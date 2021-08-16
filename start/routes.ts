@@ -1,25 +1,26 @@
-/*
-|--------------------------------------------------------------------------
-| Routes
-|--------------------------------------------------------------------------
-|
-| This file is dedicated for defining HTTP routes. A single file is enough
-| for majority of projects, however you can define routes in different
-| files and just make sure to import them inside this file. For example
-|
-| Define routes in following two files
-| ├── start/routes/cart.ts
-| ├── start/routes/customer.ts
-|
-| and then import them inside `start/routes.ts` as follows
-|
-| import './routes/cart'
-| import './routes/customer''
-|
-*/
-
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.get('/', async ({ view }) => {
   return view.render('welcome')
 })
+
+Route.resource('primary-cover', 'HomeCoversController').only([
+    'index', 'store', 'destroy'
+])
+Route.resource('blog', 'BlogsController')
+Route.resource('blog-category', 'BlogsController').only(['store', 'update', 'destroy'])
+Route.resource('aspirations', 'AspirationsController').only([
+    'index', 'store', 'destroy'
+])
+Route.get('manage-vision-mission', 'AboutUsController.')
+Route.resource('about-us', 'AboutUsController').except(['create', 'edit'])
+
+//create, update, delete mission, also manage vision-mission on index method
+Route.resource('mission', 'OurMissionsController').only(['store', 'destroy', 'update'])
+
+Route.resource('our-social-media', 'OurSocialsController').only([
+    'index', 'store', 'update', 'destroy'
+])
+
+//method store is for frontend page
+Route.resource('lead', 'LeadsController').only(['index', 'store', 'destroy'])
