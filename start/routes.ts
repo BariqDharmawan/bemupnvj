@@ -1,7 +1,8 @@
 import Route from '@ioc:Adonis/Core/Route'
+import Env from '@ioc:Adonis/Core/Env'
 
 Route.get('/', async ({ view }) => {
-  return view.render('welcome')
+    return view.render('welcome', {appName: Env.get('APP_NAME')})
 })
 
 Route.resource('primary-cover', 'HomeCoversController').only([

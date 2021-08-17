@@ -1,0 +1,21 @@
+import BaseSchema from '@ioc:Adonis/Lucid/Schema'
+
+export default class ContactUs extends BaseSchema {
+    protected tableName = 'contact_us'
+
+    public async up() {
+        this.schema.createTable(this.tableName, (table) => {
+            table.increments('id').primary()
+            table.string('email').notNullable()
+            table.string('telephone').notNullable()
+            table.text('address').notNullable()
+            table.text('desc_contact_page').notNullable()
+            table.timestamp('created_at', { useTz: true })
+            table.timestamp('updated_at', { useTz: true })
+        })
+    }
+
+    public async down() {
+        this.schema.dropTable(this.tableName)
+    }
+}
