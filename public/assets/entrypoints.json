@@ -7,6 +7,14 @@
       "js": [
         "/assets/app.js"
       ]
+    },
+    "admin": {
+      "css": [
+        "/assets/admin.css"
+      ],
+      "js": [
+        "/assets/admin.js"
+      ]
     }
   }
 }

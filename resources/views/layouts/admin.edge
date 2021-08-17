@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ process.env.APP_NAME }} - @!section('title')</title>
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    @entryPointStyles('admin')
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        @include('partials/preloader')
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <a href="index3.html" class="brand-link">
+                <img src="{{ asset('assets/img/icon/bemupnvj.svg') }}" 
+                alt="AdminLTE Logo"
+                class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">AdminLTE 3</span>
+            </a>
+            <div class="sidebar pt-2">
+                <div class="form-inline">
+                    <div class="input-group" data-widget="sidebar-search">
+                        <input class="form-control form-control-sidebar" type="search" placeholder="Search"
+                            aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-sidebar">
+                                <i class="fas fa-search fa-fw"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        @!component('partials/dashboard-menu', {
+                            url: 'admin',
+                            text: 'Dashboard',
+                            iconMenu: 'fas fa-tachometer-alt'
+                        })
+                        @!component('partials/dashboard-menu', {
+                            url: 'widget',
+                            text: 'Widgets',
+                            iconMenu: 'fas fa-th'
+                        })
+                        @component('partials/dashboard-menu', {
+                            url: '#',
+                            text: 'UI Elements',
+                            iconMenu: 'fas fa-tree',
+                            iconTextClass: 'fas fa-angle-left right'
+                        })
+                            <ul class="nav nav-treeview">
+                                @!component('partials/dashboard-menu', {
+                                    url: 'general',
+                                    text: 'General',
+                                    iconMenu: 'far fa-circle nav-icon'
+                                })
+                                @!component('partials/dashboard-menu', {
+                                    url: 'icons',
+                                    text: 'Icons',
+                                    iconMenu: 'far fa-circle nav-icon'
+                                })
+                            </ul>
+                        @endcomponent
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        @!section('body')
+        @include('partials/footer')
+    </div>
+    @entryPointScripts('admin')
+</body>
+
+</html>

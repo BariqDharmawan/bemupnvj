@@ -15,6 +15,7 @@
     "devDependencies": {
         "@adonisjs/assembler": "^5.3.5",
         "@symfony/webpack-encore": "^1.5.0",
+        "admin-lte": "^3.0",
         "adonis-preset-ts": "^2.1.0",
         "autoprefixer": "^10.3.1",
         "cross-env": "^7.0.3",

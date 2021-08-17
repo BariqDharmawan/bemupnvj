@@ -5,6 +5,10 @@ Route.get('/', async ({ view }) => {
     return view.render('welcome', {appName: Env.get('APP_NAME')})
 })
 
+Route.get('admin', async ({ view }) => {
+    return view.render('dashboard', {appName: Env.get('APP_NAME')})
+})
+
 Route.resource('primary-cover', 'HomeCoversController').only([
     'index', 'store', 'destroy'
 ])
