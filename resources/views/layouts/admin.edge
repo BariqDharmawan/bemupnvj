@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ process.env.APP_NAME }} - @!section('title')</title>
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    @entryPointStyles('admin')
+    <link rel="stylesheet" href="/assets/css/admin.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -14,7 +14,7 @@
         @include('partials/preloader')
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="index3.html" class="brand-link">
-                <img src="{{ asset('assets/img/icon/bemupnvj.svg') }}" 
+                <img src="/assets/img/icon/bemupnvj.svg" 
                 alt="AdminLTE Logo"
                 class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">AdminLTE 3</span>
@@ -70,7 +70,7 @@
         @!section('body')
         @include('partials/footer')
     </div>
-    @entryPointScripts('admin')
+    <script src="/assets/js/admin.js"></script>
 </body>
 
 </html>
