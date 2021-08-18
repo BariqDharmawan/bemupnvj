@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ process.env.APP_NAME }} - @!section('title')</title>
+    <title>{{ process.env.APP_NAME }} - {{ title }}</title>
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="/assets/css/admin.css">
 </head>
@@ -14,9 +14,8 @@
         @include('partials/preloader')
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="index3.html" class="brand-link">
-                <img src="/assets/img/icon/bemupnvj.svg" 
-                alt="AdminLTE Logo"
-                class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img src="/assets/img/icon/bemupnvj.svg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                    style="opacity: .8">
                 <span class="brand-text font-weight-light">AdminLTE 3</span>
             </a>
             <div class="sidebar pt-2">
@@ -50,24 +49,49 @@
                             iconMenu: 'fas fa-tree',
                             iconTextClass: 'fas fa-angle-left right'
                         })
-                            <ul class="nav nav-treeview">
-                                @!component('partials/dashboard-menu', {
-                                    url: 'general',
-                                    text: 'General',
-                                    iconMenu: 'far fa-circle nav-icon'
-                                })
-                                @!component('partials/dashboard-menu', {
-                                    url: 'icons',
-                                    text: 'Icons',
-                                    iconMenu: 'far fa-circle nav-icon'
-                                })
-                            </ul>
+                        <ul class="nav nav-treeview">
+                            @!component('partials/dashboard-menu', {
+                                url: 'general',
+                                text: 'General',
+                                iconMenu: 'far fa-circle nav-icon'
+                            })
+                            @!component('partials/dashboard-menu', {
+                                url: 'icons',
+                                text: 'Icons',
+                                iconMenu: 'far fa-circle nav-icon'
+                            })
+                        </ul>
                         @endcomponent
                     </ul>
                 </nav>
             </div>
         </aside>
-        @!section('body')
+        <div class="content-wrapper">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">{{ title }}</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                {{--  @each(path in paths)
+                                    <li class="breadcrumb-item">
+                                        <a href="{{ path.url }}">{{ path.name }}</a>
+                                    </li>
+                                @endeach  --}}
+                                <li class="breadcrumb-item active">Dashboard v1</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <main class="content">
+                <div class="container-fluid">
+                    @!section('body')
+                </div>
+            </main>
+        </div>
         @include('partials/footer')
     </div>
     <script src="/assets/js/admin.js"></script>
