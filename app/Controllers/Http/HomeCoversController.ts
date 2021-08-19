@@ -1,24 +1,29 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Env from '@ioc:Adonis/Core/Env'
 
 export default class HomeCoversController {
-  public async index ({}: HttpContextContract) {
-  }
+    public async index({ view, request }: HttpContextContract) {
+        const appName = Env.get('APP_NAME')
+        const paths: string = request.url()
 
-  public async create ({}: HttpContextContract) {
-  }
+        return view.render('primary-cover/index', { appName, paths })
+    }
 
-  public async store ({}: HttpContextContract) {
-  }
+    public async create({ }: HttpContextContract) {
+    }
 
-  public async show ({}: HttpContextContract) {
-  }
+    public async store({ }: HttpContextContract) {
+    }
 
-  public async edit ({}: HttpContextContract) {
-  }
+    public async show({ }: HttpContextContract) {
+    }
 
-  public async update ({}: HttpContextContract) {
-  }
+    public async edit({ }: HttpContextContract) {
+    }
 
-  public async destroy ({}: HttpContextContract) {
-  }
+    public async update({ }: HttpContextContract) {
+    }
+
+    public async destroy({ }: HttpContextContract) {
+    }
 }
