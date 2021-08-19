@@ -18,5 +18,5 @@ export default class AspirationCategory extends BaseModel {
     @hasMany(() => Aspiration, {
         foreignKey: 'aspiration_category_id'
     })
-    public majors: HasMany<typeof Aspiration>
+    public aspirations: HasMany<typeof Aspiration>
 }

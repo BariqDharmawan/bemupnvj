@@ -2,12 +2,24 @@ import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
 export default class OurSocial extends BaseModel {
-  @column({ isPrimary: true })
-  public id: number
+    @column({ isPrimary: true })
+    public id: number
 
-  @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime
+    @column()
+    public logo: string
+    
+    @column()
+    public name: string
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime
+    @column()
+    public username: string
+    
+    @column()
+    public color: string
+
+    @column.dateTime({ autoCreate: true })
+    public createdAt: DateTime
+
+    @column.dateTime({ autoCreate: true, autoUpdate: true })
+    public updatedAt: DateTime
 }

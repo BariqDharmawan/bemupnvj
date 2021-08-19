@@ -1,8 +1,8 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class ContactUs extends BaseModel {
-    public static table = 'contact_us'
+export default class OurContact extends BaseModel {
+    public static table = 'our_contact'
 
     @column({ isPrimary: true })
     public id: number
