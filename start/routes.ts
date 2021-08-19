@@ -5,6 +5,8 @@ Route.get('/', async ({ view }) => {
     return view.render('welcome', {appName: Env.get('APP_NAME')})
 })
 
+Route.get('/', 'HomeController.index').as('homepage')
+
 Route.get('admin', async ({ view }) => {
     return view.render('dashboard', {appName: Env.get('APP_NAME')})
 })
@@ -17,7 +19,6 @@ Route.resource('blog-category', 'BlogsController').only(['store', 'update', 'des
 Route.resource('aspirations', 'AspirationsController').only([
     'index', 'store', 'destroy'
 ])
-Route.get('manage-vision-mission', 'AboutUsController.')
 Route.resource('about-us', 'AboutUsController').except(['create', 'edit'])
 
 //create, update, delete mission, also manage vision-mission on index method
