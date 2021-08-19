@@ -2,11 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ process.env.APP_NAME }} - {{ title }}</title>
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="/assets/css/admin.css">
+    @include('partials/meta')
+    @include('partials/admin-css')
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -39,8 +36,8 @@
                             iconMenu: 'fas fa-tachometer-alt'
                         })
                         @!component('partials/dashboard-menu', {
-                            url: 'widget',
-                            text: 'Widgets',
+                            url: route('primary_cover.index'),
+                            text: 'Primary Cover',
                             iconMenu: 'fas fa-th'
                         })
                         @component('partials/dashboard-menu', {
@@ -80,7 +77,7 @@
                                         <a href="{{ path.url }}">{{ path.name }}</a>
                                     </li>
                                 @endeach  --}}
-                                <li class="breadcrumb-item active">Dashboard v1</li>
+                                <li class="breadcrumb-item active">{{ paths }}</li>
                             </ol>
                         </div>
                     </div>
