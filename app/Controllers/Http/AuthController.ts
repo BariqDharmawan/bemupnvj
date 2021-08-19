@@ -4,7 +4,8 @@ import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext"
 
 export default class AuthController {
     public async index({ view }: HttpContextContract) {
-        return view.render('auth.login')
+        const titlePage = 'Login'
+        return view.render('auth/login', {titlePage})
     }
     public async store({request, auth, response}: HttpContextContract, isRemember: boolean = true) {
         const authGuard = auth.use('web')

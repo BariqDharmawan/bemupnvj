@@ -1,0 +1,19 @@
+<div class="form-group">
+    @if(prepandIcon)
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <div class="input-group-text">
+                <span class="{{ prepandIcon }}"></span>
+            </div>
+        </div>
+        <input type="{{ type }}" name="{{ name }}" 
+        id="{{ dashCase(name) }}" class="form-control"
+        {{ $props.serializeExcept(['id', 'type', 'class']) }}>
+    </div>
+    @else
+    <label for="{{ id }}">{{ label }}</label>
+    <input type="{{ type }}" name="{{ name }}" 
+    class="form-control" id="{{ dashCase(name) }}"
+    {{ $props.serializeExcept(['id', 'type', 'class']) }}>
+    @end
+</div>

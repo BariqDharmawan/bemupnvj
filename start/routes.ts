@@ -1,6 +1,6 @@
+import { HttpContext } from '@adonisjs/core/build/standalone'
 import Route from '@ioc:Adonis/Core/Route'
-import Env from '@ioc:Adonis/Core/Env'
-import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import './routeAuth'
 
 Route.get('/', 'HomeController.index')
 
@@ -25,11 +25,6 @@ Route.group(() => {
     }).prefix('blog').as('blog')
 
     Route.resource('primary-cover', 'HomeCoversController').only(['index', 'store', 'destroy'])
-    
-    // Route.group(() => {
-    //     Route.get('/', 'AuthController.index').as('index')
-    //     Route.post('post', 'AuthController.store').as('store')
-    // }).prefix('login').as('login')
 
 }).as('admin')
 

@@ -72,12 +72,11 @@
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                {{--  @each(path in paths)
-                                    <li class="breadcrumb-item">
-                                        <a href="{{ path.url }}">{{ path.name }}</a>
+                                @each((path, index) in paths)
+                                    <li class="breadcrumb-item {{ index + 1 === paths.length ? 'active' : '' }}">
+                                        <a href="">{{ path }}</a>
                                     </li>
-                                @endeach  --}}
-                                <li class="breadcrumb-item active">{{ paths }}</li>
+                                @endeach
                             </ol>
                         </div>
                     </div>
