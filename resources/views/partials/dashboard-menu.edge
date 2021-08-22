@@ -1,5 +1,6 @@
 <li class="nav-item">
-    <a href="{{ url }}" class="nav-link">
+    <a href="{{ url }}" class="nav-link"
+    {{ $props.serializeExcept(['url', 'iconMenu', 'iconTextClass', 'text']) }}>
         @if(iconMenu)
         <i class="nav-icon {{ iconMenu }}"></i>
         @endif

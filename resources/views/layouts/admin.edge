@@ -11,41 +11,29 @@
         @include('partials/preloader')
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="index3.html" class="brand-link">
-                <img src="/assets/img/icon/bemupnvj.svg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                    style="opacity: .8">
+                <img src="/assets/img/icon/bemupnvj.svg" alt="{{ process.env.APP_NAME }} Logo"
+                class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">AdminLTE 3</span>
             </a>
-            <div class="sidebar pt-2">
-                <div class="form-inline">
-                    <div class="input-group" data-widget="sidebar-search">
-                        <input class="form-control form-control-sidebar" type="search" placeholder="Search"
-                            aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-sidebar">
-                                <i class="fas fa-search fa-fw"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
-                        @!component('partials/dashboard-menu', {
-                            url: 'admin',
-                            text: 'Dashboard',
-                            iconMenu: 'fas fa-tachometer-alt'
-                        })
-                        @!component('partials/dashboard-menu', {
-                            url: route('admin.primary_cover.index'),
-                            text: 'Primary Cover',
-                            iconMenu: 'fas fa-th'
-                        })
-                        @component('partials/dashboard-menu', {
-                            url: '#',
-                            text: 'UI Elements',
-                            iconMenu: 'fas fa-tree',
-                            iconTextClass: 'fas fa-angle-left right'
-                        })
+            <nav class="sidebar pt-2 mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    @!component('partials/dashboard-menu', {
+                        url: route('admin.dashboard'),
+                        text: 'Dashboard',
+                        iconMenu: 'fas fa-tachometer-alt'
+                    })
+                    @!component('partials/dashboard-menu', {
+                        url: route('admin.primary_cover.index'),
+                        text: 'Primary Cover',
+                        iconMenu: 'fas fa-th'
+                    })
+                    @component('partials/dashboard-menu', {
+                        url: '#',
+                        text: 'UI Elements',
+                        iconMenu: 'fas fa-tree',
+                        iconTextClass: 'fas fa-angle-left right'
+                    })
                         <ul class="nav nav-treeview">
                             @!component('partials/dashboard-menu', {
                                 url: 'general',
@@ -58,19 +46,30 @@
                                 iconMenu: 'far fa-circle nav-icon'
                             })
                         </ul>
+                    @endcomponent
+                    @if(auth.isLoggedIn)
+                        @component('partials/dashboard-menu', {
+                            url: 'javascript:void(0);',
+                            text: 'Logout',
+                            iconMenu: 'fas fa-th',
+                            onclick: 'event.preventDefault(); document.getElementById("logout-form").submit()'
+                        })
+                        <form action="{{ route('admin.logout') }}" method="POST" id="logout-form">
+                            {{ csrfField() }}
+                        </form>
                         @endcomponent
-                    </ul>
-                </nav>
-            </div>
+                    @end
+                </ul>
+            </nav>
         </aside>
         <div class="content-wrapper">
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">{{ title }}</h1>
+                            <h1 class="m-0">{{ titlePage }}</h1>
                         </div>
-                        <div class="col-sm-6">
+                        {{--  <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 @each((path, index) in paths)
                                     <li class="breadcrumb-item {{ index + 1 === paths.length ? 'active' : '' }}">
@@ -78,7 +77,7 @@
                                     </li>
                                 @endeach
                             </ol>
-                        </div>
+                        </div>  --}}
                     </div>
                 </div>
             </div>
@@ -90,7 +89,9 @@
         </div>
         @include('partials/footer')
     </div>
-    <script src="/assets/js/admin.js"></script>
+
+    @include('partials/admin-script')
+
 </body>
 
 </html>
