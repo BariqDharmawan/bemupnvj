@@ -4,10 +4,10 @@
 <div class="card card-secondary mb-5">
     <div class="card-body">
         <p>Cover saat ini</p>
-        <img src="{{ primaryCover.filename }}" 
-        alt="{{ process.env.APP_NAME + ' Cover' }}" height="250px">
+        <img src="{{ primaryCover.filename }}" alt="{{ process.env.APP_NAME + ' Cover' }}" id="primary-cover"
+            height="250px">
         <small class="text-secondary d-block">
-            Ukuran ini merupakan preview, ukuran aslinya adalah  
+            Ukuran ini merupakan preview, ukuran aslinya adalah
             <var class="text-info">100% layar x 400px</var>
         </small>
     </div>
@@ -15,19 +15,12 @@
 <div class="card card-secondary">
     <div class="card-body">
         <p>
-            Cover yang diupload akan digunakan di page 
-            <a href="{{ route('landing_page') }}">Home</a> dan 
+            Cover yang diupload akan digunakan di page
+            <a href="{{ route('landing_page') }}">Home</a> dan
             <a href="{{ route('about_us.index') }}">About us</a>
         </p>
-        <form action="" method="POST">
-            <div class="form-group">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile">
-                    <label class="custom-file-label" for="customFile">Choose file</label>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Upload cover</button>
-        </form>
+        <form action="{{ route('admin.primary_cover.store') }}" class='dropzone'
+            data-old-banner-id="{{ primaryCover.id }}"></form>
     </div>
 </div>
 @end

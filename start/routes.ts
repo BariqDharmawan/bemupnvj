@@ -1,5 +1,6 @@
 import Route from '@ioc:Adonis/Core/Route'
 import './routeAuth'
+import './routeApi'
 
 Route.get('/', 'HomeController.index').as('landing_page')
 
@@ -23,7 +24,9 @@ Route.group(() => {
         Route.resource('category', 'BlogsController').only(['store', 'update', 'destroy'])
     }).prefix('blog').as('blog')
 
-    Route.resource('primary-cover', 'HomeCoversController').only(['index', 'store', 'destroy'])
+    Route.resource('primary-cover', 'HomeCoversController').only([
+        'index', 'store', 'destroy'
+    ])
 
 }).as('admin').middleware('auth')
 
