@@ -5,22 +5,26 @@ import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext"
 export default class AuthController {
     public async index({ view }: HttpContextContract) {
         const titlePage = 'Login'
+
         return view.render('auth/login', {titlePage})
     }
-    public async store({request, auth, response}: HttpContextContract, isRemember: boolean = true) {
-        const authGuard = auth.use('web')
-        
-        const email = request.input('email')
-        const password = request.input('password')
+    public async store({request, auth, response, session}: HttpContextContract) {
+        const { email, password } = request.all()
 
-        isRemember = request.input('isRemember') ?? isRemember
-
-        await authGuard.check()
-        if (authGuard.isLoggedIn) {
-            
+        try {
+            await auth.use('web').attempt(email, password, true)
+            return response.redirect('/dashboard')
+        } catch (error) {
+            session.flash('notification', error)
+            console.log(error)
+            return response.redirect().back()
         }
-    
-        await authGuard.attempt(email, password, isRemember)
-        response.redirect().toRoute('admin.dashboard')
+    }
+    /**
+     * async logout
+     */
+    public async logout({ auth, response }: HttpContextContract) {
+        await auth.use('web').logout()
+        return response.redirect().toPath('/login')
     }
 }

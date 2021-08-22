@@ -1,8 +1,7 @@
-import { HttpContext } from '@adonisjs/core/build/standalone'
 import Route from '@ioc:Adonis/Core/Route'
 import './routeAuth'
 
-Route.get('/', 'HomeController.index')
+Route.get('/', 'HomeController.index').as('landing_page')
 
 Route.resource('contact-us', 'OurSocialsController').only([
     'index', 'store', 'update', 'destroy'
@@ -26,7 +25,7 @@ Route.group(() => {
 
     Route.resource('primary-cover', 'HomeCoversController').only(['index', 'store', 'destroy'])
 
-}).as('admin')
+}).as('admin').middleware('auth')
 
 
 Route.resource('blog', 'BlogsController')

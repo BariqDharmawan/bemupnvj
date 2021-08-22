@@ -1,12 +1,17 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Env from '@ioc:Adonis/Core/Env'
+import HomeCover from 'App/Models/HomeCover'
+
 
 export default class HomeCoversController {
     public async index({ view, request }: HttpContextContract) {
         const appName = Env.get('APP_NAME')
         const paths: string = request.url()
+        const titlePage = 'Setup Primary Cover'
 
-        return view.render('primary-cover/index', { appName, paths })
+        const primaryCover = await HomeCover.query().select('filename').first()
+
+        return view.render('primary-cover/index', { appName, paths, titlePage, primaryCover })
     }
 
     public async create({ }: HttpContextContract) {

@@ -8,17 +8,17 @@ export default class AdminSeederSeeder extends BaseSeeder {
             {
                 email: 'superadminbem@upnvj.ac.id',
                 role: 'superadmin',
-                password: await Hash.make('superadminbemupnvj')
+                password: 'superadminbemupnvj'
             },
             {
                 email: 'adminbem1@upnvj.ac.id',
                 role: 'admin',
-                password: await Hash.make('adminbemupnvj')
+                password: 'adminbemupnvj'
             },
             {
                 email: 'adminbem2@upnvj.ac.id',
                 role: 'admin',
-                password: await Hash.make('adminbemupnvj')
+                password: 'adminbemupnvj'
             },
         ])
     }

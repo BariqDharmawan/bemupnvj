@@ -1,19 +1,28 @@
 <div class="form-group">
     @if(prepandIcon)
-    <div class="input-group">
-        <div class="input-group-prepend">
-            <div class="input-group-text">
-                <span class="{{ prepandIcon }}"></span>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <span class="{{ prepandIcon }}"></span>
+                </div>
             </div>
+            <input type="{{ type }}" name="{{ name }}" 
+            id="{{ dashCase(name) }}" class="form-control"
+            {{ $props.serializeExcept(['id', 'type', 'class']) }}>
         </div>
-        <input type="{{ type }}" name="{{ name }}" 
-        id="{{ dashCase(name) }}" class="form-control"
-        {{ $props.serializeExcept(['id', 'type', 'class']) }}>
-    </div>
     @else
-    <label for="{{ id }}">{{ label }}</label>
-    <input type="{{ type }}" name="{{ name }}" 
-    class="form-control" id="{{ dashCase(name) }}"
-    {{ $props.serializeExcept(['id', 'type', 'class']) }}>
+        @if(type == 'checkbox')
+            <div class="icheck-primary">
+                <input type="checkbox" id="{{ dashCase(name) }}" name="{{ name }}">
+                <label for="{{ dashCase(name) }}">
+                    {{ label }}
+                </label>
+            </div>
+        @else
+            <label for="{{ id }}">{{ label }}</label>
+            <input type="{{ type }}" name="{{ name }}" 
+            class="form-control" id="{{ dashCase(name) }}"
+            {{ $props.serializeExcept(['id', 'type', 'class']) }}>
+        @end
     @end
 </div>

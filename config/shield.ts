@@ -5,7 +5,7 @@
  * file.
  */
 
-import Env from '@ioc:Adonis/Core/Env'
+
 import { ShieldConfig } from '@ioc:Adonis/Addons/Shield'
 
 /*
@@ -18,45 +18,46 @@ import { ShieldConfig } from '@ioc:Adonis/Addons/Shield'
 | variety of options to choose from.
 */
 export const csp: ShieldConfig['csp'] = {
-  /*
-  |--------------------------------------------------------------------------
-  | Enable/disable CSP
-  |--------------------------------------------------------------------------
-  |
-  | The CSP rules are disabled by default for seamless onboarding.
-  |
-  */
-  enabled: false,
+    /*
+    |--------------------------------------------------------------------------
+    | Enable/disable CSP
+    |--------------------------------------------------------------------------
+    |
+    | The CSP rules are disabled by default for seamless onboarding.
+    |
+    */
+    enabled: false,
 
-  /*
-  |--------------------------------------------------------------------------
-  | Directives
-  |--------------------------------------------------------------------------
-  |
-  | All directives are defined in camelCase and here is the list of
-  | available directives and their possible values.
-  |
-  | https://content-security-policy.com
-  |
-  | @example
-  | directives: {
-  |   defaultSrc: ['self', '@nonce', 'cdnjs.cloudflare.com']
-  | }
-  |
-  */
-  directives: {
-  },
+    /*
+    |--------------------------------------------------------------------------
+    | Directives
+    |--------------------------------------------------------------------------
+    |
+    | All directives are defined in camelCase and here is the list of
+    | available directives and their possible values.
+    |
+    | https://content-security-policy.com
+    |
+    | @example
+    | directives: {
+    |   defaultSrc: ['self', '@nonce', 'cdnjs.cloudflare.com']
+    | }
+    |
+    */
+    directives: {
+        
+    },
 
-  /*
-  |--------------------------------------------------------------------------
-  | Report only
-  |--------------------------------------------------------------------------
-  |
-  | Setting `reportOnly=true` will not block the scripts from running and
-  | instead report them to a URL.
-  |
-  */
-  reportOnly: false,
+    /*
+    |--------------------------------------------------------------------------
+    | Report only
+    |--------------------------------------------------------------------------
+    |
+    | Setting `reportOnly=true` will not block the scripts from running and
+    | instead report them to a URL.
+    |
+    */
+    reportOnly: false,
 }
 
 /*
@@ -69,57 +70,59 @@ export const csp: ShieldConfig['csp'] = {
 |
 */
 export const csrf: ShieldConfig['csrf'] = {
-  /*
-  |--------------------------------------------------------------------------
-  | Enable/Disable CSRF
-  |--------------------------------------------------------------------------
-  */
-  enabled: Env.get('NODE_ENV') !== 'testing',
+    /*
+    |--------------------------------------------------------------------------
+    | Enable/Disable CSRF
+    |--------------------------------------------------------------------------
+    */
+    enabled: true,
 
-  /*
-  |--------------------------------------------------------------------------
-  | Routes to Ignore
-  |--------------------------------------------------------------------------
-  |
-  | Define an array of route patterns that you want to ignore from CSRF
-  | validation. Make sure the route patterns are started with a leading
-  | slash. Example:
-  |
-  | `/foo/bar`
-	|
-	| Also you can define a function that is evaluated on every HTTP Request.
-	| ```
-	|  exceptRoutes: ({ request }) => request.url().includes('/api')
-	| ```
-  |
-  */
-  exceptRoutes: [],
+    /*
+    |--------------------------------------------------------------------------
+    | Routes to Ignore
+    |--------------------------------------------------------------------------
+    |
+    | Define an array of route patterns that you want to ignore from CSRF
+    | validation. Make sure the route patterns are started with a leading
+    | slash. Example:
+    |
+    | `/foo/bar`
+      |
+      | Also you can define a function that is evaluated on every HTTP Request.
+      | ```
+      |  exceptRoutes: ({ request }) => request.url().includes('/api')
+      | ```
+    |
+    */
+    exceptRoutes: (ctx) => {
+        return ctx.request.url().includes('/api/')
+    },
 
-  /*
-  |--------------------------------------------------------------------------
-  | Enable Sharing Token Via Cookie
-  |--------------------------------------------------------------------------
-  |
-  | When the following flag is enabled, AdonisJS will drop `XSRF-TOKEN`
-  | cookie that frontend frameworks can read and return back as a
-  | `X-XSRF-TOKEN` header.
-  |
-  | The cookie has `httpOnly` flag set to false, so it is little insecure and
-  | can be turned off when you are not using a frontend framework making
-  | AJAX requests.
-  |
-  */
-  enableXsrfCookie: true,
+    /*
+    |--------------------------------------------------------------------------
+    | Enable Sharing Token Via Cookie
+    |--------------------------------------------------------------------------
+    |
+    | When the following flag is enabled, AdonisJS will drop `XSRF-TOKEN`
+    | cookie that frontend frameworks can read and return back as a
+    | `X-XSRF-TOKEN` header.
+    |
+    | The cookie has `httpOnly` flag set to false, so it is little insecure and
+    | can be turned off when you are not using a frontend framework making
+    | AJAX requests.
+    |
+    */
+    enableXsrfCookie: true,
 
-  /*
-  |--------------------------------------------------------------------------
-  | Methods to Validate
-  |--------------------------------------------------------------------------
-  |
-  | Define an array of HTTP methods to be validated for a valid CSRF token.
-  |
-  */
-  methods: ['POST', 'PUT', 'PATCH', 'DELETE'],
+    /*
+    |--------------------------------------------------------------------------
+    | Methods to Validate
+    |--------------------------------------------------------------------------
+    |
+    | Define an array of HTTP methods to be validated for a valid CSRF token.
+    |
+    */
+    methods: ['POST', 'PUT', 'PATCH', 'DELETE'],
 }
 
 /*
@@ -134,26 +137,26 @@ export const csrf: ShieldConfig['csrf'] = {
 |
 */
 export const dnsPrefetch: ShieldConfig['dnsPrefetch'] = {
-  /*
-  |--------------------------------------------------------------------------
-  | Enable/disable this feature
-  |--------------------------------------------------------------------------
-  */
-  enabled: true,
+    /*
+    |--------------------------------------------------------------------------
+    | Enable/disable this feature
+    |--------------------------------------------------------------------------
+    */
+    enabled: true,
 
-  /*
-  |--------------------------------------------------------------------------
-  | Allow or Dis-Allow Explicitly
-  |--------------------------------------------------------------------------
-  |
-  | The `enabled` boolean does not set `X-DNS-Prefetch-Control` header. However
-  | the `allow` boolean controls the value of `X-DNS-Prefetch-Control` header.
-  |
-  | - When `allow = true`, then `X-DNS-Prefetch-Control = 'on'`
-  | - When `allow = false`, then `X-DNS-Prefetch-Control = 'off'`
-  |
-  */
-  allow: true,
+    /*
+    |--------------------------------------------------------------------------
+    | Allow or Dis-Allow Explicitly
+    |--------------------------------------------------------------------------
+    |
+    | The `enabled` boolean does not set `X-DNS-Prefetch-Control` header. However
+    | the `allow` boolean controls the value of `X-DNS-Prefetch-Control` header.
+    |
+    | - When `allow = true`, then `X-DNS-Prefetch-Control = 'on'`
+    | - When `allow = false`, then `X-DNS-Prefetch-Control = 'off'`
+    |
+    */
+    allow: true,
 }
 
 /*
@@ -171,8 +174,8 @@ export const dnsPrefetch: ShieldConfig['dnsPrefetch'] = {
 | Learn more at https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
 */
 export const xFrame: ShieldConfig['xFrame'] = {
-  enabled: true,
-  action: 'DENY',
+    enabled: true,
+    action: 'DENY',
 }
 
 /*
@@ -187,38 +190,38 @@ export const xFrame: ShieldConfig['xFrame'] = {
 |
 */
 export const hsts: ShieldConfig['hsts'] = {
-  enabled: true,
-  /*
-  |--------------------------------------------------------------------------
-  | Max Age
-  |--------------------------------------------------------------------------
-  |
-  | Control, how long the browser should remember that a site is only to be
-  | accessed using HTTPS.
-  |
-  */
-  maxAge: '180 days',
+    enabled: true,
+    /*
+    |--------------------------------------------------------------------------
+    | Max Age
+    |--------------------------------------------------------------------------
+    |
+    | Control, how long the browser should remember that a site is only to be
+    | accessed using HTTPS.
+    |
+    */
+    maxAge: '180 days',
 
-  /*
-  |--------------------------------------------------------------------------
-  | Include Subdomains
-  |--------------------------------------------------------------------------
-  |
-  | Apply rules on the subdomains as well.
-  |
-  */
-  includeSubDomains: true,
+    /*
+    |--------------------------------------------------------------------------
+    | Include Subdomains
+    |--------------------------------------------------------------------------
+    |
+    | Apply rules on the subdomains as well.
+    |
+    */
+    includeSubDomains: true,
 
-  /*
-  |--------------------------------------------------------------------------
-  | Preloading
-  |--------------------------------------------------------------------------
-  |
-  | Google maintains a service to register your domain and it will preload
-  | the HSTS policy. Learn more https://hstspreload.org/
-  |
-  */
-  preload: false,
+    /*
+    |--------------------------------------------------------------------------
+    | Preloading
+    |--------------------------------------------------------------------------
+    |
+    | Google maintains a service to register your domain and it will preload
+    | the HSTS policy. Learn more https://hstspreload.org/
+    |
+    */
+    preload: false,
 }
 
 /*
@@ -234,5 +237,5 @@ export const hsts: ShieldConfig['hsts'] = {
 |
 */
 export const contentTypeSniffing: ShieldConfig['contentTypeSniffing'] = {
-  enabled: true,
+    enabled: true,
 }
