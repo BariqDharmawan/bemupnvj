@@ -15,13 +15,6 @@ export default class HomeCoversController {
 
         const primaryCover = await HomeCover.firstOrFail()
 
-        if (request.ajax()) {
-            const primaryCoverToJson = primaryCover.toJSON()
-
-            console.log(primaryCoverToJson)
-            return primaryCoverToJson
-        }
-
         return view.render('primary-cover/index', { appName, paths, titlePage, primaryCover })
 
     }
@@ -51,7 +44,6 @@ export default class HomeCoversController {
             filename:  `${pathBanner}/${imgName}`
         })
 
-        session.flash('notification', 'Berhasil upload banner')
     }
 
     public async destroy({ params }: HttpContextContract) {

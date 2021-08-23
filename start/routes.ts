@@ -8,9 +8,10 @@ Route.resource('contact-us', 'OurSocialsController').only([
     'index', 'store', 'update', 'destroy'
 ])
 
-//create, update, delete mission, also manage vision-mission on index method
-Route.resource('mission', 'OurMissionsController').only(['store', 'destroy', 'update'])
+Route.resource('mission', 'OurMissionsController').apiOnly().middleware({'*': ['auth']})
 
+Route.get('about-us/vision-mission', 'AboutUsController.manageVisionMission')
+.as('about_us.vision_mission').middleware(['auth'])
 Route.resource('about-us', 'AboutUsController').except(['create', 'edit'])
 
 //method store is for frontend page

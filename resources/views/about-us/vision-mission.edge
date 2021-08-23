@@ -1,0 +1,99 @@
+@layout('layouts/admin')
+
+@section('body')
+<div class="card mb-5">
+    <div class="card-header">
+        <h2 class="card-title">Vision</h2>
+    </div>
+    <div class="card-body">
+        <p>{{ aboutUs.our_vision }}</p>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header d-flex align-items-center justify-content-between">
+        <h2 class="card-title m-0">
+            <i class="ion ion-clipboard mr-1"></i>
+            Mission
+        </h2>
+        <button type="button" class="btn btn-primary" 
+        data-toggle="modal" data-target="#modal-add-mission">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div>
+    <div class="card-body">
+        <ul class="todo-list" data-widget="todo-list" id="list-missions">
+            @each((mission, key) in missions)
+            <li class="row mx-0 align-items-center">
+                <div class="col-2">
+                    <span class="handle">
+                        <i class="fas fa-ellipsis-v"></i>
+                        <i class="fas fa-ellipsis-v"></i>
+                    </span>
+                </div>
+                <div class="col-8">
+                    <p class="text">{{ mission.content }}</p>
+                </div>
+                <div class="col-2">
+                    <div class="tools">
+                        <button type="button" class="btn btn-default border-0" data-toggle="modal" data-target="#modal-edit-mission-{{ key + 1 }}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger border-0" data-toggle="modal" data-target="#modal-delete-mission-{{ key + 1 }}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </li>
+            @endeach
+        </ul>
+    </div>
+</div>
+@end
+
+@section('component')
+    <div class="modal fade" id="modal-add-mission">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form action="{{ route('mission.store') }}" method="post" id="store-mission">
+                        {{ csrfField() }}
+                        @!component('partials/bootstrap-input', {
+                            label: 'Apa misi kita?',
+                            type: 'textarea',
+                            name: 'content',
+                            placeholder: 'Usahakan jangan terlalu bertele tele, agar menarik dibaca'
+                        })
+                        <button type="submit" class="btn btn-primary">Tambah Misi</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @each((mission, key) in missions)
+        @component('partials/bootstrap-modal', {id: `delete-mission-${key + 1}`})
+            <form action="{{ route('mission.destroy', {id: mission.id}) }}" method="post" class="delete-mission">
+                <p>Are you sure wanna delete this mission?</p>
+                <button type="submit" class="btn btn-danger">Delete it</button>
+            </form>
+        @endcomponent
+        <div class="modal fade" id="modal-edit-mission-{{ key + 1 }}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Default Modal</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>One fine body&hellip;</p>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endeach
+@endsection

@@ -8,7 +8,7 @@
             </div>
             <input type="{{ type }}" name="{{ name }}" 
             id="{{ dashCase(name) }}" class="form-control"
-            {{ $props.serializeExcept(['id', 'type', 'class']) }}>
+            {{ $props.serializeExcept(['name', 'type', 'class']) }}>
         </div>
     @else
         @if(type == 'checkbox')
@@ -19,10 +19,17 @@
                 </label>
             </div>
         @else
-            <label for="{{ id }}">{{ label }}</label>
-            <input type="{{ type }}" name="{{ name }}" 
-            class="form-control" id="{{ dashCase(name) }}"
-            {{ $props.serializeExcept(['id', 'type', 'class']) }}>
+            <label for="{{ dashCase(name) }}">{{ label }}</label>
+            
+            @if(type == 'textarea')
+                <textarea class="form-control" id="{{ dashCase(name) }}" 
+                name="{{ name }}" rows="{{ rows || '3' }}" 
+                {{ $props.serializeExcept(['name', 'class', 'rows']) }}></textarea>
+            @else
+                <input type="{{ type || 'text' }}" name="{{ name }}" 
+                class="form-control" id="{{ dashCase(name) }}"
+                {{ $props.serializeExcept(['name', 'type', 'class']) }}>
+            @end
         @end
     @end
 </div>

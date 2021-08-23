@@ -13,7 +13,7 @@ export default class AuthController {
 
         try {
             await auth.use('web').attempt(email, password, true)
-            return response.redirect('/dashboard')
+            return response.redirect().toRoute('admin.dashboard')
         } catch (error) {
             session.flash('notification', error)
             console.log(error)

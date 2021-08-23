@@ -19,5 +19,6 @@ mix.styles([
     'resources/assets/vendors/AdminLTE/plugins/daterangepicker/daterangepicker.css',
     'resources/assets/vendors/AdminLTE/plugins/summernote/summernote-bs4.min.css',
     'resources/assets/vendors/AdminLTE/plugins/toastr/toastr.min.css',
-    'resources/assets/vendors/dropzone/dropzone.min.css'
+    'resources/assets/vendors/dropzone/dropzone.min.css',
+    'resources/assets/custom-admin.css'
 ], 'public/assets/css/admin.css')

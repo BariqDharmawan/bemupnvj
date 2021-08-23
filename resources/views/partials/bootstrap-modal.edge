@@ -1,0 +1,21 @@
+<div class="modal fade" id="modal-{{ id }}">
+    @if(!title)
+        <div class="p-4">
+            @set('classIcon', 'text-white')
+            @include('partials/close-btn')
+        </div>
+    @endif
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @if(title)
+            <div class="modal-header">
+                <h4 class="modal-title">{{ title }}</h4>
+                @include('partials/close-btn')
+            </div>
+            @end
+            <div class="modal-body">
+                {{{ await $slots.main() }}}
+            </div>
+        </div>
+    </div>
+</div>

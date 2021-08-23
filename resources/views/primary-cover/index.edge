@@ -4,8 +4,7 @@
 <div class="card card-secondary mb-5">
     <div class="card-body">
         <p>Cover saat ini</p>
-        <img src="{{ primaryCover.filename }}" alt="{{ process.env.APP_NAME + ' Cover' }}" id="primary-cover"
-            height="250px">
+        <img src="{{ primaryCover.filename }}" alt="{{ process.env.APP_NAME + ' Cover' }}" id="primary-cover" height="250px">
         <small class="text-secondary d-block">
             Ukuran ini merupakan preview, ukuran aslinya adalah
             <var class="text-info">100% layar x 400px</var>
@@ -20,7 +19,7 @@
             <a href="{{ route('about_us.index') }}">About us</a>
         </p>
         <form action="{{ route('admin.primary_cover.store') }}" class='dropzone'
-            data-old-banner-id="{{ primaryCover.id }}"></form>
+        data-old-banner-id="{{ primaryCover.id }}" id="change-primary-cover"></form>
     </div>
 </div>
 @end
