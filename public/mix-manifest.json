@@ -2,7 +2,5 @@
     "/assets/js/app.js": "/assets/js/app.js",
     "/assets/js/admin.js": "/assets/js/admin.js",
     "/assets/css/app.css": "/assets/css/app.css",
-    "/assets/vendors/dropzone/dropzone.min.css": "/assets/vendors/dropzone/dropzone.min.css",
-    "/assets/vendors/dropzone/dropzone.min.js": "/assets/vendors/dropzone/dropzone.min.js",
     "/assets/css/admin.css": "/assets/css/admin.css"
 }

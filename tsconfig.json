@@ -33,6 +33,7 @@
       "@adonisjs/shield",
       "@adonisjs/lucid",
       "@adonisjs/auth"
-    ]
+    ],
+    "noUnusedLocals": false,
   }
 }

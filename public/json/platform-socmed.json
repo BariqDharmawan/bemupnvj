@@ -1,0 +1,30 @@
+[
+    {
+        "text": "Instagram",
+        "val": "instagram"
+    },
+    {
+        "text": "Youtube",
+        "val": "youtube"
+    },
+    {
+        "text": "Facebook",
+        "val": "facebook"
+    },
+    {
+        "text": "Twitter",
+        "val": "twitter"
+    },
+    {
+        "text": "Whatsapp",
+        "val": "whatsapp"
+    },
+    {
+        "text": "Telegram",
+        "val": "telegram"
+    },
+    {
+        "text": "Messenger",
+        "val": "messenger"
+    }
+]

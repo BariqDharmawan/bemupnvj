@@ -1,4 +1,5 @@
 import "./function/global"
+import "./function/validation"
 import './component/todo-list'
 import './component/modal'
 import './component/dropzone'

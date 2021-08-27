@@ -19,11 +19,11 @@ export default class HomeCoversController {
 
     }
 
-    public async getCover({}: HttpContextContract) {
+    public async getCover({response}: HttpContextContract) {
         const primaryCover = await HomeCover.first()
         const primaryCoverToJson = primaryCover?.toJSON()
 
-        return primaryCoverToJson
+        return response.json({primaryCoverToJson})
     }
 
     public async store({ request, response }: HttpContextContract) {
@@ -51,7 +51,7 @@ export default class HomeCoversController {
 
     }
 
-    public async destroy({ params }: HttpContextContract) {
+    public async destroy({ response, params }: HttpContextContract) {
         const getOldBanner = await HomeCover.findOrFail(params.id)
 
         try {
@@ -59,5 +59,10 @@ export default class HomeCoversController {
         } catch (error) {}
 
         await getOldBanner.delete()
+
+        return response.json({
+            'success': true,
+            'message': 'Successfully delete cover'
+        })
     }
 }

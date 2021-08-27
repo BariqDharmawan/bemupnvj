@@ -4,9 +4,15 @@ import './routeApi'
 
 Route.get('/', 'HomeController.index').as('landing_page')
 
-Route.resource('contact-us', 'OurSocialsController').only([
+Route.get('contact-us/manage', 'OurContactController.manage')
+    .as('contact_us.manage').middleware(['auth'])
+Route.resource('contact-us', 'OurContactController').only([
     'index', 'store', 'update', 'destroy'
 ])
+
+Route.resource('our-social', 'OurSocialsController').only([
+    'store', 'update', 'destroy'
+]).middleware({'*': ['auth']})
 
 Route.resource('mission', 'OurMissionsController').apiOnly().middleware({'*': ['auth']})
 Route.post('mission/update-all-list', 'OurMissionsController.updateAllList')

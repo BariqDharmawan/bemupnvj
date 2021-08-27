@@ -25,7 +25,8 @@
                     <var class="font-style-normal mr-2 bg-dark rounded-circle d-flex align-items-center justify-content-center todo-list__number--circle">
                         {{ mission.order_number }}
                     </var>
-                    <textarea class="form-control-plaintext col change-readonly-input" 
+                    <textarea class="form-control-plaintext col 
+                    change-readonly-input no-resize no-focus" 
                     data-is-plaintext="true"
                     data-action-url="{{ route('mission.update', {id: mission.id}) }}"
                     id="mission-content-{{ Number(key) + 1 }}" 

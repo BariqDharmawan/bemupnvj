@@ -2,6 +2,11 @@ import { getMission } from "../function/get-ajax";
 import { updateAjax } from "../function/update-ajax";
 import { storeAjax } from "../function/store-ajax";
 
+$('.select2bs4').select2({
+    theme: 'bootstrap4',
+    placeholder: 'Choose a platform'
+})
+
 //submit #our-vision on focusout
 $("#our-vision").on('focusout', function (e) {
     e.preventDefault()

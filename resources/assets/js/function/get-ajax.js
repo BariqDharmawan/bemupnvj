@@ -39,7 +39,7 @@ function getMission() {
                                 "<var class='font-style-normal mr-2 bg-dark rounded-circle d-flex align-items-center justify-content-center todo-list__number--circle'>" + 
                                     row.order_number + 
                                 "</var>" +
-                                "<textarea class='form-control-plaintext col change-readonly-input' data-is-plaintext='true'" +
+                                "<textarea class='form-control-plaintext col change-readonly-input no-resize no-focus' data-is-plaintext='true'" +
                                 "data-action-url='mission/update/" + row.id + "'" +
                                 "id='mission-content-" + (Number(index) + 1) + "'" +
                                 "readonly>" + row.content + "</textarea>" +

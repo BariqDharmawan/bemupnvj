@@ -6,7 +6,7 @@ export default class OurMissionsController {
     /**
      * getMission
      */
-    public async getMission({ response }: HttpContextContract) {
+    public async getMission({}: HttpContextContract) {
         const missions = await OurMission.query().orderBy('order_number', 'asc')
         return missions
     }
@@ -15,7 +15,7 @@ export default class OurMissionsController {
         const latestOrderNumber = await OurMission.query().select('order_number')
                                 .orderBy('order_number', 'desc').first()
         
-        const addMission = OurMission.create({
+        OurMission.create({
             content: request.input('content'),
             order_number: (latestOrderNumber?.order_number || 0) + 1
         })
@@ -43,7 +43,7 @@ export default class OurMissionsController {
             isDirty = false
             message = 'Nothing gonna edit'
         }
-        
+
         return response.json({
             'success': true,
             'message': message,

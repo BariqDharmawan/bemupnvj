@@ -10,6 +10,7 @@ export default class OurSocials extends BaseSchema {
             table.string('name').unique()
             table.string('username')
             table.string('color')
+            table.string('url').notNullable().unique()
             table.timestamp('created_at', { useTz: true })
             table.timestamp('updated_at', { useTz: true })
         })
