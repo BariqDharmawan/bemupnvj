@@ -5,3 +5,12 @@
 .card-body::after, .card-footer::after, .card-header::after {
     content: none;
 }
+
+.font-style-normal {
+    font-style: normal;
+}
+
+.todo-list__number--circle {
+    width: 20px;
+    height: 20px;
+}
