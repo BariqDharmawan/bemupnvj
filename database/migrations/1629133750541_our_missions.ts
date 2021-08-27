@@ -7,7 +7,7 @@ export default class OurMissions extends BaseSchema {
         this.schema.createTable(this.tableName, (table) => {
             table.increments('id').primary()
             table.text('content').notNullable()
-            table.integer('order_number').notNullable().unique()
+            table.integer('order_number').notNullable()
             table.timestamp('created_at', { useTz: true })
             table.timestamp('updated_at', { useTz: true })
         })

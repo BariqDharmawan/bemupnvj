@@ -26,7 +26,7 @@ export default class HomeCoversController {
         return primaryCoverToJson
     }
 
-    public async store({ request, session }: HttpContextContract) {
+    public async store({ request, response }: HttpContextContract) {
         const coverImage = request.file('file', {
             size: '20mb',
             extnames: ['jpg', 'png', 'gif', 'webp', 'jpeg'],
@@ -42,6 +42,11 @@ export default class HomeCoversController {
 
         HomeCover.create({
             filename:  `${pathBanner}/${imgName}`
+        })
+
+        return response.json({
+            'success': true,
+            'message': 'Successfully update cover'
         })
 
     }

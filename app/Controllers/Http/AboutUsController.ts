@@ -14,7 +14,7 @@ export default class AboutUsController {
         const aboutUs = await AboutUs.first()
         const missions = await OurMission.query().orderBy('order_number', 'asc')
 
-        return view.render('about-us.vision-mission', {
+        return view.render('about-us/vision-mission', {
             appName, titlePage, aboutUs, missions
         })
     }
@@ -28,7 +28,21 @@ export default class AboutUsController {
     public async create({ }: HttpContextContract) {
     }
 
-    public async store({ }: HttpContextContract) {
+    public async store({ request, response }: HttpContextContract) {
+        const inputVision = request.input('our_vision')
+        const aboutUs = await AboutUs.query().select('id').first()
+        const updateAboutUs = await AboutUs.findOrFail(aboutUs?.id)
+
+        if (inputVision) {
+            updateAboutUs.our_vision = inputVision
+        }
+        
+        await updateAboutUs.save()
+
+        return response.json({
+            'success': true,
+            'message': 'Successfully update our about us'
+        })
     }
 
     public async show({ }: HttpContextContract) {

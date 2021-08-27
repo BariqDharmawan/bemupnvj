@@ -1,5 +1,4 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Database from '@ioc:Adonis/Lucid/Database'
 import OurMission from 'App/Models/OurMission'
 
 export default class OurMissionsController {
@@ -30,7 +29,48 @@ export default class OurMissionsController {
     public async edit({ }: HttpContextContract) {
     }
 
-    public async update({ }: HttpContextContract) {
+    public async update({request, params, response}: HttpContextContract) {
+        const missionToEdit = await OurMission.findOrFail(params.id)
+        missionToEdit.content = request.input('content')
+
+        let isDirty = true,
+            message = 'Successfully update mission content'
+
+        if (missionToEdit.$isDirty) {
+            await missionToEdit.save()
+        }
+        else {
+            isDirty = false
+            message = 'Nothing gonna edit'
+        }
+        
+        return response.json({
+            'success': true,
+            'message': message,
+            'isDirty': isDirty
+        })
+    }
+
+    /**
+     * updateAllList
+     */
+    public async updateAllList({request, response}: HttpContextContract) {
+        const listUpdatedId = Array.from(request.body().updated_list_Id).map(id => {
+            return Number(id)
+        })
+
+        for (let i = 0; i < listUpdatedId.length; i++) {
+            const eachMission = await OurMission.findOrFail(listUpdatedId[i]);
+            eachMission.order_number = i + 1
+            await eachMission.save()
+            console.log(eachMission.order_number)
+        }
+
+
+        return response.json({
+            'success': true,
+            'message': 'Successfully update ordering missions'
+        })
     }
 
     public async destroy({ params }: HttpContextContract) {

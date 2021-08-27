@@ -1,0 +1,50 @@
+<div class="card">
+    <div class="card-header d-flex align-items-center justify-content-between">
+        <h2 class="card-title m-0">
+            <i class="ion ion-clipboard mr-1"></i>
+            Mission
+        </h2>
+        <button type="button" class="btn btn-primary" 
+        data-toggle="modal" data-target="#modal-add-mission">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div>
+    <div class="card-body">
+        <ul class="todo-list" data-widget="todo-list" id="list-missions">
+            @each((mission, key) in missions)
+            <li class="row mx-0 align-items-center" 
+            data-current-order="{{ mission.order_number }}"
+            data-id="{{ mission.id }}">
+                <div class="col-auto">
+                    <span class="handle">
+                        <i class="fas fa-ellipsis-v"></i>
+                        <i class="fas fa-ellipsis-v"></i>
+                    </span>
+                </div>
+                <div class="col row mx-0 align-items-center">
+                    <var class="font-style-normal mr-2 bg-dark rounded-circle d-flex align-items-center justify-content-center todo-list__number--circle">
+                        {{ mission.order_number }}
+                    </var>
+                    <textarea class="form-control-plaintext col change-readonly-input" 
+                    data-is-plaintext="true"
+                    data-action-url="{{ route('mission.update', {id: mission.id}) }}"
+                    id="mission-content-{{ Number(key) + 1 }}" 
+                    readonly>{{ mission.content }}</textarea>
+                </div>
+                <div class="col-2">
+                    <div class="tools">
+                        <button type="button" 
+                        class="btn btn-default border-0 btn--change-readonly-to-editable" 
+                        data-input="#mission-content-{{ Number(key) + 1 }}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger border-0" data-toggle="modal" data-target="#modal-delete-mission-{{ key + 1 }}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </li>
+            @endeach
+        </ul>
+    </div>
+</div>

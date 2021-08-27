@@ -9,6 +9,8 @@ Route.resource('contact-us', 'OurSocialsController').only([
 ])
 
 Route.resource('mission', 'OurMissionsController').apiOnly().middleware({'*': ['auth']})
+Route.post('mission/update-all-list', 'OurMissionsController.updateAllList')
+    .as('mission.update_all-list')
 
 Route.get('about-us/vision-mission', 'AboutUsController.manageVisionMission')
 .as('about_us.vision_mission').middleware(['auth'])
