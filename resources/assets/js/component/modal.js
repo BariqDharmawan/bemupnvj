@@ -1,7 +1,6 @@
 import { deleteAjax } from "../function/delete-ajax"
 import { getMission } from "../function/get-ajax";
 import { storeAjax } from "./../function/store-ajax"
-import * as Global from "./../function/global";
 
 //delete mission on popup open
 let deleteUrl;

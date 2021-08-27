@@ -21,11 +21,11 @@ $(function () {
         })
     
         let getOldBannerId;
-        myDropzone.on('success', function () {
+        myDropzone.on('success', function (file, response) {
             getOldBannerId = $(this)[0]['element']['dataset']['oldBannerId']
             deleteAjax(`/primary-cover/${getOldBannerId}`)
             getNewBanner()
-            showToastr('success', 'Berhasil upload banner')
+            showToastr('success', response.message)
         })
     
         myDropzone.on('complete', function (file) {
