@@ -21,3 +21,7 @@
 .no-focus:focus {
     outline: none;
 }
+
+.close-icon-black .close.btn .fas {
+    color: black;
+}

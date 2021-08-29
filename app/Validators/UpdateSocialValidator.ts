@@ -1,7 +1,7 @@
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class StoreSocialValidator {
+export default class UpdateSocialValidator {
     constructor(protected ctx: HttpContextContract) {
     }
 
@@ -24,16 +24,9 @@ export default class StoreSocialValidator {
      *     ])
      *    ```
      */
-
     public schema = schema.create({
         platform: schema.string({}, [
             rules.required(),
-
-            rules.unique({
-                table: 'our_socials', 
-                column: 'name', 
-                caseInsensitive: false,
-            })
         ]),
         username: schema.string({
             trim: true
@@ -45,7 +38,7 @@ export default class StoreSocialValidator {
         color: schema.string({}, [
             rules.required()
         ]),
-        logo: schema.file({
+        logo: schema.file.optional({
             size: '2mb',
             extnames: ['jpg', 'png', 'gif', 'webp', 'jpeg', 'ico', 'svg']
         })
@@ -62,10 +55,5 @@ export default class StoreSocialValidator {
      * }
      *
      */
-    public messages = {
-        'platform.unique': '{{ field }} already exist, please choose different {{ field }}',
-        'username.regex': 'Username should only contain letter and alpha'
-    }
-
-    public bail = true
+    public messages = {}
 }

@@ -5818,6 +5818,11 @@ knex@^0.95.6:
     tarn "^3.0.1"
     tildify "2.0.0"
 
+laravel-mix-serve@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/laravel-mix-serve/-/laravel-mix-serve-2.2.2.tgz#5deb6c41e1741b898b82a4cea5dd9f72431fb7a1"
+  integrity sha512-EGgQI4IDqfwn8Lk/IR/lTc/cZj9GCR6yoVR1qvu02OBh5xKWcM8mZn/hZ5QNs+bYo62s8OJ3bqQitzIOzBLo8A==
+
 laravel-mix@^6.0.28:
   version "6.0.28"
   resolved "https://registry.yarnpkg.com/laravel-mix/-/laravel-mix-6.0.28.tgz#5479c83a610f8884ae279dfe003c533ab16fccb5"

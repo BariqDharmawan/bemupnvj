@@ -1,0 +1,7 @@
+<button class="{{ classnya }}" data-toggle="modal" data-target="#modal-{{ targetModal }}">
+    @if(text)
+        {{ text }}
+    @else
+        {{{ await $slots.main() }}}
+    @end
+</button>

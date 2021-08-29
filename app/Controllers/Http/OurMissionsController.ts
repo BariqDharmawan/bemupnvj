@@ -73,8 +73,13 @@ export default class OurMissionsController {
         })
     }
 
-    public async destroy({ params }: HttpContextContract) {
+    public async destroy({ params, response }: HttpContextContract) {
         const getMission = await OurMission.findOrFail(params.id)
         await getMission.delete()
+
+        return response.json({
+            'success': true,
+            'message': 'Successfully delete mission'
+        })
     }
 }

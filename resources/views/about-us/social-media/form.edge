@@ -1,0 +1,41 @@
+@component('partials/bootstrap-modal', {id: idModal})
+    <form action="{{ formAction }}" method="post" enctype="multipart/form-data">
+        {{ csrfField() }}
+        @!component('partials/bootstrap-input', {
+            type: 'text',
+            name: 'username',
+            label: 'Username',
+            prepandIcon: 'fas fa-at',
+            placeholder: 'Ex: @bariqdharmawans',
+            addClass: 'not-allowed-space',
+            autocomplete: 'username',
+            value: (social) ? social.username : ''
+        })
+        @!component('partials/bootstrap-input', {
+            label: 'Platform',
+            name: 'platform',
+            type: 'select',
+            datum: platforms,
+            value: (social) ? social.name : ''
+        })
+        @!component('partials/bootstrap-input', {
+            type: 'color',
+            name: 'color',
+            label: 'Background icon',
+            helperText: "Please don't choose the color of background that same " +
+            "with color of the icon"
+        })
+        @!component('partials/bootstrap-input', {
+            type: 'file',
+            name: 'logo',
+            label: 'Choose Logo'
+        })
+        <button type="submit" class="btn btn-primary">
+            @if(idModal === 'add-social-media')
+            Add new social media
+            @else
+            Save update
+            @endif
+        </button>
+    </form>
+@end

@@ -1,7 +1,7 @@
-<div class="modal fade" id="{{ 'modal-' + id }}">
+<div class="modal fade {{ addClass || ''}}" id="{{ 'modal-' + id }}"
+{{ $props.serializeExcept(['addClass', 'id']) }}>
     @if(!title)
         <div class="p-4">
-            @set('classIcon', 'text-white')
             @include('partials/close-btn')
         </div>
     @endif

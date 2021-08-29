@@ -22,4 +22,4 @@ mix.styles([
     'resources/assets/vendors/select2/css/select2.min.css',
     'resources/assets/vendors/select2/select2-bootstrap4-theme/select2-bootstrap4.css',
     'resources/assets/custom-admin.css'
-], 'public/assets/css/admin.css')
+], 'public/assets/css/admin.css');

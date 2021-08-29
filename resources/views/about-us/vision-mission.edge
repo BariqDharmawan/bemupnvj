@@ -1,17 +1,15 @@
 @layout('layouts/admin')
 
 @section('body')
-
-    @include('vision/index')
-    @include('mission/index')
-
+    @include('about-us/vision/index')
+    @include('about-us/mission/index')
 @end
 
 @section('component')
-    @include('mission/add')
+    @include('about-us/mission/add')
     
     @each((mission, key) in missions)
-        @include('mission/delete')
-        @include('mission/edit')
-    @endeach
-@endsection
+        @include('about-us/mission/delete')
+        @include('about-us/mission/edit')
+    @end
+@end

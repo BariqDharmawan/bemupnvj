@@ -19,7 +19,7 @@ export default class OurContactController {
 
         console.log(ourSocial)
 
-        return view.render('contact/social-media', {titlePage, platforms, ourSocial})
+        return view.render('about-us/our-contact', {titlePage, platforms, ourSocial})
 
   }
 

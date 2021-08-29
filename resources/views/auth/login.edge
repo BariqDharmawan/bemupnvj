@@ -8,13 +8,11 @@
 
 <body class="hold-transition login-page">
     <div class="login-box">
-        @if(flashMessages.has('notification'))
-        <div class="alert alert-danger" role="alert">
+        @component('partials/alert', {type: 'danger'})
             @each(notif in flashMessages.get('notification'))
-            {{ notif  }}
+                {{ notif  }}
             @endeach
-        </div>
-        @end
+        @endcomponent
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
                 <a href="{{ route('admin.login.index') }}" class="h1">
