@@ -5,67 +5,14 @@
 @component('partials/alert', {type: 'success', isDismissable: true})
     {{ flashMessages.get('notification') }}
 @endcomponent
-<div class="card mb-5">
-    <div class="card-header d-flex align-items-center justify-content-between">
-        <h2 class="card-title m-0">Social Media</h2>
-        @component('partials/trigger-modal', {
-            targetModal: 'add-social-media',
-            classnya: 'btn btn-primary'
-        })
-            <i class="fas fa-plus"></i>
-        @endcomponent
-    </div>
-    <div class="card-body">
-        <ul class="list-group list-group-flush" id="list-social-media">
-            @each((social, index) in ourSocial)
-                <li class="list-group-item d-flex align-items-center">
-                    <img src="{{ social.logo }}" width="40px" height="40px"
-                    alt="{{ `${social.name} ${social.platform}` }}" 
-                    style="background-color: {{ social.color }}" 
-                    class="p-2 rounded-circle">
-                    <div class="mr-auto ml-4">
-                        <p class="m-0">Platform: {{ social.name }}</p>
-                        <p class="m-0">
-                            Username: 
-                            <a href="{{ social.url }}" target="_blank">
-                                {{ social.username }}
-                            </a>
-                        </p>
-                    </div>
-                    <div>
-                        <div class="btn-group dropleft mr-2">
-                            <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Option
-                            </button>
-                            <div class="dropdown-menu">
-                                @!component('partials/trigger-modal', {
-                                    targetModal: 'edit-social-' + social.id,
-                                    classnya: 'dropdown-item',
-                                    text: 'Change detail'
-                                })
-                                @!component('partials/trigger-modal', {
-                                    targetModal: 'delete-social-' + social.id,
-                                    classnya: 'dropdown-item text-danger',
-                                    text: 'Remove'
-                                })
-                            </div>
-                        </div>
-                        <a href="{{ social.url }}" class="badge badge-primary badge-pill"
-                        target="_blank">
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-                </li>
-            @endeach
-        </ul>
-    </div>
-</div>
+    @include('about-us/social-media/list')
+    @include('about-us/address/index')
 @end
 
 @section('component')
 
     @each((social, index) in ourSocial)
-        {{-- edit modal --}}
+        {{-- edit social modal --}}
         @set('idModal', 'edit-social-' + social.id)
         @set('formAction', route('our_social.update', {
             id: social.id},
@@ -73,32 +20,16 @@
         )
         @include('about-us/social-media/form')
 
-        {{-- delete modal --}}
-        @component('partials/bootstrap-modal', {
-            id: `delete-social-${social.id}`,
-            title: `Remove our ${social.name}`,
-            addClass: 'close-icon-black'
-        })
-            <form action="{{ route('our_social.destroy', {id: social.id}) }}" 
-            method="post"
-            class="delete-social">
-                <p>Are you sure wanna delete this social media?</p>
-                <button type="submit" class="btn btn-danger">Delete it</button>
-            </form>
-        @endcomponent
+        {{-- delete social modal --}}
+        @include('about-us/social-media/delete')
     @endeach
     
-    {{-- add modal --}}
+    {{-- add social modal --}}
     @set('idModal', 'add-social-media')
     @set('formAction', route('our_social.store'))
     @include('about-us/social-media/form')
-    
-@end
 
-@section('scripts')
-    {{--  @if(flashMessages.all('errors'))  --}}
-    {{--  <script>
-        $("#modal-add-social-media").modal('show')
-    </script>  --}}
-    {{--  @end  --}}
+    {{-- edit address modal --}}
+    @include('about-us/address/edit')
+    
 @end

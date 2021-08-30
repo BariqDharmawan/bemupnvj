@@ -1,0 +1,45 @@
+@component('partials/bootstrap-modal', {id: 'edit-address'})
+    <form action="{{ route('our_contact.update', {qs: {_method: 'PUT'}}) }}" 
+    method="post" enctype="multipart/form-data" id="edit-address">
+        {{ csrfField() }}
+        @!component('partials/bootstrap-input', {
+            type: 'textarea',
+            name: 'address',
+            label: 'Alamat',
+            placeholder: 'Masukan alamat lengkap disini',
+            value: ourContact.address
+        })
+        @component('partials/bootstrap-input', {
+            label: 'Embed google maps',
+            title: 'Mohon masukan url google maps yang benar',
+            name: 'embed_map',
+            placeholder: 'Mohon masukan embed yang benar',
+            value: ourContact.embed_map,
+            required: 'required'
+        })
+            <small class="mr-1 text-muted">
+                Untuk mengetahui cara embed maps, lihat video
+                @!component('partials/trigger-modal', {
+                    type: 'anchor',
+                    targetModal: 'cara-embed',
+                    classnya: 'bg-transparent border-0 text-primary',
+                    text: 'ini'
+                })
+            </small>
+        @end
+        <button type="submit" class="btn btn-primary">Save update</button>
+    </form>
+@end
+
+@section('component')
+    @component('partials/bootstrap-modal', {
+        id: 'cara-embed', 
+        addClassDialog: 'modal-lg',
+        notHasCloseBtn: true,
+        addClass: 'modal-body--full-content modal--bg-black'
+    })
+        <video src="/assets/video/cara-embed-map.mp4" width="100%" 
+        height="500px"
+        autoplay muted draggable="false" loop controls></video>
+    @end
+@endsection

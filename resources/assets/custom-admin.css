@@ -25,3 +25,15 @@
 .close-icon-black .close.btn .fas {
     color: black;
 }
+
+.embed-map iframe {
+    width: 100%;
+}
+
+.modal-body--full-content .modal-body {
+    display: flex;
+    padding: 0;
+}
+.modal--bg-black .modal-content, .modal--bg-black .modal-body {
+    background-color: black;
+}

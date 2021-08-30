@@ -34,7 +34,8 @@
                 <textarea class="form-control 
                 {{ flashMessages.has('errors.' + name) ? 'is-invalid' : '' }}" 
                 id="{{ dashCase(name) }}" name="{{ name }}" rows="{{ rows || '3' }}" 
-                {{ $props.serializeExcept(['name', 'class', 'rows', 'id']) }}></textarea>
+                style="resize: none"
+                {{ $props.serializeExcept(['name', 'class', 'rows', 'id', 'value']) }}>{{ value || '' }}</textarea>
             @elseif(type == 'select')
                 <select class="form-control select2bs4 {{ addClass ?? '' }}
                 {{ flashMessages.has('errors.' + name) ? 'is-invalid' : '' }}"
@@ -78,5 +79,10 @@
     <small class="form-text text-danger">
         {{ flashMessages.get('errors.' + name) }}
     </small>
+    @else
+    <small class="form-text text-danger {{ name + '-error-message' }}"></small>
     @end
+    
+    {{{ await $slots.main() }}}
+
 </div>

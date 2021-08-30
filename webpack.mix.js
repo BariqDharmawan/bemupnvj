@@ -8,6 +8,7 @@ mix.sass('resources/assets/scss/app.scss', 'public/assets/css')
     .js('resources/assets/js/admin.js', 'public/assets/js')
     .copyDirectory('resources/assets/img', 'public/assets/img')
     .copyDirectory('resources/assets/vendors', 'public/assets/vendors')
+    .copyDirectory('resources/assets/video', 'public/assets/video')
 
 mix.styles([
     'resources/assets/vendors/AdminLTE/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css',

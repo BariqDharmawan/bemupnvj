@@ -14,6 +14,11 @@ Route.resource('our-social', 'OurSocialsController').only([
     'store', 'update', 'destroy'
 ]).middleware({'*': ['auth']})
 
+Route.resource('our-contact', 'OurContactController').only([
+    'store', 'destroy'
+]).middleware({'*': ['auth']})
+Route.put('our-contact/update', 'OurContactController.update').as('our_contact.update')
+
 Route.resource('mission', 'OurMissionsController').apiOnly().middleware({'*': ['auth']})
 Route.post('mission/update-all-list', 'OurMissionsController.updateAllList')
     .as('mission.update_all-list')

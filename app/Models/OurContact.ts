@@ -8,6 +8,9 @@ export default class OurContact extends BaseModel {
     public id: number
 
     @column()
+    public embed_map: string
+    
+    @column()
     public address: string
 
     @column()

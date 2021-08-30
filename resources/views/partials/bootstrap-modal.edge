@@ -1,11 +1,11 @@
 <div class="modal fade {{ addClass || ''}}" id="{{ 'modal-' + id }}"
 {{ $props.serializeExcept(['addClass', 'id']) }}>
-    @if(!title)
+    @if(!title && !notHasCloseBtn)
         <div class="p-4">
             @include('partials/close-btn')
         </div>
     @endif
-    <div class="modal-dialog">
+    <div class="modal-dialog {{ addClassDialog ? addClassDialog : '' }}">
         <div class="modal-content">
             @if(title)
             <div class="modal-header">

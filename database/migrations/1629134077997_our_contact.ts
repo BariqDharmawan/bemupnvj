@@ -9,6 +9,7 @@ export default class OurContact extends BaseSchema {
             table.string('email').notNullable()
             table.string('telephone').notNullable()
             table.text('address').notNullable()
+            table.text('embed_map')
             table.text('desc_contact_page').notNullable()
             table.timestamp('created_at', { useTz: true })
             table.timestamp('updated_at', { useTz: true })

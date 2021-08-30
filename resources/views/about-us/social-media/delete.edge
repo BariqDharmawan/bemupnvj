@@ -1,0 +1,12 @@
+@component('partials/bootstrap-modal', {
+    id: `delete-social-${social.id}`,
+    title: `Remove our ${social.name}`,
+    addClass: 'close-icon-black'
+})
+    <form action="{{ route('our_social.destroy', {id: social.id}) }}" 
+    method="post"
+    class="delete-social">
+        <p>Are you sure wanna delete this social media?</p>
+        <button type="submit" class="btn btn-danger">Delete it</button>
+    </form>
+@endcomponent

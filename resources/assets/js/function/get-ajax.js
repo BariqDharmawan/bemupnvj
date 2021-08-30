@@ -36,4 +36,15 @@ function getSocialMedia() {
     })
 }
 
-export {getNewBanner, getMission, getSocialMedia}
+function getAddress() {
+    $("#list-address").load('/contact-us/manage #list-address', function (response, status, xhr) {
+        if (status == 'error') {
+            console.log(xhr.status + " " + xhr.statusText)
+        }
+        else if (status == 'success') {
+            console.log('get current address')
+        }
+    })
+}
+
+export {getNewBanner, getMission, getSocialMedia, getAddress}

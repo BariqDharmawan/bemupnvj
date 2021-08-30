@@ -1,7 +1,20 @@
-<button class="{{ classnya }}" data-toggle="modal" data-target="#modal-{{ targetModal }}">
-    @if(text)
-        {{ text }}
+@if(type == 'anchor')
+<a class="{{ classnya }}" href="javascript:void(0);" 
+data-toggle="modal" data-target="#modal-{{ targetModal }}">
+    @if(icon)
+        <span class="mr-2">{{ text }}</span>
+        <i class="fas {{ icon }}"></i>
     @else
-        {{{ await $slots.main() }}}
+        <span>{{ text }}</span>
+    @end
+</a>
+@else
+<button class="{{ classnya }}" data-toggle="modal" data-target="#modal-{{ targetModal }}">
+    @if(icon)
+        <span class="mr-2">{{ text }}</span>
+        <i class="fas {{ icon }}"></i>
+    @else
+        <span>{{ text }}</span>
     @end
 </button>
+@endif
