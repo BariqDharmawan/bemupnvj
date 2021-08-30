@@ -1,0 +1,8 @@
+<li class="list-group-item d-flex align-items-center">
+    <i class="fas {{ icon }}"></i>
+    <a href="{{ link || text }}" target="_blank" 
+    class="ml-2 text-info mr-auto">
+        {{ text }}
+    </a>
+    {{{  await $slots.main()  }}}
+</li>

@@ -20,7 +20,7 @@ function getMission() {
             console.log(xhr.status + " " + xhr.statusText)
         }
         else if (status == 'success') {
-            console.log('get current social media success')
+            console.log('get current mission success')
         }
     })
 }
@@ -39,12 +39,23 @@ function getSocialMedia() {
 function getAddress() {
     $("#list-address").load('/contact-us/manage #list-address', function (response, status, xhr) {
         if (status == 'error') {
-            console.log(xhr.status + " " + xhr.statusText)
+            console.error(xhr.status + " " + xhr.statusText)
         }
         else if (status == 'success') {
-            console.log('get current address')
+            console.info('get current address')
         }
     })
 }
 
-export {getNewBanner, getMission, getSocialMedia, getAddress}
+function getContact() {
+    $("#list-contact").load('/contact-us/manage #list-contact', function (response, status, xhr) {
+        if (status == 'error') {
+            console.error(xhr.status + " " + xhr.statusText)
+        }
+        else if (status == 'success') {
+            console.info('get current address')
+        }
+    })
+}
+
+export {getNewBanner, getMission, getSocialMedia, getAddress, getContact}

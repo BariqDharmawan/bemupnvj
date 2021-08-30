@@ -42,7 +42,7 @@ export default class OurContactController {
     public async edit({ }: HttpContextContract) {
     }
 
-    public async update({ request, response, session }: HttpContextContract) {
+    public async update({ request, response }: HttpContextContract) {
         const requestValidated = await request.validate(UpdateContactValidator)
 
         const newAddress = request.input('address')
@@ -72,8 +72,19 @@ export default class OurContactController {
             notification = 'deskripsi di page /contact-us'
         }
 
-        getOldContact.address = requestValidated.address
-        getOldContact.embed_map = requestValidated.embed_map
+        if (newAddress) {
+            getOldContact.address = newAddress
+            getOldContact.embed_map = request.input('embed_map')
+        }
+
+        if (newEmail) {
+            getOldContact.email = newEmail
+        }
+
+        if (newTelephone) {
+            getOldContact.telephone = newTelephone
+        }
+        
 
         await getOldContact.save()
         

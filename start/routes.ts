@@ -6,9 +6,8 @@ Route.get('/', 'HomeController.index').as('landing_page')
 
 Route.get('contact-us/manage', 'OurContactController.manage')
     .as('contact_us.manage').middleware(['auth'])
-Route.resource('contact-us', 'OurContactController').only([
-    'index', 'store', 'update', 'destroy'
-])
+
+Route.resource('contact-us', 'ContactusesController')
 
 Route.resource('our-social', 'OurSocialsController').only([
     'store', 'update', 'destroy'

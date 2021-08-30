@@ -1,5 +1,5 @@
 import { deleteAjax } from "../function/delete-ajax"
-import { getAddress, getMission, getSocialMedia } from "../function/get-ajax";
+import { getAddress, getMission, getSocialMedia, getContact } from "../function/get-ajax";
 import { storeAjax } from "./../function/store-ajax"
 
 //delete mission on popup open
@@ -54,6 +54,7 @@ $("#store-mission").on('submit', function (e) {
 //     $(this).parents('.modal').modal('hide')
 // })
 
+//edit address on popup open
 $("#edit-address").on("submit", function (e) {
     e.preventDefault()
     storeUrl = $(this).attr('action')
@@ -61,4 +62,24 @@ $("#edit-address").on("submit", function (e) {
 
     storeAjax(storeUrl, formData, $(this))
     getAddress()
+})
+
+//edit email on popup open
+$("#edit-email").on("submit", function (e) {
+    e.preventDefault()
+    storeUrl = $(this).attr('action')
+    formData = $(this).serialize()
+
+    storeAjax(storeUrl, formData, $(this))
+    getContact()
+})
+
+//edit email on popup open
+$("#edit-telephone").on("submit", function (e) {
+    e.preventDefault()
+    storeUrl = $(this).attr('action')
+    formData = $(this).serialize()
+
+    storeAjax(storeUrl, formData, $(this))
+    getContact()
 })

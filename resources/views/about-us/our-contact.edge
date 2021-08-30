@@ -5,6 +5,7 @@
 @component('partials/alert', {type: 'success', isDismissable: true})
     {{ flashMessages.get('notification') }}
 @endcomponent
+    @include('about-us/contact/index')
     @include('about-us/social-media/list')
     @include('about-us/address/index')
 @end

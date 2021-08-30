@@ -26,11 +26,9 @@ export default class UpdateContactValidator {
      */
     public schema = schema.create({
         embed_map: schema.string.optional({trim: true}, [
-            rules.required(),
             rules.minLength(100)
         ]),
         address: schema.string.optional({trim: true}, [
-            rules.required(),
             rules.minLength(10)
         ]),
         email: schema.string.optional({trim: true}, [
