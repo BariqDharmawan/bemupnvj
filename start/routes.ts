@@ -30,6 +30,7 @@ Route.put('about-us/update', 'AboutUsController.update').as('about_us.update')
 
 //method store is for frontend page
 Route.resource('lead', 'LeadsController').only(['index', 'store', 'destroy'])
+    .middleware({'index': ['auth']})
 
 Route.group(() => {
     Route.get('dashboard', 'DashboardController.index').as('dashboard')

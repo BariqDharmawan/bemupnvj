@@ -11,6 +11,9 @@ export default class Lead extends BaseModel {
     @column()
     public subject: string
 
+    @column()
+    public desc: string
+
     @column.dateTime({ autoCreate: true })
     public createdAt: DateTime
 

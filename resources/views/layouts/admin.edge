@@ -13,7 +13,9 @@
             <a href="index3.html" class="brand-link">
                 <img src="/assets/img/icon/bemupnvj.svg" alt="{{ process.env.APP_NAME }} Logo"
                 class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+                <span class="brand-text font-weight-light">
+                    {{ process.env.APP_NAME }}
+                </span>
             </a>
             <nav class="sidebar pt-2 mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
@@ -65,7 +67,7 @@
                                 iconMenu: 'far fa-circle nav-icon'
                             })
                             @!component('partials/dashboard-menu', {
-                                url: route('admin.contact_us.index'),
+                                url: route('lead.index'),
                                 text: 'Leads dari publik',
                                 iconMenu: 'far fa-circle nav-icon'
                             })

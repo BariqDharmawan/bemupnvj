@@ -12,8 +12,7 @@ export default class ContactusesController {
         return view.render('contact-us/content', {titlePage, contentContactPage})
     }
     public async leads({ view }: HttpContextContract) {
-        const contactUs = await Lead.query().orderBy('created_at', 'asc')
-        return view.render('contact-us/lead', {contactUs});
+        
     }
     public async index({ }: HttpContextContract) {
     }
