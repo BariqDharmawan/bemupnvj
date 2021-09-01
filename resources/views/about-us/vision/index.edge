@@ -10,7 +10,7 @@
     <form class="card-body" action="{{ route('about_us.store') }}" method="POST">
         {{ csrfField() }}
         <textarea name="our_vision" id="our-vision" 
-        class="form-control change-readonly-input"
+        class="form-control change-readonly-input submit-on-focusout"
         rows="10" readonly>{{ aboutUs.our_vision }}</textarea>
     </form>
 </div>

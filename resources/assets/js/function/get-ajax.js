@@ -5,8 +5,9 @@ function getNewBanner() {
         dataType: 'json',
         cache: false,
         success: function (data) {
-            $("#primary-cover").attr('src', data.filename)
-            $(".dropzone").attr('data-old-banner-id', data.id)
+            console.log('get new banner', data.primaryCoverToJson)
+            $("#primary-cover").attr('src', data.primaryCoverToJson.filename)
+            $(".dropzone").attr('data-old-banner-id', data.primaryCoverToJson.id)
         },
         error: function (error) {
             console.log(error);
@@ -26,7 +27,7 @@ function getMission() {
 }
 
 function getSocialMedia() {
-    $("#list-social-media").load('/contact-us/manage #list-social-media', function (response, status, xhr) {
+    $("#list-social-media").load('/our-contact/manage #list-social-media', function (response, status, xhr) {
         if (status == 'error') {
             console.log(xhr.status + " " + xhr.statusText)
         }
@@ -37,7 +38,7 @@ function getSocialMedia() {
 }
 
 function getAddress() {
-    $("#list-address").load('/contact-us/manage #list-address', function (response, status, xhr) {
+    $("#list-address").load('/our-contact/manage #list-address', function (response, status, xhr) {
         if (status == 'error') {
             console.error(xhr.status + " " + xhr.statusText)
         }
@@ -48,7 +49,7 @@ function getAddress() {
 }
 
 function getContact() {
-    $("#list-contact").load('/contact-us/manage #list-contact', function (response, status, xhr) {
+    $("#list-contact").load('/our-contact/manage #list-contact', function (response, status, xhr) {
         if (status == 'error') {
             console.error(xhr.status + " " + xhr.statusText)
         }

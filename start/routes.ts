@@ -4,15 +4,14 @@ import './routeApi'
 
 Route.get('/', 'HomeController.index').as('landing_page')
 
-Route.get('contact-us/manage', 'OurContactController.manage')
-    .as('contact_us.manage').middleware(['auth'])
 
-Route.resource('contact-us', 'ContactusesController')
 
 Route.resource('our-social', 'OurSocialsController').only([
     'store', 'update', 'destroy'
 ]).middleware({'*': ['auth']})
 
+Route.get('our-contact/manage', 'OurContactController.manage')
+    .as('our_contact.manage').middleware(['auth'])
 Route.resource('our-contact', 'OurContactController').only([
     'store', 'destroy'
 ]).middleware({'*': ['auth']})
@@ -35,6 +34,8 @@ Route.resource('lead', 'LeadsController').only(['index', 'store', 'destroy'])
 Route.group(() => {
     Route.get('dashboard', 'DashboardController.index').as('dashboard')
     Route.get('aspirations/manage', 'AspirationsController.manage').as('aspirations.manage')
+    Route.get('contact-us/content', 'ContactusesController.content').as('contact_us.content')
+    Route.resource('contact-us', 'ContactusesController')
     Route.group(() => {
         Route.get('manage', 'BlogsController.manage').as('manage')
         Route.resource('category', 'BlogsController').only(['store', 'update', 'destroy'])
@@ -43,6 +44,9 @@ Route.group(() => {
     Route.resource('primary-cover', 'HomeCoversController').only([
         'index', 'store', 'destroy'
     ])
+
+    Route.put('content-page/:page_name', 'ContentPagesController.update')
+        .as('content_page.update')
 
 }).as('admin').middleware('auth')
 

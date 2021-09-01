@@ -1,27 +1,66 @@
 @layout('layouts/admin')
 
 @section('body')
-<div class="card mb-5">
-    <div class="card-body">
-        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-            @!component('partials/bootstrap-tab', {
-                tabName: 'Video tentang kita',
-                isActive: true
-            })
-            @!component('partials/bootstrap-tab', {
-                tabName: 'Deskripsi tentang kita'
-            })
-        </ul>
-        <div class="tab-content" id="pills-tabContent">
-            @component('partials/bootstrap-pane', {
-                tabName: 'Video tentang kita',
-                isActive: true,
-                addClass: 'position-relative'
-            })
-                <a data-fancybox data-src="{{ 'https://www.youtube.com/watch?v=' + aboutUs.know_us_video }}"
-                href="javascript:;" class="position-relative">
+@component('partials/alert', {type: 'success', isDismissable: true})
+{{ flashMessages.get('notification') }}
+@endcomponent
+    
+    <ul class="nav nav-tabs" id="tab-about-us" role="tablist">
+        @!component('partials/bootstrap-tab', {
+            tabName: 'Detail',
+            isActive: true
+        })
+        @!component('partials/bootstrap-tab', {
+            tabName: 'Video tentang kita',
+        })
+    </ul>
+    <div class="card mb-5">
+        <div class="card-body border-top-0">
+            <div class="tab-content" id="tab-about-usContent">
+                @component('partials/bootstrap-pane', {
+                    tabName: 'Detail',
+                    isActive: true
+                })
+                <img src="{{ aboutUs.logo }}" height="100" class="rounded-circle mb-4"
+                title="{{ `${aboutUs.cabinet_name} logo` }}" width="100"
+                alt="{{ `${aboutUs.cabinet_name} logo` }}" draggable="false">
+                <form action="{{ route('about_us.update', {qs: {_method: 'PUT'}}) }}" method="post"
+                    enctype="multipart/form-data">
+                    {{ csrfField() }}
+                    @!component('partials/bootstrap-input', {
+                        type: 'text',
+                        name: 'cabinet_name',
+                        label: 'Nama Kabinet Kita',
+                        required: 'required',
+                        helperText: "Usahakan menggunakan nama yang mudah dan singkat",
+                        value: aboutUs.cabinet_name
+                    })
+                    @!component('partials/bootstrap-input', {
+                        type: 'textarea',
+                        name: 'cabinet_meaning',
+                        label: 'Deskripsi Kabinet Kita',
+                        required: 'required',
+                        rows: 5,
+                        helperText: "Usahakan deskripsikan arti " +
+                        "kabinet yang singkat dan jelas",
+                        value: aboutUs.cabinet_meaning
+                    })
+                    <label for="logo_cabinet">Logo Kabinet</label>
+                    <div class="dropzone dropzone-inside-form mb-4"></div>
+                    <button type="submit" class="btn btn-primary">Ubah Detail Kabinet</button>
+                </form>
+                @endcomponent
+                @component('partials/bootstrap-pane', {
+                    tabName: 'Video tentang kita',
+                    addClass: 'position-relative'
+                })
+                <a data-fancybox 
+                data-src="{{ 'https://www.youtube.com/watch?v=' + aboutUs.know_us_video }}"
+                    href="javascript:;" class="position-relative">
                     <i class="fas fa-play icon-play-fancybox"></i>
-                    <img src="https://img.youtube.com/vi/{{ aboutUs.know_us_video }}/mqdefault.jpg" class="img-fluid" alt="Tentang {{ process.env.APP_NAME }}">
+                    <img class="img-fluid"
+                    src="https://img.youtube.com/vi/{{ aboutUs.know_us_video }}/mqdefault.jpg" 
+                    alt="Tentang {{ process.env.APP_NAME }}">
                 </a>
                 @!component('partials/trigger-modal', {
                     type: 'anchor',
@@ -30,27 +69,12 @@
                     icon: 'fa-edit',
                     text: 'Ubah'
                 })
-            @end
-            @component('partials/bootstrap-pane', {
-                tabName: 'Deskripsi tentang kita',
-                addClass: 'position-relative'
-            })
-                <div>{{{ aboutUs.desc }}}</div>
-                <div class="overflow-hidden">
-                    @!component('partials/trigger-modal', {
-                        type: 'anchor',
-                        targetModal: 'edit-our-desc',
-                        classnya: 'bg-transparent border-0 text-primary position-absolute bottom-right-0',
-                        icon: 'fa-edit',
-                        text: 'Ubah'
-                    })
-                </div>
-            @end
+                @end
+            </div>
         </div>
     </div>
-</div>
 @end
 
 @section('component')
-    @include('about-us/content/edit')
+@include('about-us/content/edit')
 @endsection

@@ -8,8 +8,7 @@ export const AboutUsFactories = Factory.define(AboutUs, ({ faker }) => {
         'https://www.youtube.com/watch?v='
     )
     return {
-        cabinet_name: faker.lorem.words(3),
-        desc: faker.lorem.paragraphs(5),
+        cabinet_name: 'Mardhika',
         cabinet_meaning: faker.lorem.paragraphs(2),
         our_vision: faker.lorem.paragraph(),
         vision_cover: faker.image.nature(),

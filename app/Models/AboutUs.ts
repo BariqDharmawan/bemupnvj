@@ -11,9 +11,6 @@ export default class AboutUs extends BaseModel {
     public cabinet_name: string
 
     @column()
-    public desc: string
-
-    @column()
     public cabinet_meaning: string
 
     @column()

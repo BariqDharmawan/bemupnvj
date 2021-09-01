@@ -4,32 +4,53 @@ import * as Global from "./../function/global";
 import { showToastr } from "./../function/toastr";
 
 //ajax delete banner on page /primary-cover
-if (document.querySelectorAll('.dropzone').length > 0) {
+if (document.querySelectorAll('.dropzone').length > 0 ||
+    document.querySelectorAll('.dropzone-inside-form')) {
     Dropzone.autoDiscover = false;
 }
 
-$(function () {
+// $(function () {
 
-    //change primary cover using dropzone
-    if (document.querySelector('#change-primary-cover')) {
-        const myDropzone = new Dropzone('.dropzone', {
+//change primary cover using dropzone
+if (document.querySelectorAll('.dropzone-single').length > 0) {
+    const myDropzone = new Dropzone('.dropzone-single', {
+        maxFilesize: 20, //20mb
+        acceptedFiles: ".jpeg,.jpg,.png,.pdf",
+        headers: {
+            'X-CSRF-TOKEN': Global.csrfToken
+        }
+    })
+
+    let getOldBannerId;
+    myDropzone.on('success', function (file, response) {
+        getOldBannerId = $(this)[0]['element']['dataset']['oldBannerId']
+        deleteAjax(`/primary-cover/${getOldBannerId}`)
+        getNewBanner()
+        showToastr('success', response.message)
+    })
+
+    myDropzone.on('complete', function (file) {
+        myDropzone.removeFile(file)
+    })
+}
+
+if (document.querySelectorAll('.dropzone-inside-form').length > 0) {
+    document.querySelectorAll('.dropzone-inside-form').forEach(formWithDropzone => {
+        const formAction = formWithDropzone.closest('form').action
+        const dropzoneInsideForm = new Dropzone('.dropzone-inside-form', {
+            url: formAction,
             maxFilesize: 20, //20mb
             acceptedFiles: ".jpeg,.jpg,.png,.pdf",
             headers: {
                 'X-CSRF-TOKEN': Global.csrfToken
             }
         })
-    
-        let getOldBannerId;
-        myDropzone.on('success', function (file, response) {
-            getOldBannerId = $(this)[0]['element']['dataset']['oldBannerId']
-            deleteAjax(`/primary-cover/${getOldBannerId}`)
-            getNewBanner()
-            showToastr('success', response.message)
+        dropzoneInsideForm.on('complete', function (file) {
+            console.log('complete upload inside form')
         })
-    
-        myDropzone.on('complete', function (file) {
-            myDropzone.removeFile(file)
-        })
-    }
-})
+    })
+
+}
+
+
+// })

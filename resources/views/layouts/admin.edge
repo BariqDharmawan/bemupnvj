@@ -41,13 +41,32 @@
                                 iconMenu: 'far fa-circle nav-icon'
                             })
                             @!component('partials/dashboard-menu', {
-                                url: route('contact_us.manage'),
+                                url: route('our_contact.manage'),
                                 text: 'Our Contact',
                                 iconMenu: 'far fa-circle nav-icon'
                             })
                             @!component('partials/dashboard-menu', {
                                 url: route('about_us.content'),
-                                text: 'Content',
+                                text: 'Mengenai Kabinet',
+                                iconMenu: 'far fa-circle nav-icon'
+                            })
+                        </ul>
+                    @endcomponent
+                    @component('partials/dashboard-menu', {
+                        url: '#',
+                        text: 'Contact Us',
+                        iconMenu: 'fas fa-tree',
+                        iconTextClass: 'fas fa-angle-left right'
+                    })
+                        <ul class="nav nav-treeview">
+                            @!component('partials/dashboard-menu', {
+                                url: route('admin.contact_us.content'),
+                                text: 'Konten',
+                                iconMenu: 'far fa-circle nav-icon'
+                            })
+                            @!component('partials/dashboard-menu', {
+                                url: route('admin.contact_us.index'),
+                                text: 'Leads dari publik',
                                 iconMenu: 'far fa-circle nav-icon'
                             })
                         </ul>
@@ -74,15 +93,6 @@
                         <div class="col-sm-6">
                             <h1 class="m-0">{{ titlePage }}</h1>
                         </div>
-                        {{--  <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                @each((path, index) in paths)
-                                    <li class="breadcrumb-item {{ index + 1 === paths.length ? 'active' : '' }}">
-                                        <a href="">{{ path }}</a>
-                                    </li>
-                                @endeach
-                            </ol>
-                        </div>  --}}
                     </div>
                 </div>
             </div>

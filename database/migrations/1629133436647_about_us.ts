@@ -7,7 +7,6 @@ export default class AboutUs extends BaseSchema {
         this.schema.createTable(this.tableName, (table) => {
             table.increments('id').primary()
             table.string('cabinet_name')
-            table.text('desc').notNullable()
             table.text('cabinet_meaning').notNullable()
             table.text('our_vision').notNullable()
             table.text('vision_cover').notNullable()

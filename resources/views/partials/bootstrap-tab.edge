@@ -1,7 +1,8 @@
 <li class="nav-item" role="presentation">
-    <a id="pills-{{ dashCase(tabName) }}-tab" data-toggle="pill" 
-    href="#pills-{{ dashCase(tabName) }}"
-    role="tab"aria-controls="pills-{{ dashCase(tabName) }}" aria-selected="true" class="nav-link {{ isActive ? 'active' : '' }}" 
+    <a id="tab-{{ dashCase(tabName) }}-tab" data-toggle="pill" 
+    href="#tab-{{ dashCase(tabName) }}" class="nav-link {{ isActive ? 'active' : '' }}"
+    role="tab"aria-controls="tab-{{ dashCase(tabName) }}" 
+    aria-selected="{{ isActive ? 'true' : ''}}" 
     {{ $props.serializeExcept(['tabName', 'id']) }}>
         {{ tabName }}
     </a>

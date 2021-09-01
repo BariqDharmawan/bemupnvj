@@ -18,7 +18,8 @@
             <a href="{{ route('landing_page') }}">Home</a> dan
             <a href="{{ route('about_us.index') }}">About us</a>
         </p>
-        <form action="{{ route('admin.primary_cover.store') }}" class='dropzone'
+        <form action="{{ route('admin.primary_cover.store') }}" 
+        class='dropzone dropzone-single'
         data-old-banner-id="{{ primaryCover.id }}" id="change-primary-cover"></form>
     </div>
 </div>

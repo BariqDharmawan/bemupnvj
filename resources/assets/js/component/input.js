@@ -10,7 +10,7 @@ $('.select2bs4').select2({
 $('.summernote').summernote()
 
 //submit #our-vision on focusout
-$("#our-vision").on('focusout', function (e) {
+$(".submit-on-focusout").on('focusout', function (e) {
     e.preventDefault()
     if ($(this).is(":not([readonly])")) {
         const form = $(this).parents('form')

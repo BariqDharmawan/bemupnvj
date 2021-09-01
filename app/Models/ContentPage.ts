@@ -1,15 +1,15 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class Lead extends BaseModel {
+export default class ContentPage extends BaseModel {
     @column({ isPrimary: true })
     public id: number
 
     @column()
-    public email: string
+    public desc_page: string
 
     @column()
-    public subject: string
+    public page_name: string
 
     @column.dateTime({ autoCreate: true })
     public createdAt: DateTime
