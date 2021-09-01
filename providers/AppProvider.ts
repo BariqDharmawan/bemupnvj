@@ -1,4 +1,5 @@
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
+import View from '@ioc:Adonis/Core/View'
 
 export default class AppProvider {
     constructor(protected app: ApplicationContract) {

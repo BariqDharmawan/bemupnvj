@@ -1,0 +1,15 @@
+@component('partials/bootstrap-modal', {id: 'edit-video-kita'})
+    <form action="{{ route('about_us.update', {qs: {_method: 'PUT'}}) }}" method="POST">
+        {{ csrfField() }}
+        @!component('partials/bootstrap-input', {
+            type: 'url',
+            name: 'know_us_video',
+            placeholder: 'Masukan url youtube disini',
+            label: 'Video Tentang Kita',
+            required: 'required',
+            helperText: "Url hrs diawali 'https://'. Contoh: https://www.youtube.com/watch?v=klXeBW9AD0s",
+            value: 'https://www.youtube.com/watch?v=' + aboutUs.know_us_video
+        })
+        <button type="submit" class="btn btn-primary">Ubah video</button>
+    </form>
+@end

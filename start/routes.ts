@@ -24,7 +24,10 @@ Route.post('mission/update-all-list', 'OurMissionsController.updateAllList')
 
 Route.get('about-us/vision-mission', 'AboutUsController.manageVisionMission')
 .as('about_us.vision_mission').middleware(['auth'])
-Route.resource('about-us', 'AboutUsController').except(['create', 'edit'])
+Route.get('about-us/content', 'AboutUsController.content')
+.as('about_us.content').middleware(['auth'])
+Route.resource('about-us', 'AboutUsController').except(['create', 'edit', 'update'])
+Route.put('about-us/update', 'AboutUsController.update').as('about_us.update')
 
 //method store is for frontend page
 Route.resource('lead', 'LeadsController').only(['index', 'store', 'destroy'])

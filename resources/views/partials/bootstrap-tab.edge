@@ -1,0 +1,8 @@
+<li class="nav-item" role="presentation">
+    <a id="pills-{{ dashCase(tabName) }}-tab" data-toggle="pill" 
+    href="#pills-{{ dashCase(tabName) }}"
+    role="tab"aria-controls="pills-{{ dashCase(tabName) }}" aria-selected="true" class="nav-link {{ isActive ? 'active' : '' }}" 
+    {{ $props.serializeExcept(['tabName', 'id']) }}>
+        {{ tabName }}
+    </a>
+</li>

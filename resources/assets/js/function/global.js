@@ -6,4 +6,8 @@ $.ajaxSetup({
     }
 });
 
+function getStringAfter(stringnya, after) {
+    return stringnya.split(after).splice(1).join(after)
+}
+
 export {csrfToken}

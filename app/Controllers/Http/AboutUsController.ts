@@ -2,6 +2,8 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Env from '@ioc:Adonis/Core/Env'
 import AboutUs from 'App/Models/AboutUs';
 import OurMission from 'App/Models/OurMission';
+import OurContact from 'App/Models/OurContact';
+import Helper from 'App/Helper';
 
 export default class AboutUsController {
     /**
@@ -17,6 +19,14 @@ export default class AboutUsController {
         return view.render('about-us/vision-mission', {
             appName, titlePage, aboutUs, missions
         })
+    }
+
+    public async content({ view }: HttpContextContract) {
+        const titlePage = 'Konten Tentang Kita'
+        const aboutUs = await AboutUs.first()
+        const content = await OurContact.query().select('desc_contact_page').first()
+
+        return view.render('about-us/content', {titlePage, aboutUs, content})
     }
 
     public async index({ view }: HttpContextContract) {
@@ -51,7 +61,22 @@ export default class AboutUsController {
     public async edit({ }: HttpContextContract) {
     }
 
-    public async update({ }: HttpContextContract) {
+    public async update({ request, response, session }: HttpContextContract) {
+        const changeOurVideo = request.input('know_us_video')
+        let notification = ''
+
+        const aboutUs = await AboutUs.firstOrFail()
+
+        if (changeOurVideo) {
+            aboutUs.know_us_video = Helper.getStringAfter(
+                changeOurVideo, 'https://www.youtube.com/watch?v='
+            )
+            notification = 'video tentang kita'
+        }
+
+        await aboutUs.save()
+        session.flash('notification', `Berhasil mengubah ${notification}`)
+        return response.redirect().back()
     }
 
     public async destroy({ }: HttpContextContract) {

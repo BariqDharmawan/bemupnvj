@@ -45,6 +45,11 @@
                                 text: 'Our Contact',
                                 iconMenu: 'far fa-circle nav-icon'
                             })
+                            @!component('partials/dashboard-menu', {
+                                url: route('about_us.content'),
+                                text: 'Content',
+                                iconMenu: 'far fa-circle nav-icon'
+                            })
                         </ul>
                     @endcomponent
                     @if(auth.isLoggedIn)
@@ -110,6 +115,7 @@
     <script src="/assets/vendors/dropzone/dropzone.min.js"></script>
     <script src="/assets/vendors/AdminLTE/plugins/toastr/toastr.min.js"></script>
     <script src="/assets/vendors/AdminLTE/plugins/select2/js/select2.full.min.js"></script>
+    <script src="/assets/vendors/fancybox/jquery.fancybox.min.js"></script>
     <script src="/assets/js/admin.js"></script>
     @!section('scripts')
 
