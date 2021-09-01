@@ -26,7 +26,7 @@ export default class AboutUsController {
         const aboutUs = await AboutUs.first()
         const content = await OurContact.query().select('desc_contact_page').first()
 
-        return view.render('about-us/content', {titlePage, aboutUs, content})
+        return view.render('about-us/content/index', {titlePage, aboutUs, content})
     }
 
     public async index({ view }: HttpContextContract) {
@@ -63,6 +63,7 @@ export default class AboutUsController {
 
     public async update({ request, response, session }: HttpContextContract) {
         const changeOurVideo = request.input('know_us_video')
+        const changeDesc = request.input('desc')
         let notification = ''
 
         const aboutUs = await AboutUs.firstOrFail()
@@ -72,6 +73,11 @@ export default class AboutUsController {
                 changeOurVideo, 'https://www.youtube.com/watch?v='
             )
             notification = 'video tentang kita'
+        }
+
+        if (changeDesc) {
+            aboutUs.desc = changeDesc
+            notification = 'Deskripsi mengenai kita'
         }
 
         await aboutUs.save()

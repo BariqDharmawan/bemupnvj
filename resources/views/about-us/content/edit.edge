@@ -1,4 +1,4 @@
-@component('partials/bootstrap-modal', {id: 'edit-video-kita'})
+@component('partials/bootstrap-modal', {id: 'edit-our-video'})
     <form action="{{ route('about_us.update', {qs: {_method: 'PUT'}}) }}" method="POST">
         {{ csrfField() }}
         @!component('partials/bootstrap-input', {
@@ -9,6 +9,23 @@
             required: 'required',
             helperText: "Url hrs diawali 'https://'. Contoh: https://www.youtube.com/watch?v=klXeBW9AD0s",
             value: 'https://www.youtube.com/watch?v=' + aboutUs.know_us_video
+        })
+        <button type="submit" class="btn btn-primary">Ubah video</button>
+    </form>
+@end
+
+@component('partials/bootstrap-modal', {id: 'edit-our-desc', addClassDialog: 'modal-lg'})
+    <form action="{{ route('about_us.update', {qs: {_method: 'PUT'}}) }}" method="POST">
+        {{ csrfField() }}
+        @!component('partials/bootstrap-input', {
+            type: 'textarea',
+            name: 'desc',
+            placeholder: 'Masukan deskrip mengenai BEM kita saat ini',
+            label: 'Deskripsi mengenai BEM kita',
+            required: 'required',
+            rows: 5,
+            addClass: 'summernote',
+            value: aboutUs.desc
         })
         <button type="submit" class="btn btn-primary">Ubah video</button>
     </form>

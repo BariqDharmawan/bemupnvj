@@ -7,6 +7,8 @@ $('.select2bs4').select2({
     placeholder: 'Choose a platform'
 })
 
+$('.summernote').summernote()
+
 //submit #our-vision on focusout
 $("#our-vision").on('focusout', function (e) {
     e.preventDefault()

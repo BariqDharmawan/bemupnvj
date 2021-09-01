@@ -1,0 +1,56 @@
+@layout('layouts/admin')
+
+@section('body')
+<div class="card mb-5">
+    <div class="card-body">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            @!component('partials/bootstrap-tab', {
+                tabName: 'Video tentang kita',
+                isActive: true
+            })
+            @!component('partials/bootstrap-tab', {
+                tabName: 'Deskripsi tentang kita'
+            })
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+            @component('partials/bootstrap-pane', {
+                tabName: 'Video tentang kita',
+                isActive: true,
+                addClass: 'position-relative'
+            })
+                <a data-fancybox data-src="{{ 'https://www.youtube.com/watch?v=' + aboutUs.know_us_video }}"
+                href="javascript:;" class="position-relative">
+                    <i class="fas fa-play icon-play-fancybox"></i>
+                    <img src="https://img.youtube.com/vi/{{ aboutUs.know_us_video }}/mqdefault.jpg" class="img-fluid" alt="Tentang {{ process.env.APP_NAME }}">
+                </a>
+                @!component('partials/trigger-modal', {
+                    type: 'anchor',
+                    targetModal: 'edit-our-video',
+                    classnya: 'bg-transparent border-0 text-primary position-absolute bottom-right-0',
+                    icon: 'fa-edit',
+                    text: 'Ubah'
+                })
+            @end
+            @component('partials/bootstrap-pane', {
+                tabName: 'Deskripsi tentang kita',
+                addClass: 'position-relative'
+            })
+                <div>{{{ aboutUs.desc }}}</div>
+                <div class="overflow-hidden">
+                    @!component('partials/trigger-modal', {
+                        type: 'anchor',
+                        targetModal: 'edit-our-desc',
+                        classnya: 'bg-transparent border-0 text-primary position-absolute bottom-right-0',
+                        icon: 'fa-edit',
+                        text: 'Ubah'
+                    })
+                </div>
+            @end
+        </div>
+    </div>
+</div>
+@end
+
+@section('component')
+    @include('about-us/content/edit')
+@endsection

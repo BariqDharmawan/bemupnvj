@@ -31,7 +31,7 @@
 
             <label for="{{ dashCase(name) }}">{{ label }}</label>
             @if(type == 'textarea')
-                <textarea class="form-control 
+                <textarea class="form-control {{ addClass || '' }}
                 {{ flashMessages.has('errors.' + name) ? 'is-invalid' : '' }}" 
                 id="{{ dashCase(name) }}" name="{{ name }}" rows="{{ rows || '3' }}" 
                 style="resize: none"
