@@ -1,0 +1,18 @@
+@component('partials/bootstrap-pane', {
+    tabName: 'Kategori',
+    isActive: true
+})
+    @each((category, index) in categories)
+        @component('partials/plain-list', {
+            text: category.category,
+            link: 'javascript:void(0);'
+        })
+            @!component('partials/trigger-modal', {
+                targetModal: action + 'telephone',
+                classnya: 'btn btn-default text-primary',
+                icon: 'fa-edit',
+                text: 'Ubah'
+            })
+        @end
+    @end
+@end

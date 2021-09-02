@@ -7,7 +7,7 @@ export const BlogsFactories = Factory.define(Blog, ({ faker }) => {
         title: faker.lorem.sentence(),
         slug: faker.lorem.slug(),
         cover: faker.image.abstract(),
-        content: faker.lorem.paragraph()
+        content: '<p>' + faker.lorem.paragraph() + '</p>'
     }
 }).build()
 

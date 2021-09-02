@@ -2,7 +2,7 @@
     <a id="tab-{{ dashCase(tabName) }}-tab" data-toggle="pill" 
     href="#tab-{{ dashCase(tabName) }}" class="nav-link {{ isActive ? 'active' : '' }}"
     role="tab"aria-controls="tab-{{ dashCase(tabName) }}" 
-    aria-selected="{{ isActive ? 'true' : ''}}" 
+    aria-selected="{{ isActive ? 'true' : 'false' }}"
     {{ $props.serializeExcept(['tabName', 'id']) }}>
         {{ tabName }}
     </a>

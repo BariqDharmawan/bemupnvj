@@ -1,0 +1,18 @@
+@each((article, index) in articles)
+    @component('partials/bootstrap-modal', {
+        id: 'edit-article-' + dashCase(article.title),
+        addClassDialog: 'modal-xl'
+    })
+    <form action="{{ route('blog.update', {id: article.id}) }}" method="post">
+        {{ csrfField() }}
+        @!component('partials/bootstrap-input', {
+            name: 'title',
+            label: 'Judul',
+            placeholder: 'Masukan judul artikel',
+            value: article.title,
+            required: 'required'
+        })
+        <button type="submit" class="btn btn-primary">Simpan perubahan</button>
+    </form>
+    @end
+@end

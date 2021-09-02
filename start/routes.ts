@@ -4,8 +4,6 @@ import './routeApi'
 
 Route.get('/', 'HomeController.index').as('landing_page')
 
-
-
 Route.resource('our-social', 'OurSocialsController').only([
     'store', 'update', 'destroy'
 ]).middleware({'*': ['auth']})
@@ -32,16 +30,15 @@ Route.put('about-us/update', 'AboutUsController.update').as('about_us.update')
 Route.resource('lead', 'LeadsController').only(['index', 'store', 'destroy'])
     .middleware({'index': ['auth']})
 
+Route.get('blog/manage', 'BlogsController.manage').as('blog.manage').middleware('auth')
+Route.resource('blog', 'BlogsController')
+Route.resource('blog-category', 'BlogsController').only(['store', 'update', 'destroy'])
+    .middleware({'*': ['auth']})
+
 Route.group(() => {
     Route.get('dashboard', 'DashboardController.index').as('dashboard')
-    Route.get('aspirations/manage', 'AspirationsController.manage').as('aspirations.manage')
     Route.get('contact-us/content', 'ContactusesController.content').as('contact_us.content')
     Route.resource('contact-us', 'ContactusesController')
-    Route.group(() => {
-        Route.get('manage', 'BlogsController.manage').as('manage')
-        Route.resource('category', 'BlogsController').only(['store', 'update', 'destroy'])
-    }).prefix('blog').as('blog')
-
     Route.resource('primary-cover', 'HomeCoversController').only([
         'index', 'store', 'destroy'
     ])
@@ -51,9 +48,7 @@ Route.group(() => {
 
 }).as('admin').middleware('auth')
 
-
-Route.resource('blog', 'BlogsController')
-
+Route.get('aspirations/manage', 'AspirationsController.manage').as('aspirations.manage')
 Route.resource('aspirations', 'AspirationsController').only([
     'index', 'store', 'destroy'
 ])

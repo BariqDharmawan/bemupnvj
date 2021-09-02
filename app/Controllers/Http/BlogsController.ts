@@ -1,24 +1,35 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import BlogCategory from 'App/Models/BlogCategory'
+import Blog from 'App/Models/Blog'
 
 export default class BlogsController {
-  public async index ({}: HttpContextContract) {
-  }
+    public async index({ }: HttpContextContract) {
+    }
 
-  public async create ({}: HttpContextContract) {
-  }
+    public async manage({ view }: HttpContextContract) {
+        const titlePage = 'Manage konten blog'
 
-  public async store ({}: HttpContextContract) {
-  }
+        const categories = await BlogCategory.query().preload('blogs')
+        const articles = await Blog.all()
 
-  public async show ({}: HttpContextContract) {
-  }
+        return view.render('blog/manage', { titlePage, categories, articles })
+    }
 
-  public async edit ({}: HttpContextContract) {
-  }
+    public async create({ }: HttpContextContract) {
+    }
 
-  public async update ({}: HttpContextContract) {
-  }
+    public async store({ }: HttpContextContract) {
+    }
 
-  public async destroy ({}: HttpContextContract) {
-  }
+    public async show({ }: HttpContextContract) {
+    }
+
+    public async edit({ }: HttpContextContract) {
+    }
+
+    public async update({ }: HttpContextContract) {
+    }
+
+    public async destroy({ }: HttpContextContract) {
+    }
 }

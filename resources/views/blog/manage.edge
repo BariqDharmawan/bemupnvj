@@ -1,0 +1,30 @@
+@layout('layouts/admin')
+
+@section('body')
+    @component('partials/alert', {type: 'success', isDismissable: true})
+    {{ flashMessages.get('notification') }}
+    @end
+    
+    <ul class="nav nav-tabs" id="tab-blog" role="tablist">
+        @!component('partials/bootstrap-tab', {
+            tabName: 'Kategori',
+            isActive: true
+        })
+        @!component('partials/bootstrap-tab', {
+            tabName: 'Artikel',
+        })
+    </ul>
+    <div class="card mb-5">
+        <div class="card-body border-0 shadow-none p-0">
+            <div class="tab-content" id="tab-blogContent">
+                @include('blog/category/index')
+                @include('blog/article/index')
+            </div>
+        </div>
+    </div>
+@end
+
+@section('component')
+    @include('blog/category/edit')
+    @include('blog/article/edit')
+@end
