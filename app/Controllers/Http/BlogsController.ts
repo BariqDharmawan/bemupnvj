@@ -77,6 +77,11 @@ export default class BlogsController {
         return response.redirect().back()
     }
 
-    public async destroy({ }: HttpContextContract) {
+    public async destroy({ params, response, session }: HttpContextContract) {
+        const getArticle = await Blog.findOrFail(params.id)
+        await getArticle.delete()
+
+        session.flash('notification', 'Berhasil menghapus artikel')
+        return response.redirect().back()
     }
 }

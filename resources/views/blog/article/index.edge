@@ -46,10 +46,14 @@
                                         text: 'Edit',
                                         icon: 'fa-edit'
                                     })
-                                    <a href="{{ route('blog.show', {slug: article.slug}) }}" class="badge badge-primary badge-pill ml-2" 
+                                    <a href="{{ route('blog.show', {slug: article.slug}) }}" class="badge badge-primary badge-pill mx-2" 
                                     target="_blank">
                                         <i class="fas fa-external-link-alt"></i>
                                     </a>
+                                    <button type="button" class="btn btn-danger border-0" data-toggle="modal" 
+                                    data-target="#modal-delete-article-{{ article.id }}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
                                 </div>
                                 <div id="collapseArticle{{ Number(indexArticle) + 1 }}"
                                     class="collapse {{ indexArticle == 0 ? 'show' : '' }}" aria-labelledby="headingArticle{{ (
