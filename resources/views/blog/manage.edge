@@ -36,32 +36,24 @@
     @end
     
     @each((article, index) in articles)
+        @set('action', 'edit')
         @component('partials/bootstrap-modal', {
             id: 'edit-article-' + dashCase(article.title),
             addClassDialog: 'modal-xl'
         })
             @set('formAction', route('blog.update', {id: article.id}, {qs: {_method: 'PUT'}}))
-            @set('action', 'edit')
+            
             @include('blog/article/form')
         @end
 
-        @component('partials/bootstrap-modal', {id: 'delete-article-' + article.id})
-        <form action="{{ route('blog.destroy', {
-            id: article.id}, {qs: {_method: 'DELETE'}
-        }) }}" method="post">
-            {{ csrfField() }}
-            <p>
-                Are you sure wanna delete <strong>{{ article.title }}</strong> article?
-            </p>
-            <button type="submit" class="btn btn-danger">Delete it</button>
-        </form>
-        @end
+        @include('blog/article/delete')
     @end
 
 @end
 
 @section('scripts')
-    @if(flashMessages.get('notification') == 'Berhasil menghapus artikel')
+    @if(flashMessages.get('notification') == 'Berhasil menghapus artikel' || 
+        flashMessages.get('notification') == 'Berhasil mengubah artikel')
         <script>
             $("#tab-kategori-tab").removeClass('active').attr('aria-selected', 'false')
             $("#tab-artikel-tab").addClass('active').attr('aria-selected', 'true')
