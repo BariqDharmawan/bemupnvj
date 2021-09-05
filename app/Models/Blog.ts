@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
 import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { slugify } from '@ioc:Adonis/Addons/LucidSlugify'
 import BlogCategory from './BlogCategory'
 
 export default class Blog extends BaseModel {
@@ -22,11 +23,13 @@ export default class Blog extends BaseModel {
     public blog_category_id: number
 
     @column.dateTime({ autoCreate: true })
-    public createdAt: DateTime
+    public created_at: DateTime
 
     @column.dateTime({ autoCreate: true, autoUpdate: true })
-    public updatedAt: DateTime
+    public updated_at: DateTime
 
     @belongsTo(() => BlogCategory)
     public blogCategory: BelongsTo<typeof BlogCategory>
+
+    public static pathCover = '/uploads/article'
 }

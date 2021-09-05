@@ -1,6 +1,7 @@
 import { getMission } from "../function/get-ajax";
 import { updateAjax } from "../function/update-ajax";
 import { storeAjax } from "../function/store-ajax";
+import { previewUploadImg } from "../function/validation";
 
 $('.select2bs4').select2({
     theme: 'bootstrap4',
@@ -44,4 +45,10 @@ $("[id*='mission-content-']").on('focusout', function () {
     updateAjax(formAction, {
         content: $(this).val()
     })
+})
+
+
+
+$(".img-upload-preview").change(function () {
+    previewUploadImg($(this))
 })

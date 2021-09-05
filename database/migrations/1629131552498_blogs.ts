@@ -6,7 +6,7 @@ export default class Blogs extends BaseSchema {
     public async up() {
         this.schema.createTable(this.tableName, (table) => {
             table.increments('id').primary()
-            table.string('title').notNullable()
+            table.string('title', 100).notNullable()
             table.string('slug').notNullable().unique()
             table.string('cover').notNullable()
             table.text('content').notNullable()

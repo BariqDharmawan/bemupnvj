@@ -36,18 +36,23 @@ if (document.querySelectorAll('.dropzone-single').length > 0) {
 
 if (document.querySelectorAll('.dropzone-inside-form').length > 0) {
     document.querySelectorAll('.dropzone-inside-form').forEach(formWithDropzone => {
-        const formAction = formWithDropzone.closest('form').action
+        const form = formWithDropzone.closest('form')
         const dropzoneInsideForm = new Dropzone('.dropzone-inside-form', {
-            url: formAction,
+            url: form.action,
+            paramName: formWithDropzone.dataset.name || 'file',
             maxFilesize: 20, //20mb
             acceptedFiles: ".jpeg,.jpg,.png,.pdf",
+            autoProcessQueue: false,
             headers: {
                 'X-CSRF-TOKEN': Global.csrfToken
             }
         })
-        dropzoneInsideForm.on('complete', function (file) {
-            console.log('complete upload inside form')
+        formWithDropzone.closest('form').addEventListener('submit', function (e) {
+            e.preventDefault()
+            console.log(new FormData(this))
+            dropzoneInsideForm.processQueue()
         })
+        dropzoneInsideForm.on('error', (file, error) => console.error(error))
     })
 
 }

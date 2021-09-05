@@ -4,11 +4,13 @@
 
 <div class="row mx-0">
     <div class="col-3 px-0 bg-light">
-        <div class="nav nav-pills flex-column nav-pills--tab-no-rounded" id="tab-article" role="tablist" aria-orientation="vertical">
+        <div class="nav nav-pills flex-column nav-pills--tab-no-rounded" 
+        id="tab-article" role="tablist" aria-orientation="vertical">
             @each((category, index) in categories)
                 @!component('partials/bootstrap-tab', {
-                    tabName: 'article-' + (Number(index) + 1),
-                    isActive: index == 0 ? true : false
+                    tabName: `${category.category}`,
+                    isActive: index == 0 ? true : false,
+                    'data-category-id': category.id
                 })
             @end
         </div>
@@ -16,43 +18,38 @@
     <div class="col-9 pr-0">
         <div class="tab-content p-3" id="tab-articleContent">
             @each((category, index) in categories)
-                <div class="tab-pane fade {{ index == 0 ? 'show active' : '' }} " 
-                    id="tab-article-{{ index + 1 }}" role="tabpanel" 
-                    aria-labelledby="tab-article-{{ index + 1 }}-tab">
+                @component('partials/bootstrap-pane', {
+                    tabName: `${category.category}`,
+                    isActive: index == 0 ? true : false
+                })
                     <div class="accordion" id="accordionArticle">
                         @each((article, indexArticle) in await category.blogs)
                             <div class="card shadow-none border">
                                 <div class="card-header d-flex justify-content-between"
                                     id="headingArticle{{ Number(indexArticle) + 1 }}">
                                     <h2 class="card-title">
-                                        <button data-toggle="collapse"
-                                        class="btn btn-link btn-block bg-transparent 
-                                        text-left" type="button" 
-                                        data-target="#collapseArticle{{ (
+                                        <button data-toggle="collapse" 
+                                        class="btn btn-link btn-block bg-transparent text-left" type="button" aria-controls="collapseArticle{{ (
                                             Number(indexArticle) + 1
-                                        ) }}"
+                                        ) }}" data-target="#collapseArticle{{ (
+                                            Number(indexArticle) + 1
+                                        ) }}" 
                                         aria-expanded="{{ indexArticle == 0 ? 
-                                        'true' : 'false' }}" 
-                                        aria-controls="collapseArticle{{ (
-                                            Number(indexArticle) + 1
-                                        ) }}">
+                                        'true' : 'false' }}">
                                             {{ article.title }}
                                         </button>
                                     </h2>
                                     @!component('partials/trigger-modal', {
-                                        targetModal: 'edit-article-' + 
-                                            dashCase(article.title),
+                                        targetModal: 'edit-article-' + dashCase(article.title),
                                         classnya: 'bg-transparent border-0 text-primary p-0',
                                         text: 'Edit',
                                         icon: 'fa-edit'
                                     })
                                 </div>
-                                <div id="collapseArticle{{ Number(indexArticle) + 1 }}" 
-                                    class="collapse {{ indexArticle == 0 ? 'show' : '' }}" 
-                                    aria-labelledby="headingArticle{{ (
+                                <div id="collapseArticle{{ Number(indexArticle) + 1 }}"
+                                    class="collapse {{ indexArticle == 0 ? 'show' : '' }}" aria-labelledby="headingArticle{{ (
                                         Number(indexArticle) + 1
-                                    ) }}" 
-                                    data-parent="#accordionArticle">
+                                    ) }}" data-parent="#accordionArticle">
                                     <div class="card-body">
                                         {{{ article.content }}}
                                     </div>
@@ -60,9 +57,60 @@
                             </div>
                         @end
                     </div>
-                </div>
+                @end
             @end
+            <div class="d-flex justify-content-end">
+                @!component('partials/trigger-modal', {
+                    targetModal: 'add-article',
+                    text: 'Tambah artikel',
+                    icon: 'fa-plus'
+                })  
+            </div>
         </div>
     </div>
 </div>
+@end
+
+@section('component')
+    @component('partials/bootstrap-modal', {id: 'add-article', addClassDialog: 'modal-lg'})
+        <form action="{{ route('blog.store') }}" method="post" 
+        enctype="multipart/form-data">
+            {{ csrfField() }}
+            <input type="hidden" name="blog_category_id" required readonly>
+            @!component('partials/bootstrap-input', {
+                label: 'Judul artikel yang akan dibuat',
+                name: 'title',
+                required: 'required',
+                helperText: `Mohon jangan menggunakan judul yang sama dengan
+                            artikel sebelumnya`,
+                placeholder: 'Masukan judulmu disini'
+            })
+
+            @!component('partials/bootstrap-input', {
+                type: 'textarea',
+                label: 'Konten artikel',
+                name: 'content',
+                required: 'required',
+                addClass: 'summernote',
+                placeholder: 'Masukan judulmu disini'
+            })
+            
+            @!component('partials/bootstrap-input', {
+                type: 'file',
+                label: 'Cover artikel',
+                name: 'cover',
+                addClass: 'img-upload-preview',
+                imgPreview: 'preview-article-cover',
+                required: 'required'
+            })
+            
+            @if(flashMessages.has('errors.cover'))
+            <small class="form-text text-danger">
+                {{ flashMessages.get('errors.cover') }}
+            </small>
+            @end
+
+            <button type="submit" class="btn btn-primary">Tambah artikel baru</button>
+        </form>
+    @end
 @end
