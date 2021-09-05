@@ -30,10 +30,6 @@ Route.group(() => {
     Route.get('our-contact/manage', 'OurContactController.manage').as('our_contact.manage')
     Route.resource('our-contact', 'OurContactController').only(['store', 'destroy'])
     Route.put('our-contact/update', 'OurContactController.update').as('our_contact.update')
-
-    
-    
-    Route.resource('blog-category', 'BlogsController').only(['store', 'update', 'destroy'])
     
     Route.group(() => {
         Route.get('dashboard', 'DashboardController.index').as('dashboard')
@@ -47,6 +43,9 @@ Route.group(() => {
         Route.put('content-page/:page_name', 'ContentPagesController.update').as(
             'content_page.update'
         )
+        Route.resource('blog-category', 'BlogCategoriesController').only([
+            'store', 'update', 'destroy'
+        ])
     }).as('admin')
 
 }).middleware(['auth'])
