@@ -12,6 +12,10 @@ Route.post('mission/update-all-list', 'OurMissionsController.updateAllList')
 Route.resource('lead', 'LeadsController').only(['index', 'store', 'destroy'])
     .middleware({'index': ['auth']})
 
+Route.get('blog/manage', 'BlogsController.manage').as('blog.manage').middleware('auth')
+Route.get('blog/:slug', 'BlogsController.show').as('blog.show').middleware('auth')
+Route.resource('blog', 'BlogsController').only(['store', 'update', 'destroy'])
+
 Route.group(() => {
     Route.resource('mission', 'OurMissionsController').apiOnly()
     Route.resource('our-social', 'OurSocialsController').only(['store', 'update', 'destroy'])
@@ -27,8 +31,8 @@ Route.group(() => {
     Route.resource('our-contact', 'OurContactController').only(['store', 'destroy'])
     Route.put('our-contact/update', 'OurContactController.update').as('our_contact.update')
 
-    Route.get('blog/manage', 'BlogsController.manage').as('blog.manage')
-    Route.resource('blog', 'BlogsController').only(['store', 'update', 'destroy'])
+    
+    
     Route.resource('blog-category', 'BlogsController').only(['store', 'update', 'destroy'])
     
     Route.group(() => {

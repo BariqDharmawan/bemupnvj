@@ -13,7 +13,7 @@
             <input type="{{ type }}" name="{{ name }}" 
             id="{{ dashCase(name) }}" class="form-control {{ addClass ?? ''}}
             {{ flashMessages.has('errors.' + name) ? 'is-invalid' : '' }}"
-            {{ $props.serializeExcept(['name', 'type', 'class']) }}>
+            {{ $props.serializeExcept(['name', 'type', 'addClass', 'prepandIcon']) }}>
         </div>
 
     @else
@@ -31,10 +31,10 @@
 
             @include('partials/bootstrap-label')
             @if(type == 'file' && imgPreview)
-                <img src="/assets/img/icon/preview-upload.png" alt="" 
+                <img src="{{ value || '/assets/img/icon/preview-upload.png' }}" alt="" 
                 srcset="" id="{{ imgPreview }}"
                 class="img-fluid mb-2" style="max-height: 200px" 
-                data-default-preview="/assets/img/icon/preview-upload.png">
+                data-default-preview="{{ value || '/assets/img/icon/preview-upload.png' }}">
             @endif
 
             @if(type == 'textarea')
@@ -48,7 +48,7 @@
                 <select class="form-control select2bs4 {{ addClass ?? '' }}
                 {{ flashMessages.has('errors.' + name) ? 'is-invalid' : '' }}"
                 name="{{ name }}" style="width: 100%;"
-                {{ $props.serializeExcept(['name', 'class', 'value']) }}>
+                {{ $props.serializeExcept(['name', 'class', 'value', 'datum']) }}>
                     @each((data, key) in datum)
                         <option value="{{ data.val }}" 
                         {{ (value == data.val) ? 'selected' : ''  }}>
@@ -64,7 +64,7 @@
                     name="{{ name }}" id="{{ dashCase(name) }}"
                     data-img-preview="{{ imgPreview || '' }}"
                     {{ $props.serializeExcept([
-                        'name', 'type', 'addClass', 'id', 'imgPreview'
+                        'name', 'type', 'addClass', 'id', 'imgPreview', 'value'
                     ]) }}>
                     <label class="custom-file-label" for="{{ dashCase(name) }}">
                         {{ label }}

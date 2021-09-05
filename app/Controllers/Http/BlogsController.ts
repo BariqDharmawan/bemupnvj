@@ -1,10 +1,11 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import BlogCategory from 'App/Models/BlogCategory'
 import Blog from 'App/Models/Blog'
-import ArticleValidator from 'App/Validators/ArticleValidator'
+import StoreArticleValidator from 'App/Validators/StoreArticleValidator'
 import { cuid } from '@ioc:Adonis/Core/Helpers'
 import Application from '@ioc:Adonis/Core/Application'
 import { string } from '@ioc:Adonis/Core/Helpers'
+import UpdateArticleValidator from 'App/Validators/UpdateArticleValidator'
 
 export default class BlogsController {
     public async index({ }: HttpContextContract) {
@@ -23,7 +24,7 @@ export default class BlogsController {
     }
 
     public async store({ response, request, session }: HttpContextContract) {
-        const requestValidated = await request.validate(ArticleValidator)
+        const requestValidated = await request.validate(StoreArticleValidator)
 
         const fileCover = requestValidated.cover
         const fileCoverName = `${cuid()}.${fileCover.extname}`
@@ -37,7 +38,7 @@ export default class BlogsController {
         addNewArticle.title = requestValidated.title,
         addNewArticle.content = requestValidated.content,
         addNewArticle.blog_category_id = requestValidated.blog_category_id,
-        addNewArticle.cover = fileCoverName
+        addNewArticle.cover = `${Blog.pathCover}/${fileCoverName}`
         addNewArticle.save()
 
         console.log(addNewArticle)
@@ -54,12 +55,12 @@ export default class BlogsController {
     }
 
     public async update({ response, request, session, params }: HttpContextContract) {
-        const requestValidated = await request.validate(ArticleValidator)
+        const requestValidated = await request.validate(UpdateArticleValidator)
 
         const article = await Blog.findOrFail(params.id)
         article.title = requestValidated.title
         article.content = requestValidated.content
-        if (request.file('cover')) {
+        if (requestValidated.cover) {
             const fileCover = requestValidated.cover
             const fileCoverName = `${cuid()}.${fileCover.extname}`
 

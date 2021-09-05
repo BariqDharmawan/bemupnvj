@@ -26,5 +26,24 @@
 
 @section('component')
     @include('blog/category/edit')
-    @include('blog/article/edit')
+
+    @component('partials/bootstrap-modal', {
+        id: 'add-article',
+        addClassDialog: 'modal-xl'
+    })
+        @set('formAction', route('blog.store'))
+        @include('blog/article/form')
+    @end
+    
+    @each((article, index) in articles)
+        @component('partials/bootstrap-modal', {
+            id: 'edit-article-' + dashCase(article.title),
+            addClassDialog: 'modal-xl'
+        })
+            @set('formAction', route('blog.update', {id: article.id}, {qs: {_method: 'PUT'}}))
+            @set('action', 'edit')
+            @include('blog/article/form')
+        @end
+    @end
+
 @end

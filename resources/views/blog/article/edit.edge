@@ -3,7 +3,7 @@
         id: 'edit-article-' + dashCase(article.title),
         addClassDialog: 'modal-xl'
     })
-    <form action="{{ route('blog.update', {id: article.id}) }}" method="post">
+    <form action="{{ route('blog.update', {id: article.id}, {qs: {_method: 'PUT'}}) }}" method="post">
         {{ csrfField() }}
         @!component('partials/bootstrap-input', {
             name: 'title',

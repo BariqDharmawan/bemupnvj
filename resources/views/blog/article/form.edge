@@ -1,0 +1,57 @@
+<form action="{{ formAction }}" method="post" enctype="multipart/form-data">
+    {{ csrfField() }}
+    <input type="hidden" name="blog_category_id" required readonly>
+    @!component('partials/bootstrap-input', {
+        label: 'Judul artikel yang akan dibuat',
+        name: 'title',
+        required: 'required',
+        helperText: `Mohon jangan menggunakan judul yang sama dengan
+        artikel sebelumnya`,
+        value: article ? article.title : '',
+        placeholder: 'Masukan judulmu disini'
+    })
+
+    @!component('partials/bootstrap-input', {
+        type: 'textarea',
+        label: 'Konten artikel',
+        name: 'content',
+        required: 'required',
+        addClass: 'summernote',
+        value: article ? article.content : '',
+        placeholder: 'Masukan judulmu disini'
+    })
+
+    <div class="form-group">
+        <label for="cover" class="d-block">Cover artikel</label>
+
+        <img src="{{ article ? article.cover : '/assets/img/icon/preview-upload.png' }}" alt="" 
+        srcset="" id="preview-article-cover"
+        class="img-fluid mb-2" style="max-height: 200px" 
+        data-default-preview="{{ article ? article.cover : 
+        '/assets/img/icon/preview-upload.png' }}">
+
+        <div class="custom-file">
+            <input type="file" class="custom-file-input img-upload-preview
+            {{ flashMessages.has('errors.cover') ? 'is-invalid' : '' }}"
+            name="cover" id="cover"
+            data-img-preview="preview-article-cover" {{ action != 'edit' ? 'required' : '' }}>
+            <label class="custom-file-label" for="cover">
+                Pilih cover
+            </label>
+        </div>
+    </div>
+
+    @if(flashMessages.has('errors.cover'))
+    <small class="form-text text-danger">
+        {{ flashMessages.get('errors.cover') }}
+    </small>
+    @end
+
+    <button type="submit" class="btn btn-primary">
+        @if(action == 'edit')
+            Simpan perubahan
+        @else
+            Tambah artikel baru
+        @end
+    </button>
+</form>
