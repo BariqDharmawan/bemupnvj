@@ -59,6 +59,11 @@
                             })
                         </ul>
                     @endcomponent
+                    @!component('partials/dashboard-menu', {
+                        url: route('aspirations.manage'),
+                        text: 'Aspirasi Mahasiswa',
+                        iconMenu: 'fas fa-th'
+                    })
                     @component('partials/dashboard-menu', {
                         url: '#',
                         text: 'Contact Us',

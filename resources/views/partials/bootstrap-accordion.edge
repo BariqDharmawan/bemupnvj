@@ -1,0 +1,23 @@
+<div class="card shadow-none border">
+    <div class="card-header d-flex align-items-center"
+        id="headingAccordion{{ id }}">
+        <h2 class="card-title mr-auto">
+            <button data-toggle="collapse" type="button"
+            class="btn btn-link btn-block bg-transparent text-left"
+            aria-controls="collapseAspiration{{ id }}" 
+            data-target="#collapseAspiration{{ id }}" 
+            aria-expanded="{{ isActive ? 'true' : 'false' }}">
+                {{{ title }}}
+            </button>
+        </h2>
+    </div>
+    <div id="collapseAspiration{{ id }}"
+        class="collapse {{ isActive ? 'show' : '' }}" 
+        aria-labelledby="headingAccordion{{ id }}"
+        data-parent="#{{ idAccordion }}"
+        {{ $props.serializeExcept(['id', 'title', 'isActive', 'parentData']) }}>
+        <div class="card-body">
+            {{{ await $slots.main() }}}
+        </div>
+    </div>
+</div>

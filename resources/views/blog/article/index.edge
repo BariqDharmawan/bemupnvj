@@ -16,68 +16,72 @@
         </div>
     </div>
     <div class="col-9 pr-0">
-        <div class="tab-content p-3" id="tab-articleContent">
-            @each((category, index) in categories)
-                @component('partials/bootstrap-pane', {
-                    tabName: `${category.category}`,
-                    isActive: index == 0 ? true : false
-                })
-                    <div class="accordion" id="accordionArticle">
-                        @each((article, indexArticle) in await category.blogs)
-                            <div class="card shadow-none border">
-                                <div class="card-header d-flex align-items-center"
-                                    id="headingArticle{{ Number(indexArticle) + 1 }}">
-                                    <h2 class="card-title mr-auto">
-                                        <button data-toggle="collapse" 
-                                        class="btn btn-link btn-block bg-transparent text-left" type="button" aria-controls="collapseArticle{{ (
-                                            Number(indexArticle) + 1
-                                        ) }}" data-target="#collapseArticle{{ (
-                                            Number(indexArticle) + 1
-                                        ) }}" 
-                                        aria-expanded="{{ indexArticle == 0 ? 
-                                        'true' : 'false' }}">
-                                            {{ article.title }}
-                                        </button>
-                                    </h2>
-                                    @!component('partials/trigger-modal', {
-                                        targetModal: 'edit-article-' + 
-                                            dashCase(article.title),
-                                        classnya: 'bg-transparent border-0 text-primary p-0',
-                                        text: 'Edit',
-                                        icon: 'fa-edit'
-                                    })
-                                    <a href="{{ route('blog.show', {slug: article.slug}) }}" class="badge badge-primary badge-pill mx-2" 
-                                    target="_blank">
-                                        <i class="fas fa-external-link-alt"></i>
-                                    </a>
-                                    <button type="button" class="btn btn-danger border-0" data-toggle="modal" 
-                                    data-target="#modal-delete-article-{{ article.id }}">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                                <div id="collapseArticle{{ Number(indexArticle) + 1 }}"
-                                    class="collapse {{ indexArticle == 0 ? 'show' : '' }}" aria-labelledby="headingArticle{{ (
-                                        Number(indexArticle) + 1
-                                    ) }}" data-parent="#accordionArticle">
-                                    <div class="card-body">
-                                        {{{ article.content }}}
+        <div class="card">
+            <div class="card-body">
+                <div class="tab-content p-3" id="tab-articleContent">
+                    @each((category, index) in categories)
+                        @component('partials/bootstrap-pane', {
+                            tabName: `${category.category}`,
+                            isActive: index == 0 ? true : false
+                        })
+                            <div class="accordion" id="accordionArticle">
+                                @each((article, indexArticle) in await category.blogs)
+                                    <div class="card shadow-none border">
+                                        <div class="card-header d-flex align-items-center"
+                                            id="headingArticle{{ Number(indexArticle) + 1 }}">
+                                            <h2 class="card-title mr-auto">
+                                                <button data-toggle="collapse" 
+                                                class="btn btn-link btn-block bg-transparent text-left" type="button" aria-controls="collapseArticle{{ (
+                                                    Number(indexArticle) + 1
+                                                ) }}" data-target="#collapseArticle{{ (
+                                                    Number(indexArticle) + 1
+                                                ) }}" 
+                                                aria-expanded="{{ indexArticle == 0 ? 
+                                                'true' : 'false' }}">
+                                                    {{ article.title }}
+                                                </button>
+                                            </h2>
+                                            @!component('partials/trigger-modal', {
+                                                targetModal: 'edit-article-' + 
+                                                    dashCase(article.title),
+                                                classnya: 'bg-transparent border-0 text-primary p-0',
+                                                text: 'Edit',
+                                                icon: 'fa-edit'
+                                            })
+                                            <a href="{{ route('blog.show', {slug: article.slug}) }}" class="badge badge-primary badge-pill mx-2" 
+                                            target="_blank">
+                                                <i class="fas fa-external-link-alt"></i>
+                                            </a>
+                                            <button type="button" class="btn btn-danger border-0" data-toggle="modal" 
+                                            data-target="#modal-delete-article-{{ article.id }}">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                        <div id="collapseArticle{{ Number(indexArticle) + 1 }}"
+                                            class="collapse {{ indexArticle == 0 ? 'show' : '' }}" aria-labelledby="headingArticle{{ (
+                                                Number(indexArticle) + 1
+                                            ) }}" data-parent="#accordionArticle">
+                                            <div class="card-body">
+                                                {{{ article.content }}}
+                                            </div>
+                                            <div class="card-footer">
+                                                Munculkan di halaman: 
+                                                {{ noCase(article.show_at_page) }}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="card-footer">
-                                        Munculkan di halaman: 
-                                        {{ noCase(article.show_at_page) }}
-                                    </div>
-                                </div>
+                                @end
                             </div>
                         @end
+                    @end
+                    <div class="d-flex justify-content-end">
+                        @!component('partials/trigger-modal', {
+                            targetModal: 'add-article',
+                            text: 'Tambah artikel',
+                            icon: 'fa-plus'
+                        })  
                     </div>
-                @end
-            @end
-            <div class="d-flex justify-content-end">
-                @!component('partials/trigger-modal', {
-                    targetModal: 'add-article',
-                    text: 'Tambah artikel',
-                    icon: 'fa-plus'
-                })  
+                </div>
             </div>
         </div>
     </div>

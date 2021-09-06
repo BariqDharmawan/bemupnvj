@@ -1,0 +1,44 @@
+@layout('layouts/admin')
+
+@section('body')
+    <div class="card">
+        <div class="card-body p-0">
+            <div class="row mx-0">
+                <div class="col-3 px-0 border-right">
+                    <ul class="nav nav-pills flex-column" id="tab-aspiration" 
+                    role="tablist" aria-orientation="vertical">
+                        @each((category, index) in aspirationCategory)
+                            @!component('partials/bootstrap-tab', {
+                                tabName: category.category,
+                                isActive: index == 0 ? true : false
+                            })
+                        @endeach
+                    </ul>
+                </div>
+                <div class="col-9">
+                    <div class="tab-content p-3" id="tab-aspirationContent">
+                        @each((category, indexCategory) in aspirationCategory)
+                            @component('partials/bootstrap-pane', {
+                                tabName: category.category,
+                                isActive: indexCategory == 0 ? true : false
+                            })
+                                <div class="accordion" id="accordionAspiration">
+                                    @each((aspiration, indexAspiration) in await category.aspirations)
+                                        @component('partials/bootstrap-accordion', {
+                                            id: Number(indexAspiration) + 1,
+                                            title: aspiration.name,
+                                            isActive: indexAspiration == 0 ? true : false,
+                                            idAccordion: 'accordionAspiration'
+                                        })
+                                            {{ aspiration.message }}
+                                        @endcomponent
+                                    @end
+                                </div>
+                            @end
+                        @endeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@end
