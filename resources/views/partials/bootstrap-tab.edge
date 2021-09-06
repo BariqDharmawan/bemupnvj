@@ -1,9 +1,10 @@
-<li class="nav-item" role="presentation">
+<li class="nav-item {{ addClass || '' }}" role="presentation">
     <a id="tab-{{ dashCase(tabName) }}-tab" data-toggle="pill" 
     href="#tab-{{ dashCase(tabName) }}" class="nav-link {{ isActive ? 'active' : '' }}"
     role="tab"aria-controls="tab-{{ dashCase(tabName) }}" 
     aria-selected="{{ isActive ? 'true' : 'false' }}"
-    {{ $props.serializeExcept(['tabName', 'id']) }}>
+    {{ $props.serializeExcept(['tabName', 'id', 'addClass']) }}>
         {{ tabName }}
     </a>
+    {{{ await $slots.main() }}}
 </li>

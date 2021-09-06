@@ -57,3 +57,20 @@
 .nav-pills--tab-no-rounded .nav-link {
     border-radius: 0;
 }
+
+.h-100 {
+    height: 100%;
+}
+
+.nav-item--link-stretch .nav-link {
+    flex-grow: 1;
+}
+
+.btn-show-on-parent-hover {
+    opacity: 0;
+    visibility: hidden;
+}
+*:hover > .btn-show-on-parent-hover {
+    opacity: 1;
+    visibility: visible;
+}

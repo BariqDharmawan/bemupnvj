@@ -51,6 +51,10 @@ Route.group(() => {
     }).as('admin')
 
     Route.resource('blog', 'BlogsController').only(['store', 'update', 'destroy'])
+    
+    Route.resource('aspiration-category', 'AspirationCategoriesController').only([
+        'store', 'update'
+    ])
 
 }).middleware(['auth'])
 

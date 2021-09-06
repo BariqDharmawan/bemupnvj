@@ -1,18 +1,33 @@
 @layout('layouts/admin')
 
 @section('body')
+    @component('partials/alert', {type: 'success', isDismissable: true})
+        {{ flashMessages.get('notification') }}
+    @endcomponent
     <div class="card">
         <div class="card-body p-0">
             <div class="row mx-0">
                 <div class="col-3 px-0 border-right">
-                    <ul class="nav nav-pills flex-column" id="tab-aspiration" 
+                    <ul class="nav nav-pills flex-column h-100" id="tab-aspiration" 
                     role="tablist" aria-orientation="vertical">
                         @each((category, index) in aspirationCategory)
-                            @!component('partials/bootstrap-tab', {
+                            @component('partials/bootstrap-tab', {
                                 tabName: category.category,
+                                addClass: 'd-flex nav-item--link-stretch',
                                 isActive: index == 0 ? true : false
                             })
-                        @endeach
+                                @!component('partials/trigger-modal', {
+                                    targetModal: 'edit-category-aspiration-' +
+                                                dashCase(category.category),
+                                    classnya: 'bg-transparent border-0 text-primary btn-show-on-parent-hover',
+                                    icon: 'fa-edit',
+                                })
+                            @end
+                        @end
+                        @!component('partials/bootstrap-tab', {
+                            tabName: 'Options',
+                            addClass: 'mt-auto text-dark font-weight-bold'
+                        })
                     </ul>
                 </div>
                 <div class="col-9">
@@ -36,9 +51,50 @@
                                 </div>
                             @end
                         @endeach
+                        @component('partials/bootstrap-pane', {
+                            tabName: 'Options'
+                        })
+                            <h2 class="h4 mb-4">Tambah kategori baru</h2>
+                            <form action="{{ route('aspiration_category.store') }}" 
+                            method="post">
+                                {{ csrfField() }}
+                                @!component('partials/bootstrap-input', {
+                                    name: 'category',
+                                    label: 'Kategori',
+                                    placeholder: `Mohon buat kategori yang singkat dan mudah dimengerti`,
+                                    required: 'required'
+                                })
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </form>
+                        @end
                     </div>
                 </div>
             </div>
         </div>
     </div>
+@end
+
+@section('component')
+
+    @each((category, indexCategory) in aspirationCategory)
+        @component('partials/bootstrap-modal', {
+            id: 'edit-category-aspiration-' +
+                dashCase(category.category)
+        })
+            <form action="{{ route('aspiration_category.update', {id: category.id}, {
+                qs: {_method: 'PUT'}
+            }) }}" method="post">
+                {{ csrfField() }}
+                @!component('partials/bootstrap-input', {
+                    name: 'category',
+                    label: 'Kategori',
+                    placeholder: `Mohon buat kategori yang singkat dan mudah dimengerti`,
+                    required: 'required',
+                    value: category.category
+                })
+                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+            </form>
+        @end
+    @end
+
 @end
