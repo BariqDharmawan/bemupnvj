@@ -5,17 +5,7 @@ import UpdateBlogCategoryValidator from 'App/Validators/UpdateBlogCategoryValida
 export default class BlogCategoriesController {
     public async index({ }: HttpContextContract) {
     }
-
-    public async create({ }: HttpContextContract) {
-    }
-
     public async store({ }: HttpContextContract) {
-    }
-
-    public async show({ }: HttpContextContract) {
-    }
-
-    public async edit({ }: HttpContextContract) {
     }
 
     public async update({ params, request, response, session }: HttpContextContract) {

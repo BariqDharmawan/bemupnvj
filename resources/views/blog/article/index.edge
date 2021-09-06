@@ -62,6 +62,10 @@
                                     <div class="card-body">
                                         {{{ article.content }}}
                                     </div>
+                                    <div class="card-footer">
+                                        Munculkan di halaman: 
+                                        {{ noCase(article.show_at_page) }}
+                                    </div>
                                 </div>
                             </div>
                         @end

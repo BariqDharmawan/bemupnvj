@@ -17,7 +17,9 @@ export default class BlogsController {
         const categories = await BlogCategory.query().preload('blogs')
         const articles = await Blog.all()
 
-        return view.render('blog/manage', { titlePage, categories, articles })
+        const listPage = Blog.showAtPage
+
+        return view.render('blog/manage', { titlePage, categories, articles, listPage })
     }
 
     public async create({ }: HttpContextContract) {
@@ -39,6 +41,7 @@ export default class BlogsController {
         addNewArticle.content = requestValidated.content,
         addNewArticle.blog_category_id = requestValidated.blog_category_id,
         addNewArticle.cover = `${Blog.pathCover}/${fileCoverName}`
+        addNewArticle.show_at_page = requestValidated.show_at_page
         addNewArticle.save()
 
         console.log(addNewArticle)
@@ -70,8 +73,11 @@ export default class BlogsController {
             })
             article.cover = fileCoverName
         }
+        article.show_at_page = requestValidated.show_at_page
         article.blog_category_id = requestValidated.blog_category_id
         await article.save()
+
+        console.log(article)
 
         session.flash('notification', 'Berhasil mengubah artikel')
         return response.redirect().back()

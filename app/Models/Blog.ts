@@ -20,6 +20,9 @@ export default class Blog extends BaseModel {
     public content: string
 
     @column()
+    public show_at_page: string
+
+    @column()
     public blog_category_id: number
 
     @column.dateTime({ autoCreate: true })
@@ -32,4 +35,6 @@ export default class Blog extends BaseModel {
     public blogCategory: BelongsTo<typeof BlogCategory>
 
     public static pathCover = '/uploads/article'
+
+    public static showAtPage = ['home', 'info-mahasiswa', 'portal-berita', 'events']
 }

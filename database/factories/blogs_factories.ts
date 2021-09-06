@@ -7,6 +7,9 @@ export const BlogsFactories = Factory.define(Blog, ({ faker }) => {
         title: faker.lorem.sentence(),
         slug: faker.lorem.slug(),
         cover: faker.image.abstract(),
+        show_at_page: faker.random.arrayElement([
+                'home', 'info-mahasiswa', 'portal-berita', 'events'
+        ]),
         content: '<p>' + faker.lorem.paragraph() + '</p>'
     }
 }).build()

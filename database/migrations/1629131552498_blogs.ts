@@ -10,6 +10,8 @@ export default class Blogs extends BaseSchema {
             table.string('slug').notNullable().unique()
             table.string('cover').notNullable()
             table.text('content').notNullable()
+            table.enum('show_at_page', ['home', 'info-mahasiswa', 'portal-berita', 'events'])
+            table.timestamp('show_until', {useTz: true}).nullable()
             table.integer('blog_category_id').notNullable()
             table.timestamp('created_at', { useTz: true })
             table.timestamp('updated_at', { useTz: true })

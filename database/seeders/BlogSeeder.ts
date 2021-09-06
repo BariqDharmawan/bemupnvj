@@ -5,6 +5,6 @@ export default class BlogSeeder extends BaseSeeder {
     public static developmentOnly = true
 
     public async run() {
-        await BlogCategoriesFactories.with('blogs', 3).createMany(5)
+        await BlogCategoriesFactories.with('blogs', 3).createMany(3)
     }
 }

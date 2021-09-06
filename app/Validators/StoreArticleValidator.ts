@@ -1,5 +1,6 @@
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Blog from 'App/Models/Blog'
 
 export default class StoreArticleValidator {
     constructor(protected ctx: HttpContextContract) {
@@ -38,6 +39,9 @@ export default class StoreArticleValidator {
         content: schema.string({trim: true}, [
             rules.required(),
             rules.minLength(15)
+        ]),
+        show_at_page: schema.enum(Blog.showAtPage, [
+            rules.required()
         ]),
         blog_category_id: schema.number([
             rules.exists({table: 'blog_categories', column: 'id'})
