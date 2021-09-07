@@ -1,5 +1,6 @@
 import { showToastr } from "./toastr";
 
+let storedData
 function storeAjax(url, datanya, formEl = null) {
     $.ajax({
         type: "POST",
@@ -8,13 +9,16 @@ function storeAjax(url, datanya, formEl = null) {
         dataType: "json",
         encode: true,
     }).done(function (data) {
-        console.log(data);
+        storedData = data.data
+        console.log('store data from store-ajax', storedData);
         showToastr('success', data.message)
 
         if (formEl) {
             formEl.parents('.modal').modal('hide')
             formEl.find('[class*="-error-message"]').text('')
         }
+
+        return storedData
 
     }).fail(function (xhr, status, error) {
         const allErrorMessage = JSON.parse(xhr.responseText)
@@ -32,4 +36,4 @@ function storeAjax(url, datanya, formEl = null) {
     })
 }
 
-export {storeAjax}
+export {storeAjax, storedData}

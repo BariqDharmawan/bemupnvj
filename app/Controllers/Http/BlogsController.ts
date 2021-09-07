@@ -11,6 +11,14 @@ export default class BlogsController {
     public async index({ }: HttpContextContract) {
     }
 
+    /**
+     * async getArticle
+     */
+    public async getSingleArticle({response, params}: HttpContextContract) {
+        const article = await Blog.findOrFail(params.id)
+        return response.json({article})
+    }
+
     public async manage({ view }: HttpContextContract) {
         const titlePage = 'Manage konten blog'
 
@@ -44,8 +52,6 @@ export default class BlogsController {
         addNewArticle.show_at_page = requestValidated.show_at_page
         addNewArticle.save()
 
-        console.log(addNewArticle)
-
         session.flash('notification', 'Berhasil membuat artikel baru')
         return response.redirect().back()
 
@@ -77,8 +83,9 @@ export default class BlogsController {
         article.blog_category_id = requestValidated.blog_category_id
         await article.save()
 
-        console.log(article)
+        const category = await BlogCategory.findOrFail(article.blog_category_id)
 
+        session.flash('tabActive', category.category)
         session.flash('notification', 'Berhasil mengubah artikel')
         return response.redirect().back()
     }

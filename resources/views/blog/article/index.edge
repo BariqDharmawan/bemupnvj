@@ -2,9 +2,9 @@
     tabName: 'Artikel'
 })
 
-<div class="row mx-0">
+<div class="row mx-0" id="list-article">
     <div class="col-3 px-0 bg-light">
-        <div class="nav nav-pills flex-column nav-pills--tab-no-rounded" 
+        <ul class="nav nav-pills flex-column nav-pills--tab-no-rounded" 
         id="tab-article" role="tablist" aria-orientation="vertical">
             @each((category, index) in categories)
                 @!component('partials/bootstrap-tab', {
@@ -13,10 +13,10 @@
                     'data-category-id': category.id
                 })
             @end
-        </div>
+        </ul>
     </div>
     <div class="col-9 pr-0">
-        <div class="card">
+        <div class="card shadow-none">
             <div class="card-body">
                 <div class="tab-content p-3" id="tab-articleContent">
                     @each((category, index) in categories)
@@ -24,53 +24,58 @@
                             tabName: `${category.category}`,
                             isActive: index == 0 ? true : false
                         })
-                            <div class="accordion" id="accordionArticle">
+                            <div class="accordion" id="accordionArticle-{{ category.id }}">
                                 @each((article, indexArticle) in await category.blogs)
-                                    <div class="card shadow-none border">
-                                        <div class="card-header d-flex align-items-center"
-                                            id="headingArticle{{ Number(indexArticle) + 1 }}">
-                                            <h2 class="card-title mr-auto">
-                                                <button data-toggle="collapse" 
-                                                class="btn btn-link btn-block bg-transparent text-left" type="button" aria-controls="collapseArticle{{ (
-                                                    Number(indexArticle) + 1
-                                                ) }}" data-target="#collapseArticle{{ (
-                                                    Number(indexArticle) + 1
-                                                ) }}" 
-                                                aria-expanded="{{ indexArticle == 0 ? 
-                                                'true' : 'false' }}">
-                                                    {{ article.title }}
+                                    <div class="card shadow-none border" 
+                                        id="article-{{ article.id }}">
+                                            <div class="card-header d-flex align-items-center"
+                                                id="headingArticle{{ Number(indexArticle) + 1 }}">
+                                                <h2 class="card-title mr-auto">
+                                                    <button data-toggle="collapse" 
+                                                    class="btn btn-link btn-block bg-transparent text-left" type="button" aria-controls="collapseArticle{{ article.id }}" data-target="#collapseArticle{{ article.id }}" 
+                                                    aria-expanded="{{ indexArticle == 0 ? 
+                                                    'true' : 'false' }}">
+                                                        <span>
+                                                            {{ article.title }}
+                                                        </span>
+                                                    </button>
+                                                </h2>
+                                                @!component('partials/trigger-modal', {
+                                                    targetModal: 'edit-article-' + article.id,
+                                                    classnya: 'bg-transparent border-0 text-primary p-0',
+                                                    text: 'Edit',
+                                                    icon: 'fa-edit'
+                                                })
+                                                <a href="{{ route('blog.show', {slug: article.slug}) }}" class="badge badge-primary badge-pill mx-2 external-link" 
+                                                target="_blank">
+                                                    <i class="fas fa-external-link-alt"></i>
+                                                </a>
+                                                <button type="button" class="btn btn-danger border-0" data-toggle="modal" 
+                                                data-target="#modal-delete-article-{{ article.id }}">
+                                                    <i class="fas fa-trash"></i>
                                                 </button>
-                                            </h2>
-                                            @!component('partials/trigger-modal', {
-                                                targetModal: 'edit-article-' + 
-                                                    dashCase(article.title),
-                                                classnya: 'bg-transparent border-0 text-primary p-0',
-                                                text: 'Edit',
-                                                icon: 'fa-edit'
-                                            })
-                                            <a href="{{ route('blog.show', {slug: article.slug}) }}" class="badge badge-primary badge-pill mx-2" 
-                                            target="_blank">
-                                                <i class="fas fa-external-link-alt"></i>
-                                            </a>
-                                            <button type="button" class="btn btn-danger border-0" data-toggle="modal" 
-                                            data-target="#modal-delete-article-{{ article.id }}">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </div>
-                                        <div id="collapseArticle{{ Number(indexArticle) + 1 }}"
-                                            class="collapse {{ indexArticle == 0 ? 'show' : '' }}" aria-labelledby="headingArticle{{ (
-                                                Number(indexArticle) + 1
-                                            ) }}" data-parent="#accordionArticle">
-                                            <div class="card-body">
-                                                {{{ article.content }}}
                                             </div>
-                                            <div class="card-footer">
-                                                Munculkan di halaman: 
-                                                {{ noCase(article.show_at_page) }}
+                                            <div id="collapseArticle{{ article.id }}"
+                                                class="collapse {{ indexArticle == 0 ? 'show' : '' }}" 
+                                                aria-labelledby="headingArticle{{ article.id }}" 
+                                                data-parent="#accordionArticle-{{ category.id }}">
+                                                <div class="card-body">
+                                                    {{{ article.content }}}
+                                                </div>
+                                                <div class="card-footer">
+                                                    Munculkan di halaman:
+                                                    <span>
+                                                        {{ noCase(article.show_at_page) }}
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                @end
+                                    @else
+                                        <div class="alert alert-light" role="alert">
+                                            Tidak ada artikel di kategori 
+                                            {{ category.category }}
+                                        </div>
+                                @endeach
                             </div>
                         @end
                     @end

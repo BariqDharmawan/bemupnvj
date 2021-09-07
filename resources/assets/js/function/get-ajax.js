@@ -1,3 +1,6 @@
+import { activeTab, activeTabName } from "../component/tabs";
+import { deactiveSiblings } from "./switch-tab";
+
 function getNewBanner() {
     $.ajax({
         type: "GET",
@@ -49,7 +52,9 @@ function getAddress() {
 }
 
 function getContact() {
-    $("#list-contact").load('/our-contact/manage #list-contact', function (response, status, xhr) {
+    $("#list-contact").load('/our-contact/manage #list-contact', function (
+        response, status, xhr
+    ) {
         if (status == 'error') {
             console.error(xhr.status + " " + xhr.statusText)
         }
@@ -59,4 +64,17 @@ function getContact() {
     })
 }
 
-export {getNewBanner, getMission, getSocialMedia, getAddress, getContact}
+function getArticle() {
+    $("main.content").load('/blog/manage main.content .container-fluid', function (
+        response, status, xhr
+    ) {
+        if (status == 'error') {
+            console.error(xhr.status + " " + xhr.statusText)
+        }
+        else if (status == 'success') {
+            console.info('get current articles')
+        }
+    })
+}
+
+export {getNewBanner, getMission, getSocialMedia, getAddress, getContact, getArticle}

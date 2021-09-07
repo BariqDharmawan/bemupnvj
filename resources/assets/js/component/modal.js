@@ -1,6 +1,7 @@
 import { deleteAjax } from "../function/delete-ajax"
-import { getAddress, getMission, getSocialMedia, getContact } from "../function/get-ajax";
-import { storeAjax } from "./../function/store-ajax"
+import { getAddress, getMission, getSocialMedia, getContact, getArticle } from "../function/get-ajax";
+import { storeAjax, storedData } from "./../function/store-ajax"
+import { activeTabName } from "./tabs";
 
 //delete mission on popup open
 let deleteUrl;
@@ -82,4 +83,21 @@ $("#edit-telephone").on("submit", function (e) {
 
     storeAjax(storeUrl, formData, $(this))
     getContact()
+})
+
+//edit article on popup open
+$(".submit-article").on('submit', function (e) {
+    e.preventDefault()
+    storeUrl = $(this).attr('action')
+    formData = $(this).serialize()
+
+    const storedAjax = storeAjax(storeUrl, formData, $(this))
+    const categoryId = $(this).find("[name='blog_category_id']").val()
+
+    console.info(activeTabName)
+    localStorage.setItem('currentActiveTab', activeTabName)
+    
+    window.location.reload();
+
+    
 })

@@ -34,32 +34,50 @@
         @set('formAction', route('blog.store'))
         @include('blog/article/form')
     @end
-    
-    @each((article, index) in articles)
-        @set('action', 'edit')
-        @component('partials/bootstrap-modal', {
-            id: 'edit-article-' + dashCase(article.title),
-            addClassDialog: 'modal-xl'
-        })
-            @set('formAction', route('blog.update', {id: article.id}, {qs: {_method: 'PUT'}}))
-            
-            @include('blog/article/form')
-        @end
 
-        @include('blog/article/delete')
-    @end
+    <section id="modal-edit-articles">
+        @each((article, index) in articles)
+            @set('action', 'edit')
+            @component('partials/bootstrap-modal', {
+                id: 'edit-article-' + article.id,
+                addClassDialog: 'modal-xl'
+            })
+                @set('formAction', route('blog.update', {id: article.id}, {qs: {_method: 'PUT'}}))
+                
+                @include('blog/article/form')
+            @end
+
+            @include('blog/article/delete')
+        @end
+    </section>
 
 @end
 
 @section('scripts')
-    @if(flashMessages.get('notification') == 'Berhasil menghapus artikel' || 
-        flashMessages.get('notification') == 'Berhasil mengubah artikel')
+    @if(flashMessages.get('notification') === 'Berhasil mengubah artikel' || 
+        flashMessages.get('notification') === 'Berhasil menghapus artikel')
         <script>
-            $("#tab-kategori-tab").removeClass('active').attr('aria-selected', 'false')
-            $("#tab-artikel-tab").addClass('active').attr('aria-selected', 'true')
-        
-            $("#tab-kategori").removeClass('show active')
-            $("#tab-artikel").tab('show')
+            const tabArtikel = $("#tab-artikel")
+            tabArtikel.tab('show');
+            tabArtikel.siblings().removeClass('show active');
+
+            $("#tab-artikel-tab").addClass('active').attr('aria-selected', 'true');
+            $("#tab-artikel-tab").parent().siblings().find('.nav-link')
+                    .removeClass('active').attr('aria-selected', 'false')
+
+            const currentTabArticleCategoryActive = "{{ flashMessages.get('tabActive') }}"
+                                                    .toLowerCase().replaceAll(' ', '-')
+                                                    
+            console.log(currentTabArticleCategoryActive)
+            $(`#tab-${currentTabArticleCategoryActive}`).tab('show')
+            $(`#tab-${currentTabArticleCategoryActive}-tab`).addClass('active')
+                                                            .attr('aria-selected', 'true');
+            $(`#tab-${currentTabArticleCategoryActive}`).siblings()
+                                                        .removeClass('show active')
+            $(`#tab-${currentTabArticleCategoryActive}-tab`)
+                    .parent().siblings().find('.nav-link')
+                    .removeClass('active').attr('aria-selected', 'false')
+            
         </script>
     @end
 @end
