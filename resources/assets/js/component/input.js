@@ -47,8 +47,15 @@ $("[id*='mission-content-']").on('focusout', function () {
     })
 })
 
-
-
 $(".img-upload-preview").change(function () {
     previewUploadImg($(this))
+})
+
+$(".datepicker-here").datepicker({
+    language: 'en',
+    position: 'top left',
+    minDate: new Date(),
+    timepicker: true,
+    dateFormat: 'yyyy-mm-dd',
+    timeFormat: 'hh:ii'
 })

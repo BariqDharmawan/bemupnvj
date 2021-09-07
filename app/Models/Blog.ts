@@ -22,6 +22,9 @@ export default class Blog extends BaseModel {
     @column()
     public show_at_page: string
 
+    @column.dateTime()
+    public show_until: DateTime
+
     @column()
     public blog_category_id: number
 

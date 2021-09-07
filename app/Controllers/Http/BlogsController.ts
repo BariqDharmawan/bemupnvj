@@ -6,6 +6,7 @@ import { cuid } from '@ioc:Adonis/Core/Helpers'
 import Application from '@ioc:Adonis/Core/Application'
 import { string } from '@ioc:Adonis/Core/Helpers'
 import UpdateArticleValidator from 'App/Validators/UpdateArticleValidator'
+import { DateTime } from 'luxon'
 
 export default class BlogsController {
     public async index({ }: HttpContextContract) {
@@ -50,6 +51,7 @@ export default class BlogsController {
         addNewArticle.blog_category_id = requestValidated.blog_category_id,
         addNewArticle.cover = `${Blog.pathCover}/${fileCoverName}`
         addNewArticle.show_at_page = requestValidated.show_at_page
+        addNewArticle.show_until = request.input('show_until')
         addNewArticle.save()
 
         session.flash('notification', 'Berhasil membuat artikel baru')
@@ -81,6 +83,7 @@ export default class BlogsController {
         }
         article.show_at_page = requestValidated.show_at_page
         article.blog_category_id = requestValidated.blog_category_id
+        article.show_until = request.input('show_until')
         await article.save()
 
         const category = await BlogCategory.findOrFail(article.blog_category_id)

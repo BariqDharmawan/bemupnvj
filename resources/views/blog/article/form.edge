@@ -61,6 +61,13 @@ data-id="{{ article ? article.id : '' }}">
         <small class="form-text text-danger show_at_page-error-message"></small>
     </div>
 
+    <div class="form-group">
+        <label for="cover" class="d-block">Tampilkan artikel ini sampai tanggal</label>
+        <input type="text" name="show_until" 
+        placeholder="Jika tidak ingin ada expire, kosongkan field ini"
+        class="datepicker-here form-control" id="show-until" required>
+    </div>
+
     @if(flashMessages.has('errors.cover'))
     <small class="form-text text-danger">
         {{ flashMessages.get('errors.cover') }}

@@ -76,7 +76,7 @@
                 class="form-control {{ addClass ?? ''}}
                 {{ flashMessages.has('errors.' + name) ? 'is-invalid' : '' }}"
                 id="{{ dashCase(name) }}"
-                {{ $props.serializeExcept(['name', 'type', 'class']) }}>
+                {{ $props.serializeExcept(['name', 'type', 'addClass']) }}>
             @end
             
         @end
