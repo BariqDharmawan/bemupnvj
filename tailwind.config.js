@@ -23,7 +23,10 @@ module.exports = {
             fontFamily: {
                 'roboto': 'Roboto, sans-serif'
             }
-        }
+        },
+        container: {
+            center: true,
+        },
     },
     variants: {
         extend: {},

@@ -6,7 +6,64 @@
     @!section('style')
 </head>
 <body>
+    <nav class="bg-white h-20">
+        <div class="container flex items-center h-full">
+            <a href="" class="flex items-center lg:mr-auto">
+                <img src="{{ aboutUs.logo }}" alt="{{ aboutUs.cabinet_name }}" 
+                    height="60px"width="60px" class="rounded-full">
+                <span class="ml-2">{{ aboutUs.cabinet_name }}</span>
+            </a>
+            <ul class="flex items-center space-x-4">
+                @!component('partials/menu', {
+                    text: 'Beranda',
+                    link: route('landing_page')
+                })
+                @!component('partials/menu', {
+                    text: 'Tentang',
+                    link: route('about_us.index')
+                })
+                @component('partials/menu', {
+                    text: 'Info Mahasiswa',
+                    hasDropdown: true
+                })
+                    <ul class="flex flex-col absolute hide-el default-transition">
+                        @!component('partials/menu', {
+                            text: 'Info Untuk Mahasiswa',
+                            link: route('student_info.index')
+                        })
+                        @!component('partials/menu', {
+                            text: 'Scholarship and career',
+                            link: route('student_info.scholareer')
+                        })
+                    </ul>
+                @end
+                @component('partials/menu', {
+                    text: 'Events',
+                    hasDropdown: true
+                })
+                    <ul class="flex flex-col absolute hide-el">
+                        @!component('partials/menu', {
+                            text: 'Mendatang',
+                            link: route('event.upcoming')
+                        })
+                        @!component('partials/menu', {
+                            text: 'Lalu',
+                            link: route('event.past')
+                        })
+                    </ul>
+                @end
+                @!component('partials/menu', {
+                    text: 'Berita',
+                    link: route('news_portal')
+                })
+                @!component('partials/menu', {
+                    text: 'Kontak',
+                    link: route('contact_us.index')
+                })
+            </ul>
+        </div>
+    </nav>
     @!section('body')
-    <script src="/assets/css/app.js"></script>
+    <script src="/assets/js/app.js"></script>
 </body>
 </html>

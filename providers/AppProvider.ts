@@ -1,5 +1,6 @@
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
 import View from '@ioc:Adonis/Core/View'
+import AboutUs from 'App/Models/AboutUs'
 
 export default class AppProvider {
     constructor(protected app: ApplicationContract) {
@@ -10,7 +11,7 @@ export default class AppProvider {
     }
 
     public async boot() {
-        //
+        
     }
 
     public async ready() {

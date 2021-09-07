@@ -31,9 +31,6 @@ export default class BlogsController {
         return view.render('blog/manage', { titlePage, categories, articles, listPage })
     }
 
-    public async create({ }: HttpContextContract) {
-    }
-
     public async store({ response, request, session }: HttpContextContract) {
         const requestValidated = await request.validate(StoreArticleValidator)
 
@@ -60,9 +57,6 @@ export default class BlogsController {
     }
 
     public async show({ }: HttpContextContract) {
-    }
-
-    public async edit({ }: HttpContextContract) {
     }
 
     public async update({ response, request, session, params }: HttpContextContract) {

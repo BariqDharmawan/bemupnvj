@@ -62,6 +62,18 @@ Route.put('about-us/update', 'AboutUsController.update').as('about_us.update')
 
 Route.resource('contact-us', 'ContactusesController')
 
+Route.group(() => {
+    Route.get('/', 'StudentInfoController.index').as('index')
+    Route.get('scholarship-and-career', 'StudentInfoController.scholareer').as('scholareer')
+}).as('student_info').prefix('student-info')
+
+Route.group(() => {
+    Route.get('past', 'EventController.past').as('past')
+    Route.get('upcoming', 'EventController.upcoming').as('upcoming')
+}).as('event').prefix('event')
+
+Route.get('news-portal', 'NewsController.portal').as('news_portal')
+
 Route.resource('aspirations', 'AspirationsController').only([
     'index', 'store', 'destroy'
 ]).middleware({'destroy': ['auth']})

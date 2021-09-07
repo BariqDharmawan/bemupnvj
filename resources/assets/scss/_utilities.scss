@@ -1,0 +1,8 @@
+@layer utilities {
+    .default-transition {
+        @apply transition duration-150 ease-in;
+    }
+    .hide-el {
+        @apply invisible opacity-0 max-h-0;
+    }
+}

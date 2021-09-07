@@ -2,4 +2,4 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="csrf-token" content="{{ csrfToken }}">
-<title>{{ process.env.APP_NAME }} - {{ titlePage }}</title>
+<title>{{ process.env.APP_NAME }} {{ titlePage ? '-' + titlePage : '' }}</title>
