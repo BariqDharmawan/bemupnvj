@@ -25,11 +25,22 @@ export default class AboutUsController {
     }
 
     public async content({ view }: HttpContextContract) {
+        const titlePage = 'Deskripsi page'
+        const pageName = 'about-us'
+        const routeToPage = 'about_us.index'
+        const contentPage = await ContentPage.findByOrFail('page_name', pageName)
+
+        return view.render('content-page/index', {
+            titlePage, routeToPage, pageName, contentPage
+        })
+    }
+
+    public async profile({view}: HttpContextContract) {
         const titlePage = 'Tentang Kabinet Kita'
         const aboutUs = await AboutUs.first()
         const content = await OurContact.query().select('desc_contact_page').first()
 
-        return view.render('about-us/content/index', {titlePage, aboutUs, content})
+        return view.render('about-us/profile/index', {titlePage, aboutUs, content})
     }
 
     public async index({ view }: HttpContextContract) {

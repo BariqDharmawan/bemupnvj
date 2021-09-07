@@ -38,7 +38,7 @@
                     @!component('partials/bootstrap-input', {
                         type: 'textarea',
                         name: 'cabinet_meaning',
-                        label: 'Deskripsi Kabinet Kita',
+                        label: 'Arti Kabinet',
                         required: 'required',
                         rows: 5,
                         helperText: "Usahakan deskripsikan arti " +
@@ -76,5 +76,5 @@
 @end
 
 @section('component')
-@include('about-us/content/edit')
+    @include('about-us/profile/edit')
 @endsection

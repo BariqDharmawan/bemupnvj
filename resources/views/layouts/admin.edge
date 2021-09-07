@@ -53,8 +53,13 @@
                                 iconMenu: 'far fa-circle nav-icon'
                             })
                             @!component('partials/dashboard-menu', {
-                                url: route('about_us.content'),
+                                url: route('about_us.profile'),
                                 text: 'Mengenai Kabinet',
+                                iconMenu: 'far fa-circle nav-icon'
+                            })
+                            @!component('partials/dashboard-menu', {
+                                url: route('about_us.content'),
+                                text: 'Konten',
                                 iconMenu: 'far fa-circle nav-icon'
                             })
                         </ul>
@@ -72,12 +77,12 @@
                     })
                         <ul class="nav nav-treeview">
                             @!component('partials/dashboard-menu', {
-                                url: route('admin.contact_us.content'),
+                                url: route('contact_us.content'),
                                 text: 'Konten',
                                 iconMenu: 'far fa-circle nav-icon'
                             })
                             @!component('partials/dashboard-menu', {
-                                url: route('lead.index'),
+                                url: route('contact_us.manage'),
                                 text: 'Leads dari publik',
                                 iconMenu: 'far fa-circle nav-icon'
                             })

@@ -8,10 +8,6 @@ Route.get('/', 'HomeController.index').as('landing_page')
 Route.post('mission/update-all-list', 'OurMissionsController.updateAllList')
     .as('mission.update_all-list')
 
-//method store is for frontend page
-Route.resource('lead', 'LeadsController').only(['index', 'store', 'destroy'])
-    .middleware({'index': ['auth']})
-
 Route.group(() => {
     Route.resource('mission', 'OurMissionsController').apiOnly()
     Route.resource('our-social', 'OurSocialsController').only(['store', 'update', 'destroy'])
@@ -20,6 +16,7 @@ Route.group(() => {
         Route.get('vision-mission', 'AboutUsController.manageVisionMission')
             .as('vision_mission')
         Route.get('content', 'AboutUsController.content').as('content')
+        Route.get('profile', 'AboutUsController.profile').as('profile')
     }).prefix('about-us').as('about_us')
     
     Route.get('our-contact/manage', 'OurContactController.manage').as('our_contact.manage')
@@ -32,13 +29,15 @@ Route.group(() => {
         Route.get('manage', 'BlogsController.manage').as('manage')
         Route.get('/:slug', 'BlogsController.show').as('show')
     }).prefix('blog').as('blog')
+
+    Route.group(() => {
+        Route.get('content', 'ContactusesController.content').as('content')
+        Route.get('manage', 'ContactusesController.manage').as('manage')
+    }).prefix('contact-us').as('contact_us')
     
     Route.group(() => {
         Route.get('dashboard', 'DashboardController.index').as('dashboard')
-        Route.get('contact-us/content', 'ContactusesController.content').as(
-            'contact_us.content'
-        )
-        Route.resource('contact-us', 'ContactusesController')
+        
         Route.resource('primary-cover', 'HomeCoversController').only([
             'index', 'store', 'destroy'
         ])
@@ -60,6 +59,8 @@ Route.group(() => {
 
 Route.resource('about-us', 'AboutUsController').except(['create', 'edit', 'update'])
 Route.put('about-us/update', 'AboutUsController.update').as('about_us.update')
+
+Route.resource('contact-us', 'ContactusesController')
 
 Route.resource('aspirations', 'AspirationsController').only([
     'index', 'store', 'destroy'
