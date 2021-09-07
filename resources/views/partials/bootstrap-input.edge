@@ -7,10 +7,10 @@
         <div class="input-group">
             <div class="input-group-prepend">
                 <div class="input-group-text">
-                    <span class="{{ prepandIcon }}"></span>
+                    <label class="{{ prepandIcon }} mb-0" for="{{dashCase(name)}}"></label>
                 </div>
             </div>
-            <input type="{{ type }}" name="{{ name }}" 
+            <input type="{{ type || 'text' }}" name="{{ name }}" 
             id="{{ dashCase(name) }}" class="form-control {{ addClass ?? ''}}
             {{ flashMessages.has('errors.' + name) ? 'is-invalid' : '' }}"
             {{ $props.serializeExcept(['name', 'type', 'addClass', 'prepandIcon']) }}>

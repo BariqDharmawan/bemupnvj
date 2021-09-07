@@ -51,11 +51,10 @@ $(".img-upload-preview").change(function () {
     previewUploadImg($(this))
 })
 
-$(".datepicker-here").datepicker({
+const datepicker = $(".air-datepicker").datepicker({
     language: 'en',
     position: 'top left',
     minDate: new Date(),
-    timepicker: true,
     dateFormat: 'yyyy-mm-dd',
-    timeFormat: 'hh:ii'
+    autoClose: true,
 })
