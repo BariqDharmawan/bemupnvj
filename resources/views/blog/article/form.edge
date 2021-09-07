@@ -42,7 +42,7 @@ data-id="{{ article ? article.id : '' }}">
         name: 'content',
         required: 'required',
         addClass: 'summernote',
-        value: article ? article.content : '',
+        value: article ? article.content : "2020-09-20",
         placeholder: 'Masukan judulmu disini'
     })
 
@@ -61,17 +61,30 @@ data-id="{{ article ? article.id : '' }}">
         <small class="form-text text-danger show_at_page-error-message"></small>
     </div>
 
-    @!component('partials/bootstrap-input', {
-        prepandIcon: 'fas fa-calendar-alt',
-        name: 'show_until',
-        placeholder: 'Ex: 2021-09-21 12:00',
-        autocomplete: 'off',
-        addClass: 'air-datepicker',
-        helperText: `Klik untuk pilih tanggal, jika tidak ingin ada expire,
-                    kosongkan field ini`,
-        label: 'Tampilkan artikel ini sampai tanggal',
-        value: article ? new Intl.DateTimeFormat('id-ID').format(article.show_until) : ''
-    })
+    @if(article && article.show_until)
+        @!component('partials/bootstrap-input', {
+            prepandIcon: 'fas fa-calendar-alt',
+            name: 'show_until',
+            placeholder: 'Ex: 2021-09-21 12:00',
+            autocomplete: 'off',
+            addClass: 'air-datepicker',
+            helperText: `Klik untuk pilih tanggal, jika tidak ingin ada expire,
+                        kosongkan field ini`,
+            label: 'Tampilkan artikel ini sampai tanggal',
+            value: new Intl.DateTimeFormat('id-ID').format(article.show_until)
+        })
+    @else
+        @!component('partials/bootstrap-input', {
+            prepandIcon: 'fas fa-calendar-alt',
+            name: 'show_until',
+            placeholder: 'Ex: 2021-09-21 12:00',
+            autocomplete: 'off',
+            addClass: 'air-datepicker',
+            helperText: `Klik untuk pilih tanggal, jika tidak ingin ada expire,
+                        kosongkan field ini`,
+            label: 'Tampilkan artikel ini sampai tanggal'
+        })
+    @endif
 
     @if(flashMessages.has('errors.cover'))
     <small class="form-text text-danger">

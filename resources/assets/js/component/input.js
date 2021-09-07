@@ -28,6 +28,7 @@ $(document).on('mouseup', function (e) {
         inputReadonly.prop('readonly', true)
         inputReadonly.filter("[data-is-plaintext]").addClass('form-control-plaintext')
     }
+    
 })
 
 //click btn to make input readonly become editable
@@ -57,4 +58,5 @@ const datepicker = $(".air-datepicker").datepicker({
     minDate: new Date(),
     dateFormat: 'yyyy-mm-dd',
     autoClose: true,
+    selectDate: $(this).val() ? new Date($(this).val()) : null
 })
