@@ -25,24 +25,15 @@ export default class UpdateContactValidator {
      *    ```
      */
     public schema = schema.create({
-        embed_map: schema.string.optional({trim: true}, [
-            rules.minLength(100)
-        ]),
-        address: schema.string.optional({trim: true}, [
+        logo: schema.file.optional({
+            size: '2mb',
+            extnames: ['jpg', 'gif', 'png', 'webp', 'jpeg']
+        }),
+        info: schema.string({trim: true}, [
+            rules.required(),
             rules.minLength(10)
         ]),
-        email: schema.string.optional({trim: true}, [
-            rules.email({sanitize: true})
-        ]),
-        telephone: schema.string.optional({}, [
-            rules.mobile({
-                locales: ['id-ID']
-            })
-        ]),
-        desc_contact_page: schema.string.optional({trim: true}, [
-            rules.minLength(15),
-            rules.maxLength(255)
-        ])
+        additional_info: schema.string.optional({trim: true}),
     })
 
     /**
@@ -57,7 +48,8 @@ export default class UpdateContactValidator {
      *
      */
     public messages = {
-        'address.required': 'Alamat belum diisi',
-        'embed_map.minLength': 'Mohon untuk memasukan embed maps yang valid'
+        required: '{{ field }} belum diisi',
+        'info.minLength': '{{ field }} minimal memiliki 10 karakter',
+        'additional_info.minLength': '{{ field }} minimal memiliki 3 karakter'
     }
 }

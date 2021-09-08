@@ -1,0 +1,24 @@
+@layout('layouts/app')
+
+@section('header')
+    <div class="container">
+        @!component('partials/heading-section', {text: 'Tentang kami'})
+    </div>
+    <div class="cover-primary h-450px bg-cover bg-no-repeat" 
+    style="background-image: url({{ primaryCover.filename }})"></div>
+@endsection
+@section('body')
+    <section class="bg-orange-primary py-10">
+        <div class="container text-white content-from-wysiwyg">
+            {{{ contentPage.desc_page }}}
+        </div>
+    </section>
+    <section class="py-10">
+        <div class="container">
+            @!component('partials/heading-section', {text: `Arti ${aboutUs.cabinet_name}`})
+            <div>
+                {{{ aboutUs.cabinet_meaning }}}
+            </div>
+        </div>
+    </section>
+@end

@@ -18,29 +18,9 @@
             value: ourContact.embed_map,
             required: 'required'
         })
-            <small class="mr-1 text-muted">
-                Untuk mengetahui cara embed maps, lihat video
-                @!component('partials/trigger-modal', {
-                    type: 'anchor',
-                    targetModal: 'cara-embed',
-                    classnya: 'bg-transparent border-0 text-primary',
-                    text: 'ini'
-                })
-            </small>
+            
         @end
         <button type="submit" class="btn btn-primary">Save update</button>
     </form>
 @end
 
-@section('component')
-    @component('partials/bootstrap-modal', {
-        id: 'cara-embed', 
-        addClassDialog: 'modal-lg',
-        notHasCloseBtn: true,
-        addClass: 'modal-body--full-content modal--bg-black'
-    })
-        <video src="/assets/video/cara-embed-map.mp4" width="100%" 
-        height="500px"
-        autoplay muted draggable="false" loop controls></video>
-    @end
-@endsection

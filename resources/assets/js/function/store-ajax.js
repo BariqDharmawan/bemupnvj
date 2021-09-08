@@ -18,8 +18,6 @@ function storeAjax(url, datanya, formEl = null) {
             formEl.find('[class*="-error-message"]').text('')
         }
 
-        return storedData
-
     }).fail(function (xhr, status, error) {
         const allErrorMessage = JSON.parse(xhr.responseText)
 

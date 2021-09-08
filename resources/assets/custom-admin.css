@@ -78,3 +78,7 @@
 .datepickers-container {
     z-index: 99999;
 }
+
+.embed-full-width iframe {
+    width: 100%;
+}

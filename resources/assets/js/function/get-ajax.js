@@ -40,17 +40,6 @@ function getSocialMedia() {
     })
 }
 
-function getAddress() {
-    $("#list-address").load('/our-contact/manage #list-address', function (response, status, xhr) {
-        if (status == 'error') {
-            console.error(xhr.status + " " + xhr.statusText)
-        }
-        else if (status == 'success') {
-            console.info('get current address')
-        }
-    })
-}
-
 function getContact() {
     $("#list-contact").load('/our-contact/manage #list-contact', function (
         response, status, xhr
@@ -77,4 +66,4 @@ function getArticle() {
     })
 }
 
-export {getNewBanner, getMission, getSocialMedia, getAddress, getContact, getArticle}
+export {getNewBanner, getMission, getSocialMedia, getContact, getArticle}

@@ -3,6 +3,8 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import OurContact from 'App/Models/OurContact';
 import OurSocial from 'App/Models/OurSocial';
 import UpdateContactValidator from 'App/Validators/UpdateContactValidator';
+import { cuid } from '@ioc:Adonis/Core/Helpers'
+import Logger from '@ioc:Adonis/Core/Logger'
 const fs = require('fs');
 
 export default class OurContactController {
@@ -18,14 +20,13 @@ export default class OurContactController {
         )
 
         const ourSocial = await OurSocial.all()
-        const ourContact = await OurContact.first()
-        // return ourContact
+        const contacts = await OurContact.all()
 
         return view.render('about-us/our-contact', {
             titlePage,
             platforms,
             ourSocial,
-            ourContact
+            contacts
         })
 
     }
@@ -42,55 +43,34 @@ export default class OurContactController {
     public async edit({ }: HttpContextContract) {
     }
 
-    public async update({ request, response }: HttpContextContract) {
+    public async update({ request, response, params }: HttpContextContract) {
         const requestValidated = await request.validate(UpdateContactValidator)
+        const getOldContact = await OurContact.findOrFail(params.id)
 
-        const newAddress = request.input('address')
-        const newEmail = request.input('email')
-        const newTelephone = request.input('telephone')
-
-        const getOldContact = await OurContact.firstOrFail()
-
-        const isAddressChange = getOldContact.address == newAddress
-        const isEmailChange = getOldContact.email == newEmail
-        const isTelephoneChange = getOldContact.telephone == newTelephone
-
-        let notification = ''
-        if (isAddressChange) {
-            notification = 'alamat'
-        }
-        else if (isEmailChange) {
-            notification = 'email'
-        }
-        else if (isTelephoneChange) {
-            notification = 'telephone'
-        }
-        else if (isAddressChange && isEmailChange && isTelephoneChange) {
-            notification = 'seluruh kontak'
-        }
-        else {
-            notification = 'deskripsi di page /contact-us'
-        }
-
-        if (newAddress) {
-            getOldContact.address = newAddress
-            getOldContact.embed_map = request.input('embed_map')
-        }
-
-        if (newEmail) {
-            getOldContact.email = newEmail
-        }
-
-        if (newTelephone) {
-            getOldContact.telephone = newTelephone
-        }
+        getOldContact.info = requestValidated.info
         
+        if (requestValidated.logo) {
+            const pathLogo = 'uploads/contact'
+            const logoName = `${cuid()}.${requestValidated?.logo.extname}`
+        
+            await requestValidated?.logo.move(Application.publicPath(pathLogo), {
+                name: logoName,
+                overwrite: true
+            })
+
+            getOldContact.logo = `${pathLogo}/${logoName}`
+        }
+        getOldContact.additional_info = requestValidated?.additional_info ?? ''
+        getOldContact.link = OurContact.generateLink(requestValidated.info)
 
         await getOldContact.save()
+
+        console.log(getOldContact.toJSON())
         
         return response.json({
             'success': true,
-            'message': 'Berhasil mengubah ' + notification
+            'message': 'Berhasil mengubah contact',
+            'data': getOldContact
         })
     }
 

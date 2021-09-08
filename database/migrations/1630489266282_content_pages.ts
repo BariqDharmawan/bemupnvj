@@ -6,7 +6,7 @@ export default class ContentPages extends BaseSchema {
     public async up() {
         this.schema.createTable(this.tableName, (table) => {
             table.increments('id')
-            table.string('desc_page')
+            table.text('desc_page')
             table.enum('page_name', ['contact', 'about-us'])
 
             /**

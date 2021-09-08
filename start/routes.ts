@@ -20,8 +20,9 @@ Route.group(() => {
     }).prefix('about-us').as('about_us')
     
     Route.get('our-contact/manage', 'OurContactController.manage').as('our_contact.manage')
-    Route.resource('our-contact', 'OurContactController').only(['store', 'destroy'])
-    Route.put('our-contact/update', 'OurContactController.update').as('our_contact.update')
+    Route.resource('our-contact', 'OurContactController').only([
+        'store', 'destroy', 'update'
+    ])
     
     Route.get('aspirations/manage', 'AspirationsController.manage').as('aspirations.manage')
     

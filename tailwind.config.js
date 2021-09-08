@@ -20,6 +20,9 @@ module.exports = {
             'red-youtube': '#F61C0D'
         }),
         extend: {
+            height: {
+                '450px': '450px'
+            },
             fontFamily: {
                 'roboto': 'Roboto, sans-serif'
             }

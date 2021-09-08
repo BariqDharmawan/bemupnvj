@@ -7,6 +7,7 @@ import ContentPage from 'App/Models/ContentPage';
 import Helper from 'App/Helper';
 import Application from '@ioc:Adonis/Core/Application'
 import { cuid } from '@ioc:Adonis/Core/Helpers'
+import HomeCover from 'App/Models/HomeCover';
 
 export default class AboutUsController {
     /**
@@ -46,7 +47,18 @@ export default class AboutUsController {
     public async index({ view }: HttpContextContract) {
         const appName: string = Env.get('APP_NAME');
         const titlePage = 'About Us'
-        return view.render('about-us', {appName, titlePage})
+
+        const aboutUs = await AboutUs.first()
+        const primaryCover = await HomeCover.first()
+        const contentPage = await ContentPage.findByOrFail('page_name', 'about-us')
+
+        return view.render('about-us/index', {
+            appName,
+            titlePage,
+            aboutUs,
+            primaryCover,
+            contentPage
+        })
     }
 
     public async create({ }: HttpContextContract) {

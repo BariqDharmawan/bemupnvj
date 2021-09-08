@@ -5,14 +5,10 @@
     <link rel="stylesheet" href="/assets/css/app.css">
     @!section('style')
 </head>
-<body>
-    <nav class="bg-white h-20">
+<body class="font-roboto">
+    <nav class="bg-white h-20 mb-16">
         <div class="container flex items-center h-full">
-            <a href="" class="flex items-center lg:mr-auto">
-                <img src="{{ aboutUs.logo }}" alt="{{ aboutUs.cabinet_name }}" 
-                    height="60px"width="60px" class="rounded-full">
-                <span class="ml-2">{{ aboutUs.cabinet_name }}</span>
-            </a>
+            @include('partials/brand-logo')
             <ul class="flex items-center space-x-4">
                 @!component('partials/menu', {
                     text: 'Beranda',
@@ -63,7 +59,33 @@
             </ul>
         </div>
     </nav>
-    @!section('body')
+    <header>
+        @!section('header')
+    </header>
+    <main>
+        @!section('body')
+    </main>
+    <footer>
+        <div class="container">
+            <div class="grid lg:grid-cols-2">
+                <div>
+                    @include('partials/brand-logo')
+                    <ul>
+                        @each((contact, key) in contact)
+                            <li class="flex">
+                                <div class="mr-2">
+                                    <img src="{{ contact.logo }}" height="16px"
+                                    alt="{{ `${contact.info} ${process.env.APP_NAME}` }}">
+                                </div>
+                                <span>{{ contact.info }}</span>
+                            </li>
+                        @endeach
+                    </ul>
+                </div>
+                <div></div>
+            </div>
+        </div>
+    </footer>
     <script src="/assets/js/app.js"></script>
 </body>
 </html>

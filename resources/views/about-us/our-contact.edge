@@ -2,12 +2,11 @@
 
 @section('body')
 
-@component('partials/alert', {type: 'success', isDismissable: true})
-    {{ flashMessages.get('notification') }}
-@endcomponent
-    @include('about-us/contact/index')
-    @include('about-us/social-media/list')
-    @include('about-us/address/index')
+    @component('partials/alert', {type: 'success', isDismissable: true})
+        {{ flashMessages.get('notification') }}
+    @endcomponent
+    @include('about-us/contact/basic')
+    @include('about-us/contact/social-media')
 @end
 
 @section('component')
@@ -19,18 +18,15 @@
             id: social.id},
             {qs: {_method: 'PUT'}})
         )
-        @include('about-us/social-media/form')
+        @include('about-us/contact/social-media/form')
 
         {{-- delete social modal --}}
-        @include('about-us/social-media/delete')
+        @include('about-us/contact/social-media/delete')
     @endeach
     
     {{-- add social modal --}}
     @set('idModal', 'add-social-media')
     @set('formAction', route('our_social.store'))
-    @include('about-us/social-media/form')
-
-    {{-- edit address modal --}}
-    @include('about-us/address/edit')
+    @include('about-us/contact/social-media/form')
     
 @end

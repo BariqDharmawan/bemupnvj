@@ -42,13 +42,14 @@ export default class OurSocialsController {
         
         const getSocial = await OurSocial.findOrFail(params.id)
         if (requestValidated.logo) {
-            let logoName = `${cuid()}.${requestValidated.logo.extname}`
-            let pathLogo = '/uploads/logo'
+            const pathLogo = '/uploads/logo'
+            const logoName = `${cuid()}.${requestValidated.logo.extname}`
     
             await requestValidated?.logo.move(Application.publicPath(pathLogo), {
                 name: logoName,
                 overwrite: true
             })
+            
             getSocial.logo = `${pathLogo}/${logoName}`
         }
         getSocial.name = platform

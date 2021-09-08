@@ -8,23 +8,35 @@ export default class OurContact extends BaseModel {
     public id: number
 
     @column()
-    public embed_map: string
+    public logo: string
     
     @column()
-    public address: string
+    public info: string
 
     @column()
-    public email: string
+    public link: string
 
     @column()
-    public telephone: string
-
-    @column()
-    public desc_contact_page: string
+    public additional_info: string
 
     @column.dateTime({ autoCreate: true })
     public createdAt: DateTime
 
     @column.dateTime({ autoCreate: true, autoUpdate: true })
     public updatedAt: DateTime
+
+    public static generateLink(info: string) {
+        const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        
+        let url = ''
+
+        if (Number(info)) {
+            url = `tel:${info}`
+        }
+        else if(info.match(validRegex)) {
+            url = `mailto:${info}`
+        }
+
+        return url
+    }
 }

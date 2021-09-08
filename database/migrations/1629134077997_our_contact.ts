@@ -6,11 +6,10 @@ export default class OurContact extends BaseSchema {
     public async up() {
         this.schema.createTable(this.tableName, (table) => {
             table.increments('id').primary()
-            table.string('email').notNullable()
-            table.string('telephone').notNullable()
-            table.text('address').notNullable()
-            table.text('embed_map')
-            table.text('desc_contact_page').notNullable()
+            table.string('logo').notNullable()
+            table.string('info').notNullable()
+            table.string('link').notNullable()
+            table.text('additional_info').nullable()
             table.timestamp('created_at', { useTz: true })
             table.timestamp('updated_at', { useTz: true })
         })

@@ -5,4 +5,9 @@
     .hide-el {
         @apply invisible opacity-0 max-h-0;
     }
+    .content-from-wysiwyg {
+        p {
+            margin-bottom: 10px
+        }
+    }
 }
