@@ -18,6 +18,8 @@ export default class Major extends BaseModel {
     @column.dateTime({ autoCreate: true, autoUpdate: true })
     public updatedAt: DateTime
 
-    @belongsTo(() => Faculty)
+    @belongsTo(() => Faculty, {
+        foreignKey: 'faculty_id'
+    })
     public faculty: BelongsTo<typeof Faculty>
 }

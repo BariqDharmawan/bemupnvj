@@ -6,10 +6,10 @@
     @!section('style')
 </head>
 <body class="font-roboto">
-    <nav class="bg-white h-20 mb-16">
+    <nav class="bg-white h-20">
         <div class="container flex items-center h-full">
             @include('partials/brand-logo')
-            <ul class="flex items-center space-x-4">
+            <ul class="flex items-center space-x-8">
                 @!component('partials/menu', {
                     text: 'Beranda',
                     link: route('landing_page')
@@ -22,31 +22,27 @@
                     text: 'Info Mahasiswa',
                     hasDropdown: true
                 })
-                    <ul class="flex flex-col absolute hide-el default-transition">
-                        @!component('partials/menu', {
-                            text: 'Info Untuk Mahasiswa',
-                            link: route('student_info.index')
-                        })
-                        @!component('partials/menu', {
-                            text: 'Scholarship and career',
-                            link: route('student_info.scholareer')
-                        })
-                    </ul>
+                    @!component('partials/menu', {
+                        text: 'Info Untuk Mahasiswa',
+                        link: route('student_info.index')
+                    })
+                    @!component('partials/menu', {
+                        text: 'Scholarship and career',
+                        link: route('student_info.scholareer')
+                    })
                 @end
                 @component('partials/menu', {
                     text: 'Events',
                     hasDropdown: true
                 })
-                    <ul class="flex flex-col absolute hide-el">
-                        @!component('partials/menu', {
-                            text: 'Mendatang',
-                            link: route('event.upcoming')
-                        })
-                        @!component('partials/menu', {
-                            text: 'Lalu',
-                            link: route('event.past')
-                        })
-                    </ul>
+                    @!component('partials/menu', {
+                        text: 'Mendatang',
+                        link: route('event.upcoming')
+                    })
+                    @!component('partials/menu', {
+                        text: 'Lalu',
+                        link: route('event.past')
+                    })
                 @end
                 @!component('partials/menu', {
                     text: 'Berita',
@@ -59,32 +55,54 @@
             </ul>
         </div>
     </nav>
-    <header>
-        @!section('header')
-    </header>
-    <main>
+    @!section('header')
+    <main class="overflow-hidden">
         @!section('body')
     </main>
-    <footer>
+    <footer class="bg-red-primary py-8 mt-10 relative">
         <div class="container">
             <div class="grid lg:grid-cols-2">
                 <div>
                     @include('partials/brand-logo')
-                    <ul>
-                        @each((contact, key) in contact)
-                            <li class="flex">
+                    <ul class="mt-8">
+                        @each((contact, key) in ourContact)
+                            <li class="flex text-white items-center mb-4 relative">
                                 <div class="mr-2">
-                                    <img src="{{ contact.logo }}" height="16px"
+                                    <img src="{{ contact.logo }}" height="16px" width="16px"
                                     alt="{{ `${contact.info} ${process.env.APP_NAME}` }}">
                                 </div>
                                 <span>{{ contact.info }}</span>
+                                @!component('partials/stretched-link', {
+                                    link: contact.link 
+                                })
                             </li>
                         @endeach
                     </ul>
                 </div>
-                <div></div>
+                <div>
+                    @!component('partials/heading-section', {
+                        text: `Arti ${aboutUs.cabinet_name}`,
+                        color: 'white',
+                        align: 'left'
+                    })
+                    <div class="relative inline-block -mt-8 w-8/12">
+                        <a data-fslightbox href="{{ 'https://www.youtube.com/watch?v=' + 
+                        aboutUs.know_us_video }}" class="block"
+                            href="javascript:;">
+                            <img src="/assets/img/icon/play-solid.svg" alt="" 
+                            class="h-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                            <img src="https://img.youtube.com/vi/{{ aboutUs.know_us_video }}/mqdefault.jpg" class="block w-full max-h-48 object-cover"
+                            alt="Tentang {{ process.env.APP_NAME }}">
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
+        @!component('partials/btn', {
+            bg: 'transparent',
+            addClass: 'rounded-md fixed right-10 bottom-10 btn-back-top hide-el',
+            icon: '/assets/img/icon/arrow-up.svg'
+        })
     </footer>
     <script src="/assets/js/app.js"></script>
 </body>

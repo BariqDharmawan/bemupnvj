@@ -51,7 +51,7 @@
                 {{ flashMessages.has('errors.' + name) ? 'is-invalid' : '' }}"
                 name="{{ name }}" style="width: 100%;"
                 {{ $props.serializeExcept([
-                    'name', 'class', 'value', 'datum', 'helperText'
+                    'name', 'addClass', 'value', 'datum', 'helperText'
                 ]) }}>
                     @each((data, key) in datum)
                         <option value="{{ data.val }}" 

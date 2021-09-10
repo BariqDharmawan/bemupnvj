@@ -8,16 +8,16 @@
     style="background-image: url({{ primaryCover.filename }})"></div>
 @endsection
 @section('body')
-    <section class="bg-orange-primary py-10">
+    <section class="bg-orange-primary py-14">
         <div class="container text-white content-from-wysiwyg">
             {{{ contentPage.desc_page }}}
         </div>
     </section>
-    <section class="py-10">
+    <section class="py-14">
         <div class="container">
             @!component('partials/heading-section', {text: `Arti ${aboutUs.cabinet_name}`})
-            <div>
-                {{{ aboutUs.cabinet_meaning }}}
+            <div class="leading-loose">
+                {{ aboutUs.cabinet_meaning }}
             </div>
         </div>
     </section>

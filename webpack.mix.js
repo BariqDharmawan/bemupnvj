@@ -1,5 +1,7 @@
 let mix = require('laravel-mix');
 
+require('laravel-mix-serve');
+
 mix.setResourceRoot('/assets/');
 mix.setPublicPath('public');
 
@@ -24,3 +26,5 @@ mix.styles([
     'resources/assets/vendors/select2/select2-bootstrap4-theme/select2-bootstrap4.css',
     'resources/assets/custom-admin.css'
 ], 'public/assets/css/admin.css');
+
+mix.serve('node ace serve --watch');

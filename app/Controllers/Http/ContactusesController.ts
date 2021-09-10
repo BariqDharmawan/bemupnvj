@@ -24,9 +24,6 @@ export default class ContactusesController {
         return view.render('contact-us/index')
     }
 
-    public async create({ }: HttpContextContract) {
-    }
-
     public async store({ response, request, }: HttpContextContract) {
         const requestValidated = await request.validate(LeadValidator)
 
@@ -40,12 +37,6 @@ export default class ContactusesController {
             'success': true,
             'message': 'Berhasil mengirim pesan ke ' + Env.get('APP_NAME')
         })
-    }
-
-    public async show({ }: HttpContextContract) {
-    }
-
-    public async edit({ }: HttpContextContract) {
     }
 
     public async update({ }: HttpContextContract) {

@@ -1,0 +1,47 @@
+<div class="mb-8 {{ addClass ?? '' }}">
+    <div class="flex flex-col-reverse">
+        @if(type == 'select')
+            <select class="bg-gray-normal focus:bg-transparent border border-gray-300 
+            cursor-pointer {{ flashMessages.has('errors.' + name) ? 'is-invalid' : '' }}"
+            name="{{ name }}" {{ $props.serializeExcept([
+                'name', 'addClass', 'value', 'datum', 'helperText'
+            ]) }}>
+                @each(data in datum)
+                    <option value="{{ data.val }}" 
+                    {{ (value == data.val) ? 'selected' : ''  }}>
+                        {{ data.text }}
+                    </option>
+                @endeach
+            </select>
+        @elseif(type == 'textarea')
+            <textarea id="{{ dashCase(name) }}"
+            class="bg-gray-normal focus:bg-transparent 
+            border border-gray-300 cursor-pointer"
+            {{ $props.serializeExcept(['name', 'type', 'value']) }}
+            name="{{ name }}" rows="{{ rows ?? 6 }}">{{ value ?? '' }}</textarea>
+        @else
+            <input type="{{ type ?? 'text' }}" id="{{ dashCase(name) }}" name="{{ name }}"
+            class="bg-gray-normal focus:bg-transparent 
+            border border-gray-300 cursor-pointer"
+            value="{{ value ?? ''}}"
+            {{ $props.serializeExcept(['name', 'type', 'value']) }}>
+        @endif
+        <label for="{{ dashCase(name) }}" class="mb-2 block relative">{{ label }}</label>
+    </div>
+
+    @if(helperText)
+    <small id="{{ dashCase(name) }}Help" class="text-gray-700">
+        {{ helperText }}
+    </small>
+    @end
+    
+    @if(flashMessages.has('errors.' + name))
+    <small class="text-red-500">
+        {{ flashMessages.get('errors.' + name) }}
+    </small>
+    @else
+    <small class="text-red-500 {{ name + '-error-message' }}"></small>
+    @end
+
+    {{{ await $slots.main() }}}
+</div>

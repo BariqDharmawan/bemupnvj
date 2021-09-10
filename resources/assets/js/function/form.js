@@ -1,0 +1,27 @@
+import axios from "axios"
+
+const formAjax = document.querySelectorAll('.form-ajax')
+let storeUrl, formData
+formAjax.forEach(form => {
+    form.addEventListener('submit', function (e) {
+        e.preventDefault()
+        
+        axios({
+            method: 'POST',
+            url: this.action,
+            data: new FormData(this)
+        })
+        .then(function (response) {
+            console.log(response.data);
+            alert(response.data.message);
+            form.reset()
+        })
+        .catch(function (error) {
+            const errorValidation = error.response.data.errors
+            for (let i = 0; i < errorValidation.length; i++) {
+                document.querySelector(`.${errorValidation[i].field}-error-message`)
+                        .textContent = errorValidation[i].message
+            }
+        });
+    })
+})

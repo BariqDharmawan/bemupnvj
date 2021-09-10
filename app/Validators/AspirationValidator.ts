@@ -26,9 +26,16 @@ export default class AspirationValidator {
      */
     public schema = schema.create({
         name: schema.string({trim: true}, [
+            rules.alpha({
+                allow: ['space']
+            }),
             rules.required(),
             rules.minLength(3),
             rules.maxLength(200),
+        ]),
+        major: schema.string({trim: true}, [
+            rules.required(),
+            rules.exists({table: 'majors', column: 'name'})
         ]),
         email: schema.string({trim: true}, [
             rules.required(),
@@ -56,5 +63,12 @@ export default class AspirationValidator {
      * }
      *
      */
-    public messages = {}
+    public messages = {
+        'major.exists': "Jurusan yang dipilih invalid, pasti diubah diinspect kan",
+        'name.alpha': "Yakin ini nama kamu? Masa sih nama mu ada angka atau spesial karakternya (titik, koma, garis miring, dsb nya",
+        required: "{{ field }} jangan sampai kosong yaa, nanti dia kecewa",
+        email: "{{ field }} nya isi yang valid kak, biar kita bisa kontak kamu suatu saat nanti",
+        'message.minLength': "Isi {{ field }} minimal 3 huruf yaa kak",
+        'aspiration_category_id.exists': "Kategori invalid, jangan coba coba inspect deh"
+    }
 }

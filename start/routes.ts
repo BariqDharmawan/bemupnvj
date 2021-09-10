@@ -28,7 +28,6 @@ Route.group(() => {
     
     Route.group(function () {
         Route.get('manage', 'BlogsController.manage').as('manage')
-        Route.get('/:slug', 'BlogsController.show').as('show')
     }).prefix('blog').as('blog')
 
     Route.group(() => {
@@ -49,14 +48,20 @@ Route.group(() => {
             'store', 'update', 'destroy'
         ])
     }).as('admin')
-
-    Route.resource('blog', 'BlogsController').only(['store', 'update', 'destroy'])
     
     Route.resource('aspiration-category', 'AspirationCategoriesController').only([
         'store', 'update'
     ])
 
 }).middleware(['auth'])
+
+Route.resource('blog', 'BlogsController').only([
+    'show', 'store', 'update', 'destroy'
+]).middleware({
+    'store': ['auth'],
+    'update': ['auth'],
+    'destroy': ['auth'],
+})
 
 Route.resource('about-us', 'AboutUsController').except(['create', 'edit', 'update'])
 Route.put('about-us/update', 'AboutUsController.update').as('about_us.update')

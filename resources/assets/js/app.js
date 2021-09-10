@@ -1,8 +1,4 @@
-import {triggerDropdown} from './component/menu'
-
-const btnTrigger = document.querySelectorAll('.nav__trigger-dropdown')
-btnTrigger.forEach(triggerBtn => {
-    triggerBtn.addEventListener('click', function () {
-        triggerDropdown(this)
-    })
-})
+import './function/library'
+import './component/menu'
+import './component/back-to-top'
+import './function/form'

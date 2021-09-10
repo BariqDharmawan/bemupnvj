@@ -9,5 +9,10 @@
             height="10px">
         @end
     </a>
-    {{{ await $slots.main() }}}
+    @if(hasDropdown)
+        <ul class="flex flex-col absolute hide-el-max default-transition 
+        bg-white px-4 shadow-md rounded-b-md">
+            {{{ await $slots.main() }}}
+        </ul>
+    @end
 </li>

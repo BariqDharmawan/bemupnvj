@@ -1,0 +1,10 @@
+input, textarea, select {
+    &:required {
+        + label {
+            &::after {
+                content: ' *';
+                @apply text-red-500;
+            }
+        }
+    }
+}

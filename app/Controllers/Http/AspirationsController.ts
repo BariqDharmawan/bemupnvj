@@ -16,18 +16,20 @@ export default class AspirationsController {
     public async create({ }: HttpContextContract) {
     }
 
-    public async store({ response, session, request }: HttpContextContract) {
+    public async store({ response, request }: HttpContextContract) {
         const validateAspirations = await request.validate(AspirationValidator)
-        await Aspiration.create({
-            name: validateAspirations.name,
+        const sendAspiration = await Aspiration.create({
+            name: validateAspirations.name + ' - ' + validateAspirations.major,
             email: validateAspirations.email,
-            message: validateAspirations.message,
-            aspiration_category_id: validateAspirations.aspiration_category_id
+            aspiration_category_id: validateAspirations.aspiration_category_id,
+            message: validateAspirations.message
         })
 
-        session.flash('notification', "Berhasil mengirim aspirasi!")
-
-        return response.redirect().back()
+        return response.json({
+            'success': true,
+            'message': 'Berhasil mengirim aspirasi!',
+            'data': sendAspiration
+        })
     }
 
     public async show({ }: HttpContextContract) {

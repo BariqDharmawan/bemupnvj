@@ -4,7 +4,13 @@
         position: relative;
         &::after {
             content: '';
-            @apply bg-red-primary h-1 absolute -bottom-2 left-0 w-full;
+            @apply bg-red-primary h-1 absolute -bottom-4 left-0 w-full;
+        }
+    }
+
+    &.text-white span {
+        &::after {
+            @apply bg-white;
         }
     }
 }

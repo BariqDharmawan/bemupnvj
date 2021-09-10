@@ -39,9 +39,8 @@ export default class AboutUsController {
     public async profile({view}: HttpContextContract) {
         const titlePage = 'Tentang Kabinet Kita'
         const aboutUs = await AboutUs.first()
-        const content = await OurContact.query().select('desc_contact_page').first()
 
-        return view.render('about-us/profile/index', {titlePage, aboutUs, content})
+        return view.render('about-us/profile/index', {titlePage, aboutUs})
     }
 
     public async index({ view }: HttpContextContract) {
@@ -51,13 +50,16 @@ export default class AboutUsController {
         const aboutUs = await AboutUs.first()
         const primaryCover = await HomeCover.first()
         const contentPage = await ContentPage.findByOrFail('page_name', 'about-us')
+        
+        const ourContact = await OurContact.all()
 
         return view.render('about-us/index', {
             appName,
             titlePage,
             aboutUs,
             primaryCover,
-            contentPage
+            contentPage,
+            ourContact
         })
     }
 
