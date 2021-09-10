@@ -16,4 +16,7 @@
     .hover\:child-underline:hover .text-to-underline {
         @apply underline;
     }
+    .first-capital::first-letter {
+        @apply capitalize;
+    }
 }

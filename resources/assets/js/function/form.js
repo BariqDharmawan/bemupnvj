@@ -12,7 +12,11 @@ formAjax.forEach(form => {
             data: new FormData(this)
         })
         .then(function (response) {
-            console.log(response.data);
+            const datas = response.data
+            console.log(datas);
+            document.querySelectorAll('.error-message').forEach(errorMessage => {
+                errorMessage.textContent = ''
+            })
             alert(response.data.message);
             form.reset()
         })

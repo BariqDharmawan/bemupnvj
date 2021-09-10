@@ -65,10 +65,10 @@ export default class AspirationValidator {
      */
     public messages = {
         'major.exists': "Jurusan yang dipilih invalid, pasti diubah diinspect kan",
-        'name.alpha': "Yakin ini nama kamu? Masa sih nama mu ada angka atau spesial karakternya (titik, koma, garis miring, dsb nya",
+        'name.alpha': "Yakin ini nama kamu? Masa sih nama mu ada angka atau spesial karakternya (titik, koma, garis miring, dll)",
         required: "{{ field }} jangan sampai kosong yaa, nanti dia kecewa",
-        email: "{{ field }} nya isi yang valid kak, biar kita bisa kontak kamu suatu saat nanti",
-        'message.minLength': "Isi {{ field }} minimal 3 huruf yaa kak",
+        email: "Email nya isi yang valid kak, biar kita bisa kontak kamu suatu saat nanti",
+        'message.minLength': "Isi {{ field }} minimal 10 huruf yaa kak",
         'aspiration_category_id.exists': "Kategori invalid, jangan coba coba inspect deh"
     }
 }

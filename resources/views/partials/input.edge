@@ -36,11 +36,11 @@
     @end
     
     @if(flashMessages.has('errors.' + name))
-    <small class="text-red-500">
+    <small class="error-message text-red-500">
         {{ flashMessages.get('errors.' + name) }}
     </small>
     @else
-    <small class="text-red-500 {{ name + '-error-message' }}"></small>
+    <small class="error-message first-capital text-red-500 {{ name + '-error-message' }}"></small>
     @end
 
     {{{ await $slots.main() }}}
