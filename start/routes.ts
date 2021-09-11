@@ -64,6 +64,7 @@ Route.resource('blog', 'BlogsController').only([
 })
 
 Route.resource('about-us', 'AboutUsController').except(['create', 'edit', 'update'])
+Route.get('vision-mission', 'AboutUsController.visionMission').as('vision_mission')
 Route.put('about-us/update', 'AboutUsController.update').as('about_us.update')
 
 Route.resource('contact-us', 'ContactusesController')

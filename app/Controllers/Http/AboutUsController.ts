@@ -20,8 +20,22 @@ export default class AboutUsController {
         const aboutUs = await AboutUs.first()
         const missions = await OurMission.query().orderBy('order_number', 'asc')
 
-        return view.render('about-us/vision-mission', {
+        return view.render('about-us/vision-mission/manage', {
             appName, titlePage, aboutUs, missions
+        })
+    }
+
+    /**
+     * visionMission
+     */
+    public async visionMission({view}: HttpContextContract) {
+        const titlePage = 'Visi Misi'
+        const aboutUs = await AboutUs.first()
+        const missions = await OurMission.query().orderBy('order_number', 'asc')
+        const ourContact = await OurContact.all()
+
+        return view.render('about-us/vision-mission/index', {
+            titlePage, aboutUs, missions, ourContact
         })
     }
 
@@ -89,7 +103,7 @@ export default class AboutUsController {
     public async edit({ }: HttpContextContract) {
     }
 
-    public async update({ request, response, session, params }: HttpContextContract) {
+    public async update({ request, response, session }: HttpContextContract) {
         const changeOurVideo = request.input('know_us_video')
         const changeDesc = request.input('desc')
         const changeLogoCabinet = request.file('file', {
@@ -124,14 +138,6 @@ export default class AboutUsController {
         }
 
         await aboutUs.save()
-
-        // const contentPage = await ContentPage.query()
-        //                     .where('page_name', params.page_name)
-        //                     .firstOrFail()
-        // if (changeDesc) {
-        //     contentPage.desc_page = changeDesc
-        //     notificationUpdate = 'Deskripsi mengenai kita'
-        // }
 
         session.flash('notification', `Berhasil mengubah ${notificationUpdate}`)
         return response.redirect().back()

@@ -4,13 +4,14 @@
         position: relative;
         &::after {
             content: '';
-            @apply bg-red-primary h-1 absolute -bottom-4 left-0 w-full;
+            @apply bg-red-primary h-1 absolute -bottom-4 left-1/2 
+            transform -translate-x-1/2 w-8/12;
         }
     }
 
     &.text-white span {
         &::after {
-            @apply bg-white;
+            @apply bg-white left-0 translate-x-0;
         }
     }
 }

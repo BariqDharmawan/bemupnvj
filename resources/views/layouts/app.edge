@@ -14,10 +14,21 @@
                     text: 'Beranda',
                     link: route('landing_page')
                 })
-                @!component('partials/menu', {
+                @component('partials/menu', {
                     text: 'Tentang',
-                    link: route('about_us.index')
+                    hasDropdown: true,
+                    minWidth: '150%',
+                    dropdownClass: 'left-1/2 transform -translate-x-1/2 w-150%'
                 })
+                    @!component('partials/menu', {
+                        text: 'Tentang kami',
+                        link: route('about_us.index')
+                    })
+                    @!component('partials/menu', {
+                        text: 'Visi dan misi',
+                        link: route('vision_mission')
+                    })
+                @end
                 @component('partials/menu', {
                     text: 'Info Mahasiswa',
                     hasDropdown: true

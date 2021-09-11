@@ -1,16 +1,18 @@
 @layout('layouts/app')
 
 @section('header')
-    <div class="container">
-        @!component('partials/heading-section', {text: 'Tentang kami'})
-    </div>
-    <div class="cover-primary h-450px bg-cover bg-no-repeat" 
-    style="background-image: url({{ primaryCover.filename }})"></div>
+    <header class="py-16">
+        <div class="container">
+            @!component('partials/heading-section', {text: 'Tentang kami'})
+        </div>
+        <div class="cover-primary h-450px bg-cover bg-no-repeat" 
+        style="background-image: url({{ primaryCover.filename }})"></div>
+    </header>
 @endsection
 @section('body')
     <section class="bg-orange-primary py-14">
-        <div class="container text-white content-from-wysiwyg">
-            {{{ contentPage.desc_page }}}
+        <div class="container text-white">
+            {{{ nl2br(contentPage.desc_page) }}}
         </div>
     </section>
     <section class="py-14">

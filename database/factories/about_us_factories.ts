@@ -9,7 +9,7 @@ export const AboutUsFactories = Factory.define(AboutUs, ({ faker }) => {
     )
     return {
         cabinet_name: 'Mardhika',
-        cabinet_meaning: faker.lorem.paragraphs(2),
+        cabinet_meaning: faker.lorem.paragraphs(6),
         our_vision: faker.lorem.paragraph(),
         vision_cover: faker.image.nature(),
         logo: faker.image.avatar(),

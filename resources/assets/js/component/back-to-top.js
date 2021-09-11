@@ -1,10 +1,12 @@
 const btnBackToTop = document.querySelector('.btn-back-top')
-const heightPage = document.body.scrollHeight
+const heightPage = document.body.clientHeight
 const heightFooter = document.querySelector('footer').clientHeight
 
 let scrollPosition = 0
+console.log(`heightPage: ${heightPage}`)
 window.addEventListener('scroll', function () {
     scrollPosition = this.scrollY
+    console.log(scrollPosition)
     if (scrollPosition >= heightPage - heightFooter) {
         btnBackToTop.classList.remove('hide-el')
     }
