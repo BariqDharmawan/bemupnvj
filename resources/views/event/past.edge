@@ -1,15 +1,17 @@
 @layout('layouts/app')
 
 @section('body')
-    @!component('partials/header-title', {
-        title: contentPage.page_name,
-        logo: contentPage.logo
-    })
+    <div class="lg:ml-14">
+        @!component('partials/header-title', {
+            title: 'Program Kerja Mardhika',
+            logo: contentPage.logo
+        })
+    </div>
     <section class="py-10">
         <div class="container">
             <div class="mb-10">
                 @!component('partials/heading-section', {
-                    text: 'Upcoming Events'
+                    text: capitalCase(noCase(contentPage.page_name))
                 })
                 <div class="grid grid-cols-3 gap-x-6 gap-y-8">
                     @each((event, index) in pastEvents)
