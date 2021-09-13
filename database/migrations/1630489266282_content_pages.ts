@@ -6,8 +6,9 @@ export default class ContentPages extends BaseSchema {
     public async up() {
         this.schema.createTable(this.tableName, (table) => {
             table.increments('id')
-            table.text('desc_page')
-            table.enum('page_name', ['contact', 'about-us'])
+            table.text('desc_page').nullable()
+            table.string('logo').nullable()
+            table.string('page_name')
 
             /**
              * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

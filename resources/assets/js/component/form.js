@@ -1,4 +1,5 @@
 import axios from "axios"
+import { Swal } from "../function/library"
 
 const formAjax = document.querySelectorAll('.form-ajax')
 let storeUrl, formData
@@ -17,7 +18,10 @@ formAjax.forEach(form => {
             document.querySelectorAll('.error-message').forEach(errorMessage => {
                 errorMessage.textContent = ''
             })
-            alert(response.data.message);
+            Swal.fire({
+                title: response.data.message,
+                icon: 'success'
+            })
             form.reset()
         })
         .catch(function (error) {

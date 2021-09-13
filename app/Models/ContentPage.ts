@@ -6,6 +6,9 @@ export default class ContentPage extends BaseModel {
     public id: number
 
     @column()
+    public logo: string
+
+    @column()
     public desc_page: string
 
     @column()

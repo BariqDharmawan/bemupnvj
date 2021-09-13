@@ -4,7 +4,6 @@ import './routeApi'
 
 Route.get('/', 'HomeController.index').as('landing_page')
 
-
 Route.post('mission/update-all-list', 'OurMissionsController.updateAllList')
     .as('mission.update_all-list')
 
@@ -53,6 +52,8 @@ Route.group(() => {
         'store', 'update'
     ])
 
+    Route.resource('content-page', 'ContentPagesController')
+
 }).middleware(['auth'])
 
 Route.resource('blog', 'BlogsController').only([
@@ -64,15 +65,19 @@ Route.resource('blog', 'BlogsController').only([
 })
 
 Route.resource('about-us', 'AboutUsController').except(['create', 'edit', 'update'])
-Route.get('vision-mission', 'AboutUsController.visionMission').as('vision_mission')
-Route.put('about-us/update', 'AboutUsController.update').as('about_us.update')
-
 Route.resource('contact-us', 'ContactusesController')
+
+Route.get('vision-mission', 'AboutUsController.visionMission').as('vision_mission')
+
+Route.group(() => {
+    Route.put('update', 'AboutUsController.update').as('update')
+    Route.get('logo-meaning', 'LogoMeaningsController.index').as('logo_meaning')
+}).prefix('about-us').as('about_us')
 
 Route.group(() => {
     Route.get('/', 'StudentInfoController.index').as('index')
     Route.get('scholarship-and-career', 'StudentInfoController.scholareer').as('scholareer')
-}).as('student_info').prefix('student-info')
+}).as('info_mahasiswa').prefix('info-mahasiswa')
 
 Route.group(() => {
     Route.get('past', 'EventController.past').as('past')

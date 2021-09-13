@@ -17,10 +17,17 @@ export default class ContentPageSeeder extends BaseSeeder {
         
         await ContentPage.createMany([
             {
-                page_name: 'contact',
+                logo: '/assets/img/content/dummy/info-mahasiswa-dummy-logo.svg',
+                page_name: 'info-mahasiswa',
+                desc_page: '',
+            },
+            {
+                logo: '',
+                page_name: 'contact-us',
                 desc_page: descPage
             },
             {
+                logo: '',
                 page_name: 'about-us',
                 desc_page: descPage
             }

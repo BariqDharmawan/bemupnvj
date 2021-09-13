@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
     @include('partials/meta')
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/app.css">
     @!section('style')
 </head>
@@ -28,6 +31,10 @@
                         text: 'Visi dan misi',
                         link: route('vision_mission')
                     })
+                    @!component('partials/menu', {
+                        text: 'Makna Logo',
+                        link: route('about_us.logo_meaning')
+                    })
                 @end
                 @component('partials/menu', {
                     text: 'Info Mahasiswa',
@@ -35,11 +42,11 @@
                 })
                     @!component('partials/menu', {
                         text: 'Info Untuk Mahasiswa',
-                        link: route('student_info.index')
+                        link: route('info_mahasiswa.index')
                     })
                     @!component('partials/menu', {
                         text: 'Scholarship and career',
-                        link: route('student_info.scholareer')
+                        link: route('info_mahasiswa.scholareer')
                     })
                 @end
                 @component('partials/menu', {
@@ -92,7 +99,7 @@
                 </div>
                 <div>
                     @!component('partials/heading-section', {
-                        text: `Arti ${aboutUs.cabinet_name}`,
+                        text: `Kenali ${aboutUs.cabinet_name}`,
                         color: 'white',
                         align: 'left'
                     })

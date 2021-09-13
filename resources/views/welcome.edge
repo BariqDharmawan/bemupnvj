@@ -6,10 +6,11 @@
         @!component('partials/btn', {
             text: 'Tentang kami', 
             bg: 'red-primary',
-            addClass: 'px-10 py-4 transform translate-y-1/2'
+            size: 'wider',
+            addClass: 'transform translate-y-1/2'
         })
     </header>
-@endsection
+@end
 
 @section('body')
     <section class="bg-red-primary mt-20">
@@ -42,7 +43,7 @@
                     <figure class="relative hover:child-underline">
                         <img src="{{ news.cover }}" alt="{{ news.title }}">
                         <figcaption class="font-bold py-4">
-                            <p class="text-to-underline default-transition inline-block pb-2">
+                            <p class="text-to-underline inline-block pb-2">
                                 <span>{{ news.title }}</span>
                             </p>
                         </figcaption>

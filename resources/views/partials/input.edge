@@ -21,8 +21,8 @@
             name="{{ name }}" rows="{{ rows ?? 6 }}">{{ value ?? '' }}</textarea>
         @else
             <input type="{{ type ?? 'text' }}" id="{{ dashCase(name) }}" name="{{ name }}"
-            class="bg-gray-normal focus:bg-transparent 
-            border border-gray-300 cursor-pointer"
+            class="bg-gray-normal focus:bg-transparent hover:bg-transparent
+            border border-gray-300 cursor-pointer transition"
             value="{{ value ?? ''}}"
             {{ $props.serializeExcept(['name', 'type', 'value']) }}>
         @endif

@@ -8992,6 +8992,16 @@ svgo@^2.3.0:
     csso "^4.2.0"
     stable "^0.1.8"
 
+sweetalert2@^11.1.5:
+  version "11.1.5"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.1.5.tgz#6bc0d681e8f83c744a9284a84aefbfdcc7d92bec"
+  integrity sha512-5cfqUK9lLbvxtjzsvORKWj+d3tcgYlzsL60FoJFXE/+mtMa5EJ3tDax9p9MBjVnZ60gQd+WGrqDIrxoNenhUjA==
+
+tailwindcss-pseudo-elements@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/tailwindcss-pseudo-elements/-/tailwindcss-pseudo-elements-2.0.0.tgz#778a29b9aafeef89fe2e22efe047ae56822627a3"
+  integrity sha512-cbnF8Rg1tJjsgrUK1sLt/TNAea9zKNhWGTI5NtKxZ8WhYjHCMAGOjaHg+iql8UlXaW1U9jPeyJsGlQsLGrbomQ==
+
 tailwindcss@^2.2.7:
   version "2.2.9"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-2.2.9.tgz#1484bd45a4a9f9f5de7faabf74c11bf0aeb5ad98"

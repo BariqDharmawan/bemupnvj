@@ -1,9 +1,15 @@
 module.exports = {
+    mode: 'jit',
     purge: [
-        './resources/**/*.js',
+        './resources/**/*.{js,scss}',
+        './resources/**/*.edge',
     ],
     darkMode: false, // or 'media' or 'class'
     theme: {
+        borderColor: theme => ({
+            ...theme('colors'),
+            'grey-primary': '#C4C4C4',
+        }),
         backgroundColor: theme => ({
             ...theme('colors'),
             'red-primary': '#E11D2D',
@@ -23,6 +29,7 @@ module.exports = {
         }),
         extend: {
             height: {
+                '200px': '200px',
                 '450px': '450px',
                 '7/10-screen': '70vh'
             },
@@ -42,10 +49,19 @@ module.exports = {
     },
     variants: {
         extend: {
-            borderColor: ['group-hover']
+            backgroundColor: ['after'],
+            inset: ['after'],
+            transform: ['after'],
+            translate: ['after'],
+            position: ['after'],
+            height: ['after'],
+            width: ['after']
         },
     },
     plugins: [
-        require('@tailwindcss/forms')
+        require('@tailwindcss/forms'),
+        require('tailwindcss-pseudo-elements')({
+            emptyContent: true
+        })
     ],
 }

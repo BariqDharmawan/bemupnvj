@@ -1,9 +1,21 @@
 // import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
+import AboutUs from "App/Models/AboutUs";
 import ContentPage from "App/Models/ContentPage";
 
 export default class ContentPagesController {
+    
+    public async index({view}: HttpContextContract) {
+        const titlePage = 'Manage title tiap page'
+        const aboutUs = await AboutUs.first()
+        const contentPages = await ContentPage.all()
+        
+        return view.render('content-page/manage', {
+            titlePage, contentPages, aboutUs
+        })
+    }
+
     /**
      * update content page
      */

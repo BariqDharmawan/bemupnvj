@@ -1,8 +1,7 @@
 @if(link != 'submit')
     <a href="{{ link ?? 'javascript:void(0);' }}" 
-    class="py-3 px-9 bg-{{ bg ?? 'bg-transparent' }} 
-    hover:bg-{{ bg.replace('primary', '700') }}
-    default-transition text-{{ color ?? 'white' }} {{ addClass ?? '' }}"
+    class="{{ wider == 'lg' ? 'px-10 py-4' : 'py-3 px-9' }} bg-{{ bg ?? 'bg-transparent' }}
+    transition text-{{ color ?? 'white' }} {{ addClass ?? '' }}"
     {{ $props.serializeExcept(['color', 'link', 'bg', 'addClass']) }}>
         @if(text)
             {{ text }}
@@ -11,7 +10,9 @@
         @endif
     </a>
 @else
-    <button type="{{ link }}" class="py-3 px-9 default-transition {{ bg == 'red' ? 'bg-red-primary text-white' : 'bg-black bg-opacity-80'}}">
+    <button type="{{ link }}" class="{{ wider == 'lg' ? 'px-10 py-4' : 'py-3 px-9' }} 
+    bg-{{ bg ?? 'bg-transparent' }} transition text-{{ color ?? 'white' }} 
+    {{ addClass ?? '' }}">
         @if(text)
             {{ text }}
         @elseif(icon)

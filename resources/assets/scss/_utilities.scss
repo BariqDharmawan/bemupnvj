@@ -1,16 +1,8 @@
 @layer utilities {
-    .default-transition {
-        @apply transition duration-150 ease-in;
-    }
     .hide-el {
         @apply invisible opacity-0;
         &-max {
-            @apply invisible opacity-0 max-h-0;
-        }
-    }
-    .content-from-wysiwyg {
-        p {
-            margin-bottom: 10px
+            @apply max-h-0;
         }
     }
     .hover\:child-underline:hover .text-to-underline {
@@ -18,5 +10,9 @@
     }
     .first-capital::first-letter {
         @apply capitalize;
+    }
+
+    .after\:empty-content::after {
+        @apply content-empty-after;
     }
 }

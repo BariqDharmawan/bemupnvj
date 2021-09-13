@@ -1,0 +1,37 @@
+@layout('layouts/app')
+
+@section('body')
+    @!component('partials/header-title', {
+        title: contentPage.page_name,
+        logo: contentPage.logo
+    })
+    <section class="py-10">
+        <div class="container">
+            <div class="mb-10">
+                @!component('partials/heading-section', {
+                    text: 'Informasi Beasiswa', align: 'left'
+                })
+                @each((beasiswa, index) in infoBeasiswa)
+                    @!component('partials/article', {
+                        title: beasiswa.title,
+                        cover: beasiswa.cover,
+                        link: route('blog.show', {id: beasiswa.id}),
+                        excerpt: excerpt(beasiswa.content, 200, {
+                            completeWords: false,
+                            suffix: ' [...]'
+                        })
+                    })
+                @end
+            </div>
+
+            <div class="text-center">
+                @!component('partials/btn', {
+                    text: 'Load more ...', 
+                    bg: 'black',
+                    addClass: 'bg-opacity-80 mx-auto hover:bg-gray-900'
+                })
+            </div>
+            
+        </div>
+    </section>
+@end
