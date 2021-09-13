@@ -2,7 +2,7 @@
     .hide-el {
         @apply invisible opacity-0;
         &-max {
-            @apply max-h-0;
+            @apply invisible opacity-0 max-h-0;
         }
     }
     .hover\:child-underline:hover .text-to-underline {
@@ -13,6 +13,6 @@
     }
 
     .after\:empty-content::after {
-        @apply content-empty-after;
+        content: '';
     }
 }

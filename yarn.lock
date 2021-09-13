@@ -9479,6 +9479,11 @@ validator@^13.6.0:
   resolved "https://registry.yarnpkg.com/validator/-/validator-13.6.0.tgz#1e71899c14cdc7b2068463cb24c1cc16f6ec7059"
   integrity sha512-gVgKbdbHgtxpRyR8K0O6oFZPhhB5tT1jeEHZR0Znr9Svg03U0+r9DXWMrnRAB+HtCStDQKlaIZm42tVsVjqtjg==
 
+vanilla-router@^1.2.8:
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/vanilla-router/-/vanilla-router-1.2.8.tgz#fe4a4e4ce1c1b1e76fa072f3d8b200670310984d"
+  integrity sha512-jZYhHPTXVqsUr4nfSD776q2eWeKNphBgvh7ELyGgcgZPo2bjUgV4BdW0l0fHX+cNZHDpW8WabQ8ZdIHc73Cd7w==
+
 vary@^1.1.2, vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"

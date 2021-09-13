@@ -1,7 +1,12 @@
 module.exports = {
     mode: 'jit',
     purge: [
-        './resources/**/*.{js,scss}',
+        './resources/**/*.scss',
+        './resources/assets/js/app.js',
+        './resources/assets/js/component/back-to-top.js',
+        './resources/assets/js/component/form.js',
+        './resources/assets/js/component/menu.js',
+        './resources/assets/js/function/library.js',
         './resources/**/*.edge',
     ],
     darkMode: false, // or 'media' or 'class'

@@ -34,7 +34,9 @@ export default class Blog extends BaseModel {
     @column.dateTime({ autoCreate: true, autoUpdate: true })
     public updated_at: DateTime
 
-    @belongsTo(() => BlogCategory)
+    @belongsTo(() => BlogCategory, {
+        foreignKey: 'blog_category_id'
+    })
     public blogCategory: BelongsTo<typeof BlogCategory>
 
     public static pathCover = '/uploads/article'

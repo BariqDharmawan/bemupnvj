@@ -1,6 +1,7 @@
 import Factory from "@ioc:Adonis/Lucid/Factory"
 import Blog from "App/Models/Blog"
 import BlogCategory from "App/Models/BlogCategory"
+import { DateTime } from 'luxon'
 
 export const BlogsFactories = Factory.define(Blog, ({ faker }) => {
     return {
@@ -12,7 +13,12 @@ export const BlogsFactories = Factory.define(Blog, ({ faker }) => {
         ]),
         content: '<p>' + faker.lorem.paragraph() + '</p>'
     }
-}).build()
+})
+.state(
+    'isEvent', (blog) => blog.show_until = DateTime.local().minus({
+        days: Math.floor(Math.random() * 10)
+    })
+).build()
 
 export const BlogCategoriesFactories = Factory.define(BlogCategory, ({ faker }) => {
     return {

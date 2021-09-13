@@ -9,7 +9,7 @@ import OurContact from "App/Models/OurContact";
 export default class StudentInfoController {
     
     public async index({view}: HttpContextContract) {
-        const titlePage = 'Info Mahasiswa'
+        const titlePage = 'Program Kerja Mardhika'
         const aboutUs = await AboutUs.first()
         const contentPage = await ContentPage.firstOrFail()
         const infoBeasiswa = await Blog.query().where('show_at_page', 'info-mahasiswa')

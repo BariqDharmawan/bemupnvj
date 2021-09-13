@@ -1,5 +1,7 @@
-<header class="flex space-x-3 items-center justify-center py-10">
-    <img src="{{ logo }}" alt="{{ title }}" class="rounded-full"
-    height="50px" width="50px">
-    <h1 class="capitalize">{{ noCase(title) }}</h1>
+<header class="py-10">
+    <div class="w-full mx-auto lg:w-3/12 flex space-x-3 items-center justify-center">
+        <img src="{{ logo }}" alt="{{ title }}" class="rounded-full"
+        height="50px" width="50px">
+        <h1 class="capitalize text-3xl font-bold">{{{ noCase(title) }}}</h1>
+    </div>
 </header>

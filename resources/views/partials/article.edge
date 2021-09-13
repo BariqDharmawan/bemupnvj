@@ -2,7 +2,7 @@
 {{ direction == 'vertical' ? 'flex-col' : 'flex-row' }} 
 border-2 border-grey-primary mb-4">
     <img src="{{ cover }}" alt="{{ title }}" 
-    class="h-200px">
+    class="h-200px object-cover">
     <figcaption class="{{ direction != 'vertical' ? 'p-4' : '' }} 
     items-start flex flex-col justify-center">
         @if(direction == 'vertical')
@@ -16,7 +16,4 @@ border-2 border-grey-primary mb-4">
         @end
         <p class="{{ direction == 'vertical' ? 'p-4 font-bold' : '' }}">{{ excerpt }}</p>
     </figcaption>
-    @!component('partials/stretched-link', {
-        link: link
-    })
 </article>

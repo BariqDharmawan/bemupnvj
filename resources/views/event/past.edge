@@ -1,0 +1,41 @@
+@layout('layouts/app')
+
+@section('body')
+    @!component('partials/header-title', {
+        title: contentPage.page_name,
+        logo: contentPage.logo
+    })
+    <section class="py-10">
+        <div class="container">
+            <div class="mb-10">
+                @!component('partials/heading-section', {
+                    text: 'Upcoming Events'
+                })
+                <div class="grid grid-cols-3 gap-x-6 gap-y-8">
+                    @each((event, index) in pastEvents)
+                        @!component('partials/article', {
+                            direction: 'vertical',
+                            category: event.blogCategory.category,
+                            title: event.title,
+                            cover: event.cover,
+                            link: route('blog.show', {id: event.id}),
+                            excerpt: excerpt(event.content, 200, {
+                                completeWords: false,
+                                suffix: ' [...]'
+                            })
+                        })
+                    @end
+                </div>
+            </div>
+
+            <div class="text-center">
+                @!component('partials/btn', {
+                    text: 'Load more ...', 
+                    bg: 'black',
+                    addClass: 'bg-opacity-80 mx-auto hover:bg-gray-900'
+                })
+            </div>
+            
+        </div>
+    </section>
+@end

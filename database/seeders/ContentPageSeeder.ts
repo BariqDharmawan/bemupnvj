@@ -22,6 +22,16 @@ export default class ContentPageSeeder extends BaseSeeder {
                 desc_page: '',
             },
             {
+                logo: '/assets/img/content/dummy/info-mahasiswa-dummy-logo.svg',
+                page_name: 'past-events',
+                desc_page: '',
+            },
+            {
+                logo: '/assets/img/content/dummy/info-mahasiswa-dummy-logo.svg',
+                page_name: 'upcoming-events',
+                desc_page: '',
+            },
+            {
                 logo: '',
                 page_name: 'contact-us',
                 desc_page: descPage

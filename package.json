@@ -69,6 +69,7 @@
         "source-map-support": "^0.5.19",
         "summernote": "^0.8.18",
         "sweetalert2": "^11.1.5",
-        "tempusdominus-bootstrap-4": "^5.39.0"
+        "tempusdominus-bootstrap-4": "^5.39.0",
+        "vanilla-router": "^1.2.8"
     }
 }
