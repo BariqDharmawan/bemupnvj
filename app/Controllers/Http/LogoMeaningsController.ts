@@ -1,33 +1,45 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import AboutUs from "App/Models/AboutUs";
-import OurContact from 'App/Models/OurContact';
+import AboutUs from "App/Models/AboutUs"
+import OurContact from 'App/Models/OurContact'
+import LogoMeanings from 'App/Models/LogoMeaning'
 
 export default class LogoMeaningsController {
-  public async index ({view}: HttpContextContract) {
-      const aboutUs = await AboutUs.first()
-      const titlePage = `Makna Logo`
-      const ourContact = await OurContact.all()
+    public async index({ view }: HttpContextContract) {
+        const aboutUs = await AboutUs.first()
+        const ourContact = await OurContact.all()
+        const logoMeanings = await LogoMeanings.all()
 
-      const bgHeader = '/assets/img/content/visi-misi-cover.png'
+        const titlePage = `Makna Logo`
+        const bgHeader = '/assets/img/content/visi-misi-cover.png'
+        
+        return view.render('about-us/logo/index', {
+            aboutUs, ourContact, titlePage, bgHeader, logoMeanings
+        })
+    }
 
-      return view.render('about-us/logo/index', {aboutUs, ourContact, titlePage, bgHeader})
-  }
+    public async manage({ view }: HttpContextContract) {
+        const titlePage = 'Makna Logo'
+        const aboutUs = await AboutUs.first()
+        const logoMeanings = await LogoMeanings.all()
 
-  public async create ({}: HttpContextContract) {
-  }
+        return view.render('about-us/logo/manage', {titlePage, aboutUs, logoMeanings})
+    }
 
-  public async store ({}: HttpContextContract) {
-  }
+    public async create({ }: HttpContextContract) {
+    }
 
-  public async show ({}: HttpContextContract) {
-  }
+    public async store({ }: HttpContextContract) {
+    }
 
-  public async edit ({}: HttpContextContract) {
-  }
+    public async show({ }: HttpContextContract) {
+    }
 
-  public async update ({}: HttpContextContract) {
-  }
+    public async edit({ }: HttpContextContract) {
+    }
 
-  public async destroy ({}: HttpContextContract) {
-  }
+    public async update({ }: HttpContextContract) {
+    }
+
+    public async destroy({ }: HttpContextContract) {
+    }
 }

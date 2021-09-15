@@ -7,6 +7,7 @@ export default class LogoMeanings extends BaseSchema {
         this.schema.createTable(this.tableName, (table) => {
             table.increments('id').primary()
             table.string('img').notNullable()
+            table.string('title').notNullable()
             table.text('desc').notNullable()
             table.timestamp('created_at', { useTz: true })
             table.timestamp('updated_at', { useTz: true })

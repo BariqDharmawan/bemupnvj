@@ -46,6 +46,9 @@ module.exports = {
             },
             backgroundImage: {
                 'gradient-purple-red': 'linear-gradient(180deg, rgba(108, 73, 172, 0) 0%, #6C49AC 0.01%, #FC5232 100%)'
+            },
+            gridAutoRows: {
+                '1fr': '1fr'
             }
         },
         container: {

@@ -7,35 +7,17 @@
 @section('body')
     <section class="py-10">
         <div class="container">
-            <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-x-8 gap-y-10">
-                <figure class="text-center">
-                    <img src="/assets/img/content/dummy/logo-meaning.png" 
-                    alt="{{ aboutUs.cabinet_name + ' ' + 'Logo' }}" class="mx-auto">
-                    <figcaption class="bg-purple-secondary text-white p-4">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing.
-                    </figcaption>
-                </figure>
-                <figure class="text-center">
-                    <img src="/assets/img/content/dummy/logo-meaning.png" 
-                    alt="{{ aboutUs.cabinet_name + ' ' + 'Logo' }}" class="mx-auto">
-                    <figcaption class="bg-purple-secondary text-white p-4">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing.
-                    </figcaption>
-                </figure>
-                <figure class="text-center">
-                    <img src="/assets/img/content/dummy/logo-meaning.png" 
-                    alt="{{ aboutUs.cabinet_name + ' ' + 'Logo' }}" class="mx-auto">
-                    <figcaption class="bg-purple-secondary text-white p-4">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing.
-                    </figcaption>
-                </figure>
-                <figure class="text-center">
-                    <img src="/assets/img/content/dummy/logo-meaning.png" 
-                    alt="{{ aboutUs.cabinet_name + ' ' + 'Logo' }}" class="mx-auto">
-                    <figcaption class="bg-purple-secondary text-white p-4">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing.
-                    </figcaption>
-                </figure>
+            <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-x-8 gap-y-10 auto-rows-1fr">
+                @each((meaning, index) in logoMeanings)
+                    <figure class="text-center h-full flex flex-col">
+                        <img src="{{ meaning.img }}" 
+                        alt="{{ aboutUs.cabinet_name + ' ' + 'Logo' }}" class="mx-auto">
+                        <figcaption class="bg-purple-secondary text-white p-4 
+                        flex-grow max-h-40 overflow-hidden inline-flex items-center">
+                            {{ meaning.desc }}
+                        </figcaption>
+                    </figure>
+                @endeach
             </div>
         </div>
     </section>

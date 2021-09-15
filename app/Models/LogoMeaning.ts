@@ -9,6 +9,9 @@ export default class LogoMeaning extends BaseModel {
     public img: string
 
     @column()
+    public title: string
+
+    @column()
     public desc: string
 
     @column.dateTime({ autoCreate: true })

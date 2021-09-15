@@ -70,7 +70,10 @@ Route.put('about-us/update', 'AboutUsController.update').as('about_us.update')
 
 Route.get('visi-misi', 'AboutUsController.visionMission').as('vision_mission')
 
-Route.get('makna-logo', 'LogoMeaningsController.index').as('logo_meaning')
+Route.group(() => {
+    Route.get('/', 'LogoMeaningsController.index').as('index')
+    Route.get('/manage', 'LogoMeaningsController.manage').as('manage')
+}).as('logo_meaning').prefix('makna-logo')
 
 Route.group(() => {
     Route.get('/', 'StudentInfoController.index').as('index')

@@ -4,6 +4,7 @@ import LogoMeaning from "App/Models/LogoMeaning"
 export const LogoMeaningFactories = Factory.define(LogoMeaning, ({ faker }) => {
     return {
         img: faker.image.nature(),
-        desc: faker.lorem.paragraphs(3)
+        title: faker.lorem.sentence(3),
+        desc: faker.lorem.paragraphs(1)
     }
 }).build()
