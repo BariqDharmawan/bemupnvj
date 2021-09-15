@@ -1,14 +1,7 @@
 @layout('layouts/app')
 
 @section('header')
-    <header class="py-16">
-        <div class="container">
-            @!component('partials/heading-section', {text: 'Visi dan Misi'})
-        </div>
-        {{-- todo: bikin crud ini --}}
-        <div class="cover-primary h-450px bg-cover bg-no-repeat" 
-        style="background-image: url('/assets/img/content/visi-misi-cover.png')"></div>
-    </header>
+    @include('about-us/header-bg')
 @end
 @section('body')
     <section class="py-14">

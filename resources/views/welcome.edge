@@ -60,7 +60,7 @@
             @!component('partials/heading-section', {
                 text: 'Informasi Terbaru', color: 'white'
             })
-            <div class="grid grid-cols-3 gap-x-6">
+            <div class="grid grid-cols-3 gap-x-8">
                 @each((news, index) in latestNews)
                     <figure>
                         <img src="{{ news.cover }}" alt="{{ news.title }}">
@@ -131,7 +131,12 @@
                         addClass: 'col-span-full'
                     })
                 </div>
-                @!component('partials/btn', {link: 'submit', text: 'Salurkan', bg: 'red'})
+                @!component('partials/btn', {
+                    link: 'submit', 
+                    text: 'Salurkan', 
+                    bg: 'red-primary',
+                    addClass: 'hover:bg-red-700'
+                })
             </form>
         </div>
     </section>

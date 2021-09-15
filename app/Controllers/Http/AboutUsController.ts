@@ -29,13 +29,15 @@ export default class AboutUsController {
      * visionMission
      */
     public async visionMission({view}: HttpContextContract) {
-        const titlePage = 'Visi Misi'
+        const titlePage = 'Visi dan Misi'
         const aboutUs = await AboutUs.first()
         const missions = await OurMission.query().orderBy('order_number', 'asc')
         const ourContact = await OurContact.all()
 
+        const bgHeader = '/assets/img/content/visi-misi-cover.png'
+
         return view.render('about-us/vision-mission/index', {
-            titlePage, aboutUs, missions, ourContact
+            titlePage, aboutUs, missions, ourContact, bgHeader
         })
     }
 
@@ -58,8 +60,7 @@ export default class AboutUsController {
     }
 
     public async index({ view }: HttpContextContract) {
-        const appName: string = Env.get('APP_NAME');
-        const titlePage = 'About Us'
+        const titlePage = 'Tentang kami'
 
         const aboutUs = await AboutUs.first()
         const primaryCover = await HomeCover.first()
@@ -67,13 +68,15 @@ export default class AboutUsController {
         
         const ourContact = await OurContact.all()
 
+        const bgHeader = primaryCover?.filename
+
         return view.render('about-us/index', {
-            appName,
             titlePage,
             aboutUs,
             primaryCover,
             contentPage,
-            ourContact
+            ourContact,
+            bgHeader
         })
     }
 

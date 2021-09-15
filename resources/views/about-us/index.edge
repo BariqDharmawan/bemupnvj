@@ -1,13 +1,7 @@
 @layout('layouts/app')
 
 @section('header')
-    <header class="py-16">
-        <div class="container">
-            @!component('partials/heading-section', {text: 'Tentang kami'})
-        </div>
-        <div class="cover-primary h-450px bg-cover bg-no-repeat" 
-        style="background-image: url({{ primaryCover.filename }})"></div>
-    </header>
+    @include('about-us/header-bg')
 @endsection
 @section('body')
     <section class="bg-orange-primary py-14">

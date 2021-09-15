@@ -19,7 +19,7 @@ function getNewBanner() {
 }
 
 function getMission() {
-    $("#list-missions").load('/about-us/vision-mission #list-missions', function (response, status, xhr) {
+    $("#list-missions").load('/about-us/visi-misi #list-missions', function (response, status, xhr) {
         if (status == 'error') {
             console.log(xhr.status + " " + xhr.statusText)
         }

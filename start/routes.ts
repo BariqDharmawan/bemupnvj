@@ -64,15 +64,13 @@ Route.resource('blog', 'BlogsController').only([
     'destroy': ['auth'],
 })
 
-Route.resource('about-us', 'AboutUsController').except(['create', 'edit', 'update'])
+Route.resource('about-us', 'AboutUsController').except(['create', 'edit', 'update', 'show'])
 Route.resource('contact-us', 'ContactusesController')
+Route.put('about-us/update', 'AboutUsController.update').as('about_us.update')
 
-Route.get('vision-mission', 'AboutUsController.visionMission').as('vision_mission')
+Route.get('visi-misi', 'AboutUsController.visionMission').as('vision_mission')
 
-Route.group(() => {
-    Route.put('update', 'AboutUsController.update').as('update')
-    Route.get('logo-meaning', 'LogoMeaningsController.index').as('logo_meaning')
-}).prefix('about-us').as('about_us')
+Route.get('makna-logo', 'LogoMeaningsController.index').as('logo_meaning')
 
 Route.group(() => {
     Route.get('/', 'StudentInfoController.index').as('index')

@@ -27,4 +27,4 @@ mix.styles([
     'resources/assets/custom-admin.css'
 ], 'public/assets/css/admin.css');
 
-mix.serve('node ace serve --watch');
+mix.serve('node ace serve --watch')
