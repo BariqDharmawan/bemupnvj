@@ -32,7 +32,7 @@ export default class LeadValidator {
         ]),
         subject: schema.string({trim: true}, [
             rules.required(),
-            rules.minLength(8)
+            rules.minLength(5)
         ]),
         desc: schema.string({trim: true}, [
             rules.required(),
@@ -53,7 +53,8 @@ export default class LeadValidator {
      *
      */
     public messages = {
-        'desc.minLenght': 'Mohon jelaskan secara rinci pesanmu. Minimal mengandung 15 huruf',
+        'subject.minLength': '{{ field }} minimal mengandung 5 huruf',
+        'desc.minLength': 'Mohon jelaskan secara rinci pesanmu. Minimal mengandung 15 huruf',
         required: '{{ field }} wajib diisi',
         email: '{{ field }} harus berupa email asli'
     }

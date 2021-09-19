@@ -26,10 +26,11 @@ formAjax.forEach(form => {
         })
         .catch(function (error) {
             const errorValidation = error.response.data.errors
+            console.error(errorValidation)
             for (let i = 0; i < errorValidation.length; i++) {
                 document.querySelector(`.${errorValidation[i].field}-error-message`)
                         .textContent = errorValidation[i].message
             }
-        });
+        })
     })
 })

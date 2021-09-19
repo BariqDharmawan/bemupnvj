@@ -1,3 +1,9 @@
+.content-from-wysiwyg {
+    p {
+        @apply mb-4;
+    }
+}
+
 @layer utilities {
     .hide-el {
         @apply invisible opacity-0;
@@ -15,4 +21,5 @@
     .after\:empty-content::after {
         content: '';
     }
+
 }

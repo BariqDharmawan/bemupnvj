@@ -3,8 +3,11 @@ import ContentPage from 'App/Models/ContentPage'
 import Lead from 'App/Models/Lead'
 import Env from '@ioc:Adonis/Core/Env'
 import LeadValidator from 'App/Validators/LeadValidator'
+import AboutUs from 'App/Models/AboutUs'
+import OurSocial from 'App/Models/OurSocial'
+import OurContact from 'App/Models/OurContact'
 
-export default class ContactusesController {
+export default class ContactUsController {
     public async content({ view }: HttpContextContract) {        
         const titlePage = 'Deskripsi page'
         const pageName = 'contact'
@@ -21,7 +24,14 @@ export default class ContactusesController {
         return view.render('contact-us/manage', {titlePage, contactUs})
     }
     public async index({ view }: HttpContextContract) {
-        return view.render('contact-us/index')
+        const aboutUs = await AboutUs.first()
+        const contentPage = await ContentPage.findByOrFail(
+            'page_name', ContentPage.pageName[3]
+        )
+        const ourSocial = await OurSocial.all()
+        const ourContact = await OurContact.all()
+
+        return view.render('contact-us/index', {aboutUs, contentPage, ourSocial, ourContact})
     }
 
     public async store({ response, request, }: HttpContextContract) {

@@ -32,12 +32,12 @@ export default class ContentPageSeeder extends BaseSeeder {
                 desc_page: '',
             },
             {
-                logo: '',
+                logo: '/assets/img/content/dummy/info-mahasiswa-dummy-logo.svg',
                 page_name: ContentPage.pageName[3],
                 desc_page: descPage
             },
             {
-                logo: '',
+                logo: '/assets/img/content/dummy/info-mahasiswa-dummy-logo.svg',
                 page_name: ContentPage.pageName[4],
                 desc_page: descPage
             }
