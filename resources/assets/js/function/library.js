@@ -1,3 +1,5 @@
+import "../component/lazyload"
+
 const fslightbox = require('fslightbox')
 const Swal = require('sweetalert2')
 const axios = require('axios').default

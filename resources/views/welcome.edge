@@ -1,8 +1,9 @@
 @layout('layouts/app')
 
 @section('header')
-    <header style="background-image: url('{{ primaryCover.filename }}')" 
-    class="h-7/10-screen bg-no-repeat bg-cover flex items-end justify-center">
+    <header
+    data-bg="{{ primaryCover }}"
+    class="h-7/10-screen bg-no-repeat bg-cover flex items-end justify-center lazyload">
         @!component('partials/btn', {
             text: 'Tentang kami', 
             bg: 'red-primary',
@@ -16,22 +17,17 @@
     <section class="bg-red-primary mt-20">
         <div class="container">
             <div class="grid grid-cols-2">
-                <figure class="flex items-center py-6">
-                    <img src="/assets/img/content/dummy/sataset.svg" class="rounded-full" 
-                    alt="Sataset {{ aboutUs.cabinet_name }}" height="45px" width="45px">
-                    <figcaption class="text-white px-4">
-                        <p class="font-bold text-lg">Judul</p>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
-                    </figcaption>
-                </figure>
-                <figure class="flex items-center py-6">
-                    <img src="/assets/img/content/dummy/sataset.svg" class="rounded-full" 
-                    alt="Sataset {{ aboutUs.cabinet_name }}" height="45px" width="45px">
-                    <figcaption class="text-white px-4">
-                        <p class="font-bold text-lg">Judul</p>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
-                    </figcaption>
-                </figure>
+                {{-- todo: bikin crud ini di dashboard admin --}}
+                @each((sataset, index) in satasets)
+                    <figure class="flex items-center py-6">
+                        <img src="{{ sataset.img }}" class="rounded-full h-11 w-11" 
+                        alt="Sataset {{ aboutUs.cabinet_name }}">
+                        <figcaption class="text-white px-10">
+                            <p class="font-bold text-lg">{{ sataset.title }}</p>
+                            <p>{{ sataset.short_desc }}</p>
+                        </figcaption>
+                    </figure>
+                @end
             </div>
         </div>
     </section>
@@ -41,7 +37,10 @@
             <div class="grid grid-cols-3 gap-x-6">
                 @each((news, index) in latestNews)
                     <figure class="relative hover:child-underline">
-                        <img src="{{ news.cover }}" alt="{{ news.title }}">
+                        @!component('partials/img-lazy', {
+                            src: news.cover,
+                            alt: news.title
+                        })
                         <figcaption class="font-bold py-4">
                             <p class="text-to-underline inline-block pb-2">
                                 <span>{{ news.title }}</span>
@@ -62,9 +61,7 @@
             })
             <div class="grid grid-cols-3 gap-x-8">
                 @each((news, index) in latestNews)
-                    <figure>
-                        <img src="{{ news.cover }}" alt="{{ news.title }}">
-                    </figure>
+                    @!component('partials/img-lazy', {src: news.cover, alt: news.title})
                 @end
             </div>
         </div>

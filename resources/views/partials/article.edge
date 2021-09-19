@@ -1,8 +1,11 @@
 <article class="flex relative hover:child-underline
 {{ direction == 'vertical' ? 'flex-col' : 'flex-row' }} 
 border-2 border-grey-primary mb-4">
-    <img src="{{ cover }}" alt="{{ title }}" 
-    class="h-200px object-cover">
+    @!component('partials/img-lazy', {
+        src: cover,
+        alt: title,
+        addClass: 'h-200px object-cover'
+    })
     <figcaption class="{{ direction != 'vertical' ? 'p-4' : '' }} 
     items-start flex flex-col justify-center">
         @if(direction == 'vertical')

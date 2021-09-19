@@ -2,6 +2,9 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import AboutUs from "App/Models/AboutUs"
 import OurContact from 'App/Models/OurContact'
 import LogoMeanings from 'App/Models/LogoMeaning'
+import StoreLogoMeaningValidator from 'App/Validators/StoreLogoMeaningValidator'
+import { cuid } from '@ioc:Adonis/Core/Helpers'
+import Application from '@ioc:Adonis/Core/Application'
 
 export default class LogoMeaningsController {
     public async index({ view }: HttpContextContract) {
@@ -28,7 +31,26 @@ export default class LogoMeaningsController {
     public async create({ }: HttpContextContract) {
     }
 
-    public async store({ }: HttpContextContract) {
+    public async store({ request, response }: HttpContextContract) {
+        const requestValidated = await request.validate(StoreLogoMeaningValidator)
+
+        const logoName = `${cuid()}.${requestValidated.img.extname}`
+        await requestValidated.img?.move(Application.publicPath('/uploads/logo-meaning'), {
+            name: logoName,
+            overwrite: true
+        })
+
+        const addMeaning = LogoMeanings.create({
+            title: requestValidated.title,
+            desc: requestValidated.desc,
+            img: logoName
+        })
+
+        return response.json({
+            'success': true,
+            'message': 'Berhasil menambah makna',
+            'data': addMeaning
+        })
     }
 
     public async show({ }: HttpContextContract) {

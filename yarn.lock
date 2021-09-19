@@ -10000,6 +10000,11 @@ validator@^13.6.0:
   resolved "https://registry.yarnpkg.com/validator/-/validator-13.6.0.tgz#1e71899c14cdc7b2068463cb24c1cc16f6ec7059"
   integrity sha512-gVgKbdbHgtxpRyR8K0O6oFZPhhB5tT1jeEHZR0Znr9Svg03U0+r9DXWMrnRAB+HtCStDQKlaIZm42tVsVjqtjg==
 
+vanilla-lazyload@^17.4.0:
+  version "17.4.0"
+  resolved "https://registry.yarnpkg.com/vanilla-lazyload/-/vanilla-lazyload-17.4.0.tgz#09d65a5be46242b82b557b9ccd886613de76f4c2"
+  integrity sha512-4IVX93uLEgQGBdSCaSE1XJgeNNT1+sV8PKiImM21EkDGJBH3tTWL9wYrMA4xT5C2EIEfw8WkinUxUG+uMY2ZyA==
+
 vanilla-router@^1.2.8:
   version "1.2.8"
   resolved "https://registry.yarnpkg.com/vanilla-router/-/vanilla-router-1.2.8.tgz#fe4a4e4ce1c1b1e76fa072f3d8b200670310984d"

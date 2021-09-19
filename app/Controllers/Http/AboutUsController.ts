@@ -63,20 +63,19 @@ export default class AboutUsController {
         const titlePage = 'Tentang kami'
 
         const aboutUs = await AboutUs.first()
-        const primaryCover = await HomeCover.first()
+        const primaryCover = await HomeCover.first().then((cover) => {
+            return cover?.filename
+        })
         const contentPage = await ContentPage.findByOrFail('page_name', 'about-us')
         
         const ourContact = await OurContact.all()
 
-        const bgHeader = primaryCover?.filename
-
         return view.render('about-us/index', {
             titlePage,
             aboutUs,
-            primaryCover,
             contentPage,
             ourContact,
-            bgHeader
+            primaryCover
         })
     }
 

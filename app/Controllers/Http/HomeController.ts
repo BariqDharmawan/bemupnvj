@@ -8,12 +8,15 @@ import { string } from '@ioc:Adonis/Core/Helpers'
 import Blog from "App/Models/Blog";
 import Major from "App/Models/Major";
 import Faculty from "App/Models/Faculty";
+import Sataset from "App/Models/Sataset";
 
 export default class HomeController {
     public async index({ view }: HttpContextContract) {
         const aboutUs = await AboutUs.first()
         const ourContact = await OurContact.all()
-        const primaryCover = await HomeCover.first()
+        const primaryCover = await HomeCover.first().then((cover) => {
+            return cover?.filename
+        })
 
         const aspirationCategoryOriginal = await AspirationCategory.all()
 
@@ -26,10 +29,16 @@ export default class HomeController {
 
         const faculties = await Faculty.query().preload('majors')
 
-        // return faculties
+        const satasets = await Sataset.query().where('is_display', true)
 
         return view.render('welcome', {
-            aboutUs, ourContact, primaryCover, latestNews, aspirationCategory, faculties
+            aboutUs,
+            ourContact,
+            primaryCover,
+            latestNews,
+            aspirationCategory,
+            faculties,
+            satasets
         })
     }
 }

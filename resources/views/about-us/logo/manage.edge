@@ -4,6 +4,17 @@
 <section>
     <div class="container">
         <div class="card">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h2 class="card-title m-0">
+                    Apa makna logo kita?
+                </h2>
+                @!component('partials/trigger-modal', {
+                    targetModal: 'add-meaning',
+                    classnya: 'btn btn-primary',
+                    icon: 'fa-edit',
+                    text: 'Tambah makna'
+                })
+            </div>
             <div class="card-body">
                 <div class="accordion" id="accordionLogoMeaning">
                     @each((meaning, index) in logoMeanings)
@@ -41,4 +52,40 @@
         </div>
     </div>
 </section>
-@endsection
+@end
+
+@section('component')
+    @each((meaning, index) in meanings)
+        @component('partials/bootstrap-modal', {id: 'edit-meaning'})
+          
+        @endcomponent
+    @endeach
+    @component('partials/bootstrap-modal', {id: 'add-meaning'})
+    <form action="{{ route('logo_meaning.store') }}" 
+    method="post" enctype="multipart/form-data" id="add-meaning">
+        {{ csrfField() }}
+        @!component('partials/bootstrap-input', {
+            name: 'title',
+            label: 'Judul',
+            placeholder: 'Masukan judul makna',
+            value: logoMeaning ? logoMeaning.title : '',
+            required: 'required'
+        })
+        @!component('partials/bootstrap-input', {
+            type: 'textarea',
+            name: 'desc',
+            label: 'Deskripsi',
+            placeholder: 'Masukan deskripsi disini',
+            value: logoMeaning ? logoMeaning.desc : '',
+            required: 'required'
+        })
+        @!component('partials/bootstrap-input', {
+            type: 'file',
+            name: 'title',
+            label: 'Upload logo',
+            helperText: 'Sudut pandang logo yang ingin dijelaskan maknanya'
+        })
+        <button type="submit" class="btn btn-primary">Save update</button>
+    </form>
+    @end
+@end

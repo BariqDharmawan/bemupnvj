@@ -4,7 +4,7 @@
     @include('partials/meta')
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    {{--  <link href="" rel="stylesheet">  --}}
     <link rel="stylesheet" href="/assets/css/app.css">
     @!section('style')
 </head>
@@ -86,8 +86,12 @@
                         @each((contact, key) in ourContact)
                             <li class="flex text-white items-center mb-4 relative">
                                 <div class="mr-2">
-                                    <img src="{{ contact.logo }}" height="16px" width="16px"
-                                    alt="{{ `${contact.info} ${process.env.APP_NAME}` }}">
+                                    @!component('partials/img-lazy', {
+                                        src: contact.logo,
+                                        alt: contact.info,
+                                        height: 16,
+                                        width: 16
+                                    })
                                 </div>
                                 <span>{{ contact.info }}</span>
                                 @!component('partials/stretched-link', {
@@ -109,8 +113,11 @@
                             href="javascript:;">
                             <img src="/assets/img/icon/play-solid.svg" alt="" 
                             class="h-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                            <img src="https://img.youtube.com/vi/{{ aboutUs.know_us_video }}/mqdefault.jpg" class="block w-full max-h-48 object-cover"
-                            alt="Tentang {{ process.env.APP_NAME }}">
+                            @!component('partials/img-lazy', {
+                                src: `https://img.youtube.com/vi/${aboutUs.know_us_video}/mqdefault.jpg`,
+                                alt: `Tentang ${process.env.APP_NAME}`,
+                                addClass: 'block w-full max-h-48 object-cover'
+                            })
                         </a>
                     </div>
                 </div>

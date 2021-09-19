@@ -19,4 +19,12 @@ export default class ContentPage extends BaseModel {
 
     @column.dateTime({ autoCreate: true, autoUpdate: true })
     public updatedAt: DateTime
+
+    public static pageName = [
+        'info-mahasiswa',
+        'past-events',
+        'upcoming-events',
+        'contact-us',
+        'about-us'
+    ]
 }

@@ -1,14 +1,17 @@
 module.exports = {
     mode: 'jit',
-    purge: [
-        './resources/**/*.scss',
-        './resources/assets/js/app.js',
-        './resources/assets/js/component/back-to-top.js',
-        './resources/assets/js/component/form.js',
-        './resources/assets/js/component/menu.js',
-        './resources/assets/js/function/library.js',
-        './resources/**/*.edge',
-    ],
+    purge: {
+        enabled: true,
+        content: [
+            './resources/**/*.scss',
+            './resources/assets/js/app.js',
+            './resources/assets/js/component/back-to-top.js',
+            './resources/assets/js/component/form.js',
+            './resources/assets/js/component/menu.js',
+            './resources/assets/js/function/library.js',
+            './resources/**/*.edge',
+        ]
+    },
     darkMode: false, // or 'media' or 'class'
     theme: {
         borderColor: theme => ({
@@ -34,6 +37,7 @@ module.exports = {
         }),
         extend: {
             height: {
+                'initial': 'initial',
                 '200px': '200px',
                 '450px': '450px',
                 '7/10-screen': '70vh'
