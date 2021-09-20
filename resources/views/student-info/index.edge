@@ -7,28 +7,27 @@
     })
     <section class="py-10">
         <div class="container">
-            <div class="mb-10">
-                @!component('partials/heading-section', {
-                    text: 'Informasi Beasiswa', align: 'left'
-                })
+            @!component('partials/heading-section', {
+                text: 'Informasi Beasiswa', align: 'left'
+            })
+            <div class="flex flex-col gap-y-5">
                 @each((beasiswa, index) in infoBeasiswa)
-                    @!component('partials/article', {
-                        title: beasiswa.title,
-                        cover: beasiswa.cover,
-                        link: route('blog.show', {id: beasiswa.id}),
-                        excerpt: excerpt(beasiswa.content, 200, {
-                            completeWords: false,
-                            suffix: ' [...]'
-                        })
+                @!component('partials/article', {
+                    title: beasiswa.title,
+                    cover: beasiswa.cover,
+                    link: route('blog.show', {id: beasiswa.id}),
+                    excerpt: excerpt(beasiswa.content, 200, {
+                        completeWords: false,
+                        suffix: ' [...]'
                     })
-                @end
+                })
+            @end
             </div>
 
-            <div class="text-center">
+            <div class="text-center mt-10">
                 @!component('partials/btn', {
-                    text: 'Load more ...', 
-                    bg: 'black',
-                    addClass: 'bg-opacity-80 mx-auto hover:bg-gray-900'
+                    text: 'Load more ...',
+                    addClass: 'bg-black bg-opacity-80 mx-auto hover:bg-gray-900'
                 })
             </div>
             

@@ -40,6 +40,11 @@ export default class ContentPageSeeder extends BaseSeeder {
                 logo: '/assets/img/content/dummy/info-mahasiswa-dummy-logo.svg',
                 page_name: ContentPage.pageName[4],
                 desc_page: descPage
+            },
+            {
+                logo: '/assets/img/content/dummy/info-mahasiswa-dummy-logo.svg',
+                page_name: ContentPage.pageName[5],
+                desc_page: descPage
             }
         ])
     }

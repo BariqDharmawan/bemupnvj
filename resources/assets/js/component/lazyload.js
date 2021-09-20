@@ -9,9 +9,6 @@ const lazyLoadInstance = new LazyLoad({
     data_bg_hidpi: 'bg-hidpi',
     data_poster: 'poster',
     data_sizes: 'sizes',
-    callback_loaded: () => {
-        console.log('loaded')
-    }
 })
 
 export {lazyLoadInstance}

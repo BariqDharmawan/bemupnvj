@@ -1,7 +1,6 @@
 @if(link != 'submit')
     <a href="{{ link ?? 'javascript:void(0);' }}" 
     class="{{ wider == 'lg' ? 'px-10 py-4' : 'py-3 px-9' }} 
-    bg-{{ bg ?? 'bg-transparent' }} 
     transition text-{{ color ?? 'white' }} 
     {{ addClass ?? '' }}" {{ $props.serializeExcept(['color', 'link', 'bg', 'addClass']) }}>
         @if(text)
@@ -12,7 +11,6 @@
     </a>
 @else
     <button type="{{ link }}" class="{{ wider == 'lg' ? 'px-10 py-4' : 'py-3 px-9' }} 
-    bg-{{ bg ?? 'bg-transparent' }} 
     transition text-{{ color ?? 'white' }} 
     {{ addClass ?? '' }}" {{ $props.serializeExcept(['color', 'link', 'bg', 'addClass']) }}>
         @if(text)
