@@ -4,8 +4,7 @@ import { lazyLoadInstance } from "./lazyload"
 
 const btnLoadMore = document.querySelectorAll('.btn-load-more')
 let nextUrl = ''
-let newsExcerpt = ''
-let newsTitle = ''
+let articleBaseUrl = ''
 
 btnLoadMore.forEach((loadMore) => {
 
@@ -16,36 +15,42 @@ btnLoadMore.forEach((loadMore) => {
 
     loadMore.addEventListener('click', function () {
 
-        console.info(`currentPage: ${currentPage}`, `lastPage: ${lastPage}`)
-
         if (currentPage < lastPage) {
             currentPage = currentPage + 1
-            nextUrl = `api${window.location.pathname}?page=${currentPage}`
+
+            nextUrl = `/api${window.location.pathname}?page=${currentPage}`
+
+            console.info(`currentPage: ${currentPage}`, `lastPage: ${lastPage}`, `nextUrl: ${nextUrl}`)
             
             axios.get(nextUrl)
                 .then((response) => {
                     const nextNews = response.data.data
                     const totalNextNews = nextNews.length
-                    console.log(`totalNextNews: ${totalNextNews}`)
+                    console.log(`totalNextNews: ${totalNextNews}`, nextNews)
 
                     for (const news of nextNews) {
                         //copy element to prevent hardcode html tag when print the result
                         articleEl = parentData.querySelector('.article-to-load-more')
                                               .cloneNode(true)
-
-                        newsExcerpt = news.content.substr(0, 200) + ' [...]';
-                        newsTitle = news.title
+                        articleBaseUrl = `/${articleEl.querySelector('.article__title').getAttribute('href').split('/')[1]}`
                         
-                        articleEl.id = news.slug
+                        console.info(`articleBaseUrl: ${articleBaseUrl}`)
+
                         articleEl.querySelector('img').dataset.src = news.cover
                         articleEl.querySelector('img').src = news.cover
 
                         articleEl.querySelector('img').setAttribute(
-                            'alt', `${newsTitle} BEMUPNVJ`
+                            'alt', `${news.title} BEMUPNVJ`
                         )
 
-                        articleEl.querySelector('.article__title').textContent = newsTitle
-                        articleEl.querySelector('.article__excerpt').innerHTML = newsExcerpt
+                        articleEl.querySelector('.article__title').textContent = news.title
+                        articleEl.querySelector('.article__title').href = 
+                            `${articleBaseUrl}/${news.id}`
+
+                        if (articleEl.querySelector('.article__excerpt')) {
+                            articleEl.querySelector('.article__excerpt').innerHTML 
+                            = news.content.substr(0, 200) + ' [...]';
+                        }
                         
                         parentData.appendChild(articleEl)
 

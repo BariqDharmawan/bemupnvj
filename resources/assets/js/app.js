@@ -1,5 +1,4 @@
 import './function/library'
-import './function/helper'
 import './component/menu'
 import './component/back-to-top'
 import './component/form'

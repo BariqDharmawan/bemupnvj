@@ -3,6 +3,8 @@ import Blog from "App/Models/Blog"
 import BlogCategory from "App/Models/BlogCategory"
 import { DateTime } from 'luxon'
 
+const randomNumber = Math.floor(Math.random() * 10)
+
 export const BlogsFactories = Factory.define(Blog, ({ faker }) => {
     return {
         title: faker.lorem.sentence(),
@@ -15,10 +17,18 @@ export const BlogsFactories = Factory.define(Blog, ({ faker }) => {
     }
 })
 .state(
-    'isEvent', (blog) => blog.show_until = DateTime.local().minus({
-        days: Math.floor(Math.random() * 10)
-    })
-).build()
+    'isEventPast', (blog) => {
+        blog.show_at_page = 'events'
+        blog.show_until = DateTime.local().minus({days: randomNumber})
+    }
+)
+.state(
+    'isEventUpcoming', (eventUpcoming) => {
+        eventUpcoming.show_at_page = 'events'
+        eventUpcoming.show_until = DateTime.local().plus({days: randomNumber})
+    }
+)
+.build()
 
 export const BlogCategoriesFactories = Factory.define(BlogCategory, ({ faker }) => {
     return {

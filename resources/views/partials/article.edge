@@ -4,21 +4,20 @@ border-2 border-grey-primary">
     @!component('partials/img-lazy', {
         src: cover,
         alt: title,
-        addClass: 'h-200px object-cover'
+        addClass: 'h-200px object-cover article__img'
     })
     <figcaption class="{{ direction != 'vertical' ? 'p-4' : '' }} 
     items-start flex flex-col justify-center">
         @if(direction == 'vertical')
-        <div class="p-4 border-b-2 border-grey-primary w-full">
-            <p class="article__category">{{ category }}</p>
-        </div>
+            <div class="p-4 border-b-2 border-grey-primary w-full">
+                <p class="article__category">{{ category }}</p>
+            </div>
+            @include('partials/article-title')
         @else
-        <p class="font-bold text-xl mb-4 text-to-underline article__title">
-            {{ title }}
-        </p>
+            @include('partials/article-title')
+            <p class="{{ direction == 'vertical' ? 'p-4 font-bold' : '' }} article__excerpt">
+                {{ excerpt }}
+            </p>
         @end
-        <p class="{{ direction == 'vertical' ? 'p-4 font-bold' : '' }} article__excerpt">
-            {{ excerpt }}
-        </p>
     </figcaption>
 </article>

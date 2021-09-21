@@ -9,33 +9,29 @@
     </div>
     <section class="py-10">
         <div class="container">
-            <div class="mb-10">
-                @!component('partials/heading-section', {
-                    text: capitalCase(noCase(contentPage.page_name))
-                })
-                <div class="grid grid-cols-3 gap-x-6 gap-y-8">
-                    @each((event, index) in pastEvents)
-                        @!component('partials/article', {
-                            direction: 'vertical',
-                            category: event.blogCategory.category,
-                            title: event.title,
-                            cover: event.cover,
-                            link: route('blog.show', {id: event.id}),
-                            excerpt: excerpt(event.content, 200, {
-                                completeWords: false,
-                                suffix: ' [...]'
-                            })
+            @!component('partials/heading-section', {
+                text: capitalCase(noCase(contentPage.page_name))
+            })
+            <div class="grid grid-cols-3 gap-x-6 gap-y-8" id="parent-past-events">
+                @each((event, index) in pastEvents)
+                    @!component('partials/article', {
+                        direction: 'vertical',
+                        category: event.blogCategory.category,
+                        title: event.title,
+                        addClass: 'article-to-load-more',
+                        cover: event.cover,
+                        link: route('blog.show', {id: event.id}),
+                        excerpt: excerpt(event.content, 200, {
+                            completeWords: false,
+                            suffix: ' [...]'
                         })
-                    @end
-                </div>
+                    })
+                @end
             </div>
 
-            <div class="text-center">
-                @!component('partials/btn', {
-                    text: 'Load more ...',
-                    addClass: 'bg-black bg-opacity-80 mx-auto hover:bg-gray-900'
-                })
-            </div>
+            @set('lastPageNumber', pastEvents.lastPage)
+            @set('parentRecord', '#parent-past-events')
+            @include('event/load-more-btn')
             
         </div>
     </section>

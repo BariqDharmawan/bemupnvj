@@ -12,7 +12,7 @@ export default class EventController {
     /**
      * async past
      */
-    public async past({view}: HttpContextContract) {
+    public async past({view, request}: HttpContextContract) {
         const ourContact = await OurContact.all()
         const aboutUs = await AboutUs.first()
         const titlePage = 'Past Events'
@@ -22,6 +22,9 @@ export default class EventController {
         let pastEvents = await Blog.query().where('show_at_page', 'events')
                                     .preload('blogCategory')
                                     .where('show_until', '<', new Date())
+                                    .paginate(request.input('page', 1), 6)
+
+        // return pastEvents
 
         return view.render('event/past', {
             ourContact, aboutUs, titlePage, contentPage, pastEvents
@@ -29,9 +32,21 @@ export default class EventController {
     }
 
     /**
+     * async past
+     */
+     public async getPast({request}: HttpContextContract) {
+        let pastEvents = await Blog.query().where('show_at_page', 'events')
+                                    .preload('blogCategory')
+                                    .where('show_until', '<', new Date())
+                                    .paginate(request.input('page', 1), 6)
+
+        return pastEvents
+    }
+
+    /**
      * async upcoming
      */
-    public async upcoming({view}: HttpContextContract) {
+    public async upcoming({view, request}: HttpContextContract) {
         const aboutUs = await AboutUs.first()
         const ourContact = await OurContact.all()
         const contentPage = await ContentPage.findByOrFail(
@@ -43,6 +58,7 @@ export default class EventController {
                                         .where(
                                             'show_until', '>=', Helper.getCurrentDatetime()
                                         )
+                                        .paginate(request.input('page', 1), 6)
 
         return view.render('event/upcoming', {
             aboutUs, upcomingEvents, ourContact, contentPage
