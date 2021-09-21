@@ -9,11 +9,14 @@ let newsTitle = ''
 
 btnLoadMore.forEach((loadMore) => {
 
-    let currentPage = 1, lastPage = loadMore.dataset.lastPage
+    let currentPage = 1
+    let lastPage = loadMore.dataset.lastPage
     let parentData = document.querySelector(loadMore.dataset.parentRecord)
     let articleEl = null
 
     loadMore.addEventListener('click', function () {
+
+        console.info(`currentPage: ${currentPage}`, `lastPage: ${lastPage}`)
 
         if (currentPage < lastPage) {
             currentPage = currentPage + 1

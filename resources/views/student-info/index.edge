@@ -10,11 +10,12 @@
             @!component('partials/heading-section', {
                 text: 'Informasi Beasiswa', align: 'left'
             })
-            <div class="flex flex-col gap-y-5">
+            <div class="flex flex-col gap-y-5" id="parent-student-beasiswa">
                 @each((beasiswa, index) in infoBeasiswa)
                 @!component('partials/article', {
                     title: beasiswa.title,
                     cover: beasiswa.cover,
+                    addClass: 'article-to-load-more',
                     link: route('blog.show', {id: beasiswa.id}),
                     excerpt: excerpt(beasiswa.content, 200, {
                         completeWords: false,
@@ -27,7 +28,11 @@
             <div class="text-center mt-10">
                 @!component('partials/btn', {
                     text: 'Load more ...',
-                    addClass: 'bg-black bg-opacity-80 mx-auto hover:bg-gray-900'
+                    addClass: `bg-black bg-opacity-80 mx-auto hover:bg-gray-900 
+                    btn-load-more`,
+                    'data-page': 1,
+                    'data-last-page': infoBeasiswa.lastPage,
+                    'data-parent-record': '#parent-student-beasiswa'
                 })
             </div>
             
