@@ -6,7 +6,7 @@ export const OurSocialFactories = Factory.define(OurSocial, ({ faker }) => {
     const platforms = ['instagram', 'youtube', 'facebook', 'twitter', 'whatsapp', 'telegram']
     return {
         logo: faker.image.cats(),
-        name: faker.unique(function name() {
+        name: faker.unique(function() {
             return faker.random.arrayElement(platforms)
         }),
         username: username,

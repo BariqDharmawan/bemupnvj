@@ -28,6 +28,15 @@ export const BlogsFactories = Factory.define(Blog, ({ faker }) => {
         eventUpcoming.show_until = DateTime.local().plus({days: randomNumber})
     }
 )
+.state('isNews', (news) => {
+    news.show_at_page = 'portal-berita'
+})
+.state('isInfoForStudent', (infoForStudent) => {
+    infoForStudent.show_at_page = 'info-mahasiswa'
+})
+.state('isLatestNews', (latestNews) => {
+    latestNews.show_at_page = 'home'
+})
 .build()
 
 export const BlogCategoriesFactories = Factory.define(BlogCategory, ({ faker }) => {

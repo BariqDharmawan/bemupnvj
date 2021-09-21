@@ -1,13 +1,16 @@
 const btnBackToTop = document.querySelector('.btn-back-top')
-const heightPage = document.body.clientHeight
-const heightFooter = document.querySelector('footer').clientHeight
+const heightPage = document.body.offsetHeight
+const heightFooter = document.querySelector('footer').scrollHeight
+const heightNav = document.querySelector('#primary-nav').scrollHeight
+const heightContent = document.querySelector('main').scrollHeight
 
 let scrollPosition = 0
-console.log(`heightPage: ${heightPage}`)
+
 window.addEventListener('scroll', function () {
     scrollPosition = this.scrollY
-    if (scrollPosition >= heightPage - heightFooter) {
+    if (scrollPosition >= heightContent + heightNav ) {
         btnBackToTop.classList.remove('hide-el')
+        console.info('footer appear')
     }
     else {
         btnBackToTop.classList.add('hide-el')
