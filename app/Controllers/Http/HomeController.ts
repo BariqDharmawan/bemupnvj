@@ -25,11 +25,11 @@ export default class HomeController {
             val: Number(id)
         }));
 
-        const latestNews = await Blog.query().where('show_at_page', 'home')
+        const latestNews = await Blog.query().where('show_at_page', 'home').limit(3)
 
         const faculties = await Faculty.query().preload('majors')
 
-        const satasets = await Sataset.query().where('is_display', true)
+        const satasets = await Sataset.query().where('is_display', true).limit(2)
 
         return view.render('welcome', {
             aboutUs,

@@ -58,7 +58,7 @@
             @!component('partials/heading-section', {
                 text: 'Informasi Terbaru', color: 'white'
             })
-            <div class="grid grid-cols-3 gap-x-8">
+            <div class="grid grid-cols-3 gap-8">
                 @each((news, index) in latestNews)
                     @!component('partials/img-lazy', {src: news.cover, alt: news.title})
                 @end
