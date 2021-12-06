@@ -12,7 +12,7 @@ export default class Sataset extends BaseModel {
   public short_desc: string
 
   @column()
-  public img: string
+  public file: string
 
   @column()
   public is_display: boolean

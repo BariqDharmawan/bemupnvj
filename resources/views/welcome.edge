@@ -19,7 +19,7 @@
                 {{-- todo: bikin crud ini di dashboard admin --}}
                 @each((sataset, index) in satasets)
                     <figure class="flex items-center py-6">
-                        <img src="{{ sataset.img }}" class="rounded-full h-11 w-11" 
+                        <img src="{{ sataset.img }}" class="rounded-full h-11 w-11"
                         alt="Sataset {{ aboutUs.cabinet_name }}">
                         <figcaption class="text-white px-10">
                             <p class="font-bold text-lg">{{ sataset.title }}</p>
@@ -70,7 +70,7 @@
             @!component('partials/heading-section', {
                 text: 'Salurkan Aspirasi'
             })
-            <form action="{{ route('aspirations.store') }}" method="POST" 
+            <form action="{{ route('aspirations.store') }}" method="POST"
             class="form-ajax">
                 <div class="grid grid-cols-11">
                     @!component('partials/input', {
@@ -83,8 +83,8 @@
 
                     <div class="mb-8 col-span-5 col-start-7">
                         <div class="flex flex-col-reverse">
-                            <select class="bg-gray-normal focus:bg-transparent border 
-                            border-gray-300 cursor-pointer 
+                            <select class="bg-gray-normal focus:bg-transparent border
+                            border-gray-300 cursor-pointer
                             {{ flashMessages.has('errors.major') ? 'is-invalid' : '' }}"
                             name="major" required>
                                 @each(faculty in faculties)
@@ -128,8 +128,8 @@
                     })
                 </div>
                 @!component('partials/btn', {
-                    link: 'submit', 
-                    text: 'Salurkan', 
+                    link: 'submit',
+                    text: 'Salurkan',
                     addClass: 'bg-red-primary hover:bg-red-700'
                 })
             </form>

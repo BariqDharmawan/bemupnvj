@@ -4,23 +4,23 @@
     @each((contentPage, index) in contentPages)
         <div class="card">
             <div class="card-header">
-                    <h2 class="card-title">
-                        Konten page 
-                        <a href="{{ route(snakeCase(contentPage.page_name) + '.index') }}">
-                            {{ noCase(contentPage.page_name) }}
-                        </a>
-                    </h2>
+              <h2 class="card-title">
+                Konten page
+                <a href="{{ route(snakeCase(contentPage.page_name) + '.index') }}">
+                  {{ noCase(contentPage.page_name) }}
+                </a>
+              </h2>
             </div>
             <div class="card-body">
                 <ul class="list-group">
                     <li class="list-group-item">
-                        Logo: <img src="{{ contentPage.logo }}" 
+                        Logo: <img src="{{ contentPage.logo }}"
                         class="p-1 bg-secondary rounded" height="40px"
                         alt="{{ contentPage.page_name + ' ' + aboutUs.cabinet_name }}">
                     </li>
                     <li class="list-group-item">
                         <p>
-                            Judul page: 
+                            Judul page:
                             <span class="text-capitalize font-weight-bold">
                                 {{ noCase(contentPage.page_name) }}
                             </span>

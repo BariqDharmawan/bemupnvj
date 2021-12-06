@@ -10,21 +10,21 @@ Route.post('mission/update-all-list', 'OurMissionsController.updateAllList')
 Route.group(() => {
     Route.resource('mission', 'OurMissionsController').apiOnly()
     Route.resource('our-social', 'OurSocialsController').only(['store', 'update', 'destroy'])
-    
+
     Route.group(() => {
         Route.get('vision-mission', 'AboutUsController.manageVisionMission')
             .as('vision_mission')
         Route.get('content', 'AboutUsController.content').as('content')
         Route.get('profile', 'AboutUsController.profile').as('profile')
     }).prefix('about-us').as('about_us')
-    
+
     Route.get('our-contact/manage', 'OurContactController.manage').as('our_contact.manage')
     Route.resource('our-contact', 'OurContactController').only([
         'store', 'destroy', 'update'
     ])
-    
+
     Route.get('aspirations/manage', 'AspirationsController.manage').as('aspirations.manage')
-    
+
     Route.group(function () {
         Route.get('manage', 'BlogsController.manage').as('manage')
     }).prefix('blog').as('blog')
@@ -33,10 +33,10 @@ Route.group(() => {
         Route.get('content', 'ContactusesController.content').as('content')
         Route.get('manage', 'ContactusesController.manage').as('manage')
     }).prefix('contact-us').as('contact_us')
-    
+
     Route.group(() => {
         Route.get('dashboard', 'DashboardController.index').as('dashboard')
-        
+
         Route.resource('primary-cover', 'HomeCoversController').only([
             'index', 'store', 'destroy'
         ])
@@ -47,7 +47,7 @@ Route.group(() => {
             'store', 'update', 'destroy'
         ])
     }).as('admin')
-    
+
     Route.resource('aspiration-category', 'AspirationCategoriesController').only([
         'store', 'update'
     ])
@@ -64,6 +64,9 @@ Route.resource('blog', 'BlogsController').only([
     'destroy': ['auth'],
 })
 
+Route.get('sataset/manage', 'SatasetController.manage').as('sataset.manage')
+Route.resource('sataset', 'SatasetController')
+
 Route.resource('about-us', 'AboutUsController').except(['create', 'edit', 'update', 'show'])
 Route.resource('contact-us', 'ContactUsController')
 Route.put('about-us/update', 'AboutUsController.update').as('about_us.update')
@@ -79,11 +82,11 @@ Route.group(() => {
 }).as('info_mahasiswa').prefix('info-mahasiswa')
 
 Route.group(() => {
-    Route.get('past', 'EventController.past').as('past')
-    Route.get('upcoming', 'EventController.upcoming').as('upcoming')
-}).as('event').prefix('event')
+    Route.get('past', 'EventController.past').as('past_events.index')
+    Route.get('upcoming', 'EventController.upcoming').as('upcoming_events.index')
+}).prefix('event')
 
-Route.get('news-portal', 'NewsController.portal').as('news_portal')
+Route.get('news-portal', 'NewsController.portal').as('portal_news.index')
 
 Route.resource('aspirations', 'AspirationsController').only([
     'index', 'store', 'destroy'

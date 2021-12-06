@@ -55,17 +55,21 @@
                 })
                     @!component('partials/menu', {
                         text: 'Mendatang',
-                        link: route('event.upcoming')
+                        link: route('upcoming_events.index')
                     })
                     @!component('partials/menu', {
                         text: 'Lalu',
-                        link: route('event.past')
+                        link: route('past_events.index')
                     })
                 @end
                 @!component('partials/menu', {
                     text: 'Berita',
-                    link: route('news_portal')
+                    link: route('portal_news.index')
                 })
+                @!component('partials/menu', {
+                  text: 'Sataset',
+                  link: route('sataset.index')
+              })
                 @!component('partials/menu', {
                     text: 'Kontak',
                     link: route('contact_us.index')
@@ -95,7 +99,7 @@
                                 </div>
                                 <span>{{ contact.info }}</span>
                                 @!component('partials/stretched-link', {
-                                    link: contact.link 
+                                    link: contact.link
                                 })
                             </li>
                         @endeach
@@ -108,10 +112,10 @@
                         align: 'left'
                     })
                     <div class="relative inline-block -mt-8 w-8/12">
-                        <a data-fslightbox href="{{ 'https://www.youtube.com/watch?v=' + 
+                        <a data-fslightbox href="{{ 'https://www.youtube.com/watch?v=' +
                         aboutUs.know_us_video }}" class="block"
                             href="javascript:;">
-                            <img src="/assets/img/icon/play-solid.svg" alt="" 
+                            <img src="/assets/img/icon/play-solid.svg" alt=""
                             class="h-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                             @!component('partials/img-lazy', {
                                 src: `https://img.youtube.com/vi/${aboutUs.know_us_video}/mqdefault.jpg`,

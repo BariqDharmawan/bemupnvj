@@ -35,6 +35,11 @@
                         text: 'Blog',
                         iconMenu: 'fas fa-th'
                     })
+                    @!component('partials/dashboard-menu', {
+                      url: route('sataset.manage'),
+                      text: 'Sataset',
+                      iconMenu: 'fas fa-th'
+                  })
                     @component('partials/dashboard-menu', {
                         url: '#',
                         text: 'About Us',
@@ -133,7 +138,7 @@
     </div>
 
     @!section('component')
-    
+
     <script src="/assets/vendors/AdminLTE/plugins/jquery/jquery.min.js"></script>
     <script src="/assets/vendors/AdminLTE/plugins/jquery-ui/jquery-ui.min.js"></script>
     <script src="/assets/vendors/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -156,6 +161,7 @@
     <script src="/assets/vendors/summernote/summernote-bs4.min.js"></script>
     <script src="/assets/vendors/air-datepicker/js/datepicker.min.js"></script>
     <script src="/assets/vendors/air-datepicker/js/i18n/datepicker.en.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.7/pdfobject.min.js" integrity="sha512-g16L6hyoieygYYZrtuzScNFXrrbJo/lj9+1AYsw+0CYYYZ6lx5J3x9Yyzsm+D37/7jMIGh0fDqdvyYkNWbuYuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/assets/js/admin.js"></script>
     @!section('scripts')
 
