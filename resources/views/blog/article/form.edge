@@ -1,14 +1,14 @@
-<form action="{{ formAction }}" method="post" enctype="multipart/form-data" 
+<form action="{{ formAction }}" method="post" enctype="multipart/form-data"
 data-id="{{ article ? article.id : '' }}">
     {{ csrfField() }}
 
     <div class="form-group">
         <label for="cover" class="d-block">Cover artikel</label>
 
-        <img src="{{ article ? article.cover : '/assets/img/icon/preview-upload.png' }}" alt="" 
+        <img src="{{ article ? article.cover : '/assets/img/icon/preview-upload.png' }}" alt=""
         srcset="" id="preview-article-cover"
-        class="img-fluid mb-2" style="max-height: 200px" 
-        data-default-preview="{{ article ? article.cover : 
+        class="img-fluid mb-2" style="max-height: 200px"
+        data-default-preview="{{ article ? article.cover :
         '/assets/img/icon/preview-upload.png' }}">
 
         <div class="custom-file">
@@ -22,8 +22,8 @@ data-id="{{ article ? article.id : '' }}">
         </div>
     </div>
 
-    @set('defaultCategoryActive',  article ? article.blog_category_id : '')
-    <input type="hidden" name="blog_category_id" 
+    @set('defaultCategoryActive',  article ? article.blog_category_id : '1')
+    <input type="hidden" name="blog_category_id"
     value="{{ defaultCategoryActive }}" required readonly>
 
     @!component('partials/bootstrap-input', {
@@ -50,8 +50,8 @@ data-id="{{ article ? article.id : '' }}">
         <label class="d-block mb-1">Tampilkan di halaman</label>
         @each((page, index) in listPage)
         <div class="d-inline-flex align-items-center mr-2">
-            <input type="radio" id="{{ dashCase(page) }}" name="show_at_page" 
-            {{ article ? (article.show_at_page == page ? 'checked' : '') : 
+            <input type="radio" id="{{ dashCase(page) }}" name="show_at_page"
+            {{ article ? (article.show_at_page == page ? 'checked' : '') :
             (index == 0 ? 'checked' : '') }} value="{{ dashCase(page) }}" required>
             <label class="mb-0 ml-1" for="{{ dashCase(page) }}">
                 {{ noCase(page) }}

@@ -30,10 +30,10 @@ $(".delete-social").on('submit', function (e) {
 let storeUrl, datanya, formData;
 $("#store-mission").on('submit', function (e) {
     e.preventDefault()
-    
+
     storeUrl = $(this).attr('action')
     console.log('store data', storeUrl)
-    
+
     formData = {
         content: $("[name='content']").val(),
     };
@@ -76,8 +76,27 @@ $(".submit-article").on('submit', function (e) {
 
     console.info(activeTabName)
     localStorage.setItem('currentActiveTab', activeTabName)
-    
+
     window.location.reload();
 
-    
+
 })
+
+$(".modal").on('shown.bs.modal', function (event) {
+  localStorage.setItem('modal-open', $(this).attr('id'))
+  console.log(localStorage.getItem('modal-open'))
+})
+
+if (localStorage.getItem('modal-open')) {
+  console.log(localStorage.getItem('modal-open'))
+
+  if ($(`#${localStorage.getItem('modal-open')}`).find('.text-danger').length > 0) {
+      $(`#${localStorage.getItem('modal-open')}`).modal('show')
+
+      $(".modal").not(`#${localStorage.getItem('modal-open')}`).find('.validation-error').remove()
+      // $(".modal.modal--single").find("input:not([name='_token']), textarea, select").val(null)
+  }
+  else {
+      localStorage.removeItem('modal-open')
+  }
+}

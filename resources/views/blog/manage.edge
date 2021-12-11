@@ -4,7 +4,7 @@
     @component('partials/alert', {type: 'success', isDismissable: true})
         {{ flashMessages.get('notification') }}
     @end
-    
+
     <ul class="nav nav-tabs" id="tab-blog" role="tablist">
         @!component('partials/bootstrap-tab', {
             tabName: 'Kategori',
@@ -43,7 +43,7 @@
                 addClassDialog: 'modal-xl'
             })
                 @set('formAction', route('blog.update', {id: article.id}, {qs: {_method: 'PUT'}}))
-                
+
                 @include('blog/article/form')
             @end
 
@@ -54,7 +54,7 @@
 @end
 
 @section('scripts')
-    @if(flashMessages.get('notification') === 'Berhasil mengubah artikel' || 
+    @if(flashMessages.get('notification') === 'Berhasil mengubah artikel' ||
         flashMessages.get('notification') === 'Berhasil menghapus artikel')
         <script>
             const tabArtikel = $("#tab-artikel")
@@ -67,7 +67,7 @@
 
             const currentTabArticleCategoryActive = "{{ flashMessages.get('tabActive') }}"
                                                     .toLowerCase().replaceAll(' ', '-')
-                                                    
+
             console.log(currentTabArticleCategoryActive)
             $(`#tab-${currentTabArticleCategoryActive}`).tab('show')
             $(`#tab-${currentTabArticleCategoryActive}-tab`).addClass('active')
@@ -77,7 +77,7 @@
             $(`#tab-${currentTabArticleCategoryActive}-tab`)
                     .parent().siblings().find('.nav-link')
                     .removeClass('active').attr('aria-selected', 'false')
-            
+
         </script>
     @end
 @end

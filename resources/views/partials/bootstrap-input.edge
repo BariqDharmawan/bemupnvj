@@ -10,7 +10,7 @@
                     <label class="{{ prepandIcon }} mb-0" for="{{dashCase(name)}}"></label>
                 </div>
             </div>
-            <input type="{{ type || 'text' }}" name="{{ name }}" 
+            <input type="{{ type || 'text' }}" name="{{ name }}"
             id="{{ dashCase(name) }}" class="form-control {{ addClass ?? ''}}
             {{ flashMessages.has('errors.' + name) ? 'is-invalid' : '' }}"
             {{ $props.serializeExcept([
@@ -33,19 +33,19 @@
 
             @include('partials/bootstrap-label')
             @if(type == 'file' && imgPreview)
-                <img src="{{ value || '/assets/img/icon/preview-upload.png' }}" alt="" 
+                <img src="{{ value || '/assets/img/icon/preview-upload.png' }}" alt=""
                 srcset="" id="{{ imgPreview }}"
-                class="img-fluid mb-2" style="max-height: 200px" 
+                class="img-fluid mb-2" style="max-height: 200px"
                 data-default-preview="{{ value || '/assets/img/icon/preview-upload.png' }}">
             @endif
 
             @if(type == 'textarea')
                 <textarea class="form-control {{ addClass || '' }}
-                {{ flashMessages.has('errors.' + name) ? 'is-invalid' : '' }}" 
-                id="{{ dashCase(name) }}" name="{{ name }}" rows="{{ rows || '3' }}" 
+                {{ flashMessages.has('errors.' + name) ? 'is-invalid' : '' }}"
+                id="{{ dashCase(name) }}" name="{{ name }}" rows="{{ rows || '3' }}"
                 style="resize: none"
                 {{ $props.serializeExcept(['name', 'class', 'rows', 'id', 'value']) }}>{{ value || '' }}</textarea>
-                
+
             @elseif(type == 'select')
                 <select class="form-control select2bs4 {{ addClass ?? '' }}
                 {{ flashMessages.has('errors.' + name) ? 'is-invalid' : '' }}"
@@ -54,13 +54,13 @@
                     'name', 'addClass', 'value', 'datum', 'helperText'
                 ]) }}>
                     @each((data, key) in datum)
-                        <option value="{{ data.val }}" 
+                        <option value="{{ data.val }}"
                         {{ (value == data.val) ? 'selected' : ''  }}>
                             {{ data.text }}
                         </option>
                     @endeach
                 </select>
-                
+
             @elseif(type == 'file')
                 <div class="custom-file">
                     <input type="file" class="custom-file-input {{ addClass || '' }}
@@ -76,21 +76,15 @@
                 </div>
 
             @else
-                <input type="{{ type || 'text' }}" name="{{ name }}" 
+                <input type="{{ type || 'text' }}" name="{{ name }}"
                 class="form-control {{ addClass ?? ''}}
                 {{ flashMessages.has('errors.' + name) ? 'is-invalid' : '' }}"
                 id="{{ dashCase(name) }}"
                 {{ $props.serializeExcept(['name', 'type', 'addClass', 'helperText']) }}>
             @end
-            
+
         @end
 
-    @end
-
-    @if(helperText)
-    <small id="{{ dashCase(name) }}Help" class="form-text text-muted">
-        {{ helperText }}
-    </small>
     @end
 
     @if(flashMessages.has('errors.' + name))
@@ -98,9 +92,14 @@
         {{ flashMessages.get('errors.' + name) }}
     </small>
     @else
-    <small class="form-text text-danger {{ name + '-error-message' }}"></small>
+      @if(helperText)
+      <small id="{{ dashCase(name) }}Help" class="form-text text-muted">
+          {{ helperText }}
+      </small>
+      @end
+      <small class="form-text text-danger {{ name + '-error-message' }}"></small>
     @end
-    
+
     {{{ await $slots.main() }}}
 
 </div>

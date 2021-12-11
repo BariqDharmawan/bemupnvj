@@ -1,19 +1,20 @@
 let mix = require('laravel-mix');
+const mixManifest = 'public/assets/manifest.json';
+const jsonfile = require('jsonfile');
 
 require('laravel-mix-serve');
 
-mix.setResourceRoot('/assets/');
-mix.setPublicPath('public');
+// mix.setResourceRoot('/assets/');
+mix.setPublicPath('public/assets');
 
 mix.sass('resources/assets/scss/app.scss', 'public/assets/css')
     .js('resources/assets/js/app.js', 'public/assets/js')
     .js('resources/assets/js/admin.js', 'public/assets/js')
-    .copyDirectory('resources/assets/img', 'public/assets/img')
-    .copyDirectory('resources/assets/vendors', 'public/assets/vendors')
-    .copyDirectory('resources/assets/video', 'public/assets/video')
-    .copyDirectory('resources/assets/img/content/dummy/uploads', 'public/uploads/contact/')
-    .copyDirectory('resources/assets/file/dummy', 'public/uploads/file/')
-
+    .copy('resources/assets/img', 'public/assets/img')
+    .copy('resources/assets/vendors', 'public/assets/vendors')
+    .copy('resources/assets/video', 'public/assets/video')
+    .copy('resources/assets/img/content/dummy/uploads', 'public/uploads/contact/')
+    .copy('resources/assets/file/dummy', 'public/uploads/file/')
 
 mix.styles([
     'resources/assets/vendors/AdminLTE/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css',
@@ -28,4 +29,4 @@ mix.styles([
     'resources/assets/vendors/select2/css/select2.min.css',
     'resources/assets/vendors/select2/select2-bootstrap4-theme/select2-bootstrap4.css',
     'resources/assets/custom-admin.css'
-], 'public/assets/css/admin.css');
+], 'public/assets/css/admin.css')

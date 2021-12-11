@@ -6279,7 +6279,7 @@
   optionalDependencies:
     "graceful-fs" "^4.1.6"
 
-"jsonfile@^6.0.1":
+"jsonfile@^6.0.1", "jsonfile@^6.1.0":
   "integrity" "sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ=="
   "resolved" "https://registry.npmjs.org/jsonfile/-/jsonfile-6.1.0.tgz"
   "version" "6.1.0"
@@ -7824,6 +7824,11 @@
     "ripemd160" "^2.0.1"
     "safe-buffer" "^5.0.1"
     "sha.js" "^2.4.8"
+
+"pdfobject@^2.2.7":
+  "integrity" "sha512-9ptX0XNCtpYz0hNWz6j/1O4rvJkcPR2rct3UDBhs8ZEosOO67dCEAu4VpBvVJ64SMh8Mrn9pWWODnyLjgFQYgg=="
+  "resolved" "https://registry.npmjs.org/pdfobject/-/pdfobject-2.2.7.tgz"
+  "version" "2.2.7"
 
 "peek-readable@^4.0.1":
   "integrity" "sha512-7qmhptnR0WMSpxT5rMHG9bW/mYSR1uqaPFj2MHvT+y/aOUu6msJijpKt5SkTDKySwg65OWG2JwTMBlgcbwMHrQ=="

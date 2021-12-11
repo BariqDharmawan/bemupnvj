@@ -20,6 +20,8 @@ export default class Sataset extends BaseModel {
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
+  public static pathAttachment = '/uploads/sataset'
+
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 }

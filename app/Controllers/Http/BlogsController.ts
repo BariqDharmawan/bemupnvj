@@ -33,27 +33,26 @@ export default class BlogsController {
 
     public async store({ response, request, session }: HttpContextContract) {
         const requestValidated = await request.validate(StoreArticleValidator)
-
         const fileCover = requestValidated.cover
         const fileCoverName = `${cuid()}.${fileCover.extname}`
+
         await fileCover?.move(Application.publicPath(Blog.pathCover), {
             name: fileCoverName,
             overwrite: true
         })
 
         const addNewArticle = new Blog()
-        addNewArticle.slug = string.dashCase(requestValidated.title),
-        addNewArticle.title = requestValidated.title,
-        addNewArticle.content = requestValidated.content,
-        addNewArticle.blog_category_id = requestValidated.blog_category_id,
+        addNewArticle.slug = string.dashCase(requestValidated.title)
+        addNewArticle.title = requestValidated.title
+        addNewArticle.content = requestValidated.content
+        addNewArticle.blog_category_id = requestValidated.blog_category_id
         addNewArticle.cover = `${Blog.pathCover}/${fileCoverName}`
         addNewArticle.show_at_page = requestValidated.show_at_page
         addNewArticle.show_until = request.input('show_until')
-        addNewArticle.save()
+        await addNewArticle.save()
 
         session.flash('notification', 'Berhasil membuat artikel baru')
         return response.redirect().back()
-
     }
 
     public async show({ }: HttpContextContract) {

@@ -2,26 +2,90 @@
 
 @section('body')
 
-<div class="accordion" id="accordionExample">
+@!component('partials/trigger-modal', {
+  targetModal: 'add-sataset',
+  classnya: 'btn btn-primary',
+  icon: 'fa-plus',
+  text: 'Tambah sataset'
+})
+
+<div class="accordion mt-5" id="accordionSataset">
   @each((sataset, index) in satasets)
   <div class="card">
-    <div class="card-header" id="headingOne">
+    <div class="card-header d-flex justify-content-between" id="headingSataset{{ index }}">
       <h2 class="mb-0">
-        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne"
-          aria-expanded="true" aria-controls="collapseOne">
+        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+        data-target="#collapseSataset{{ index }}"
+          aria-expanded="true" aria-controls="collapseSataset{{ index }}">
           {{ sataset.title }}
         </button>
       </h2>
+      @!component('partials/trigger-modal', {
+        targetModal: 'hapus-sataset' + index,
+        classnya: 'btn btn-danger',
+        icon: 'fa-trash',
+        text: 'Hapus'
+      })
     </div>
 
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+    <div id="collapseSataset{{ index }}" class="collapse @if(index == 0) show @endif"
+    aria-labelledby="headingSataset{{ index }}" data-parent="#accordionSataset">
       <div class="card-body">
-        <div class="pdf-embed" id="pdf-sataset-{{ index }}" data-pdf-src="{{ currentPath + sataset.file }}"></div>
+        <div class="preview-pdf preview-pdf--without-header" id="pdf-sataset-{{ index }}"
+          data-pdf-src="{{ sataset.file }}" data-height="450px"></div>
         <p>{{ sataset.short_desc }}</p>
+      </div>
+      <div class="card-footer">
+        Ditampilkan dihomepage: {{ sataset.is_display ? 'iya' : 'tidak' }}
       </div>
     </div>
   </div>
   @endeach
 </div>
 
+@endsection
+
+@section('component')
+  @component('partials/bootstrap-modal', {id: 'add-sataset'})
+  <form action="{{ route('sataset.store') }}"
+  method="post" enctype="multipart/form-data" id="add-new-sataset">
+      {{ csrfField() }}
+      @!component('partials/bootstrap-input', {
+        name: 'title',
+        label: 'Nama divisi',
+        placeholder: 'Contoh: DRP',
+        required: 'required'
+      })
+      @!component('partials/bootstrap-input', {
+          type: 'textarea',
+          name: 'short_desc',
+          label: 'Deskripsi singkat',
+          placeholder: 'Masukan alamat lengkap disini',
+          required: 'required'
+      })
+      @!component('partials/bootstrap-input', {
+        type: 'file',
+        name: 'file',
+        label: 'Upload PDF',
+        required: 'required'
+      })
+      @!component('partials/bootstrap-input', {
+        type: 'checkbox',
+        name: 'is_display',
+        label: 'Tampilkan di homepage'
+      })
+      <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  @end
+
+  @each((sataset, index) in satasets)
+    @component('partials/bootstrap-modal', {id: 'hapus-sataset' + index})
+      <form action="{{ route('sataset.destroy', {qs: {_method: 'DELETE'}, id: sataset.id}) }}"
+      method="post" enctype="multipart/form-data" id="edit-sataset">
+          {{ csrfField() }}
+          <p>Hapus sataset {{ sataset.title }}?</p>
+          <button type="submit" class="btn btn-primary">Hapus</button>
+      </form>
+    @end
+  @endeach
 @endsection

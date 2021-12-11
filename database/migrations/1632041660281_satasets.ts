@@ -6,7 +6,7 @@ export default class Satasets extends BaseSchema {
     public async up() {
         this.schema.createTable(this.tableName, (table) => {
             table.increments('id').primary()
-            table.string('file').notNullable()
+            table.string('file').nullable()
             table.string('title', 40).notNullable()
             table.string('short_desc').notNullable()
             table.boolean('is_display').defaultTo(false)

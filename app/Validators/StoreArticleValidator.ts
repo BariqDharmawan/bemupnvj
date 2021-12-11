@@ -29,7 +29,7 @@ export default class StoreArticleValidator {
         title: schema.string({trim: true}, [
             rules.required(),
             rules.unique({table: 'blogs', column: 'title'}),
-            rules.minLength(9),
+            rules.minLength(3),
             rules.maxLength(100)
         ]),
         cover: schema.file({
@@ -59,5 +59,7 @@ export default class StoreArticleValidator {
      * }
      *
      */
-    public messages = {}
+    public messages = {
+      'title.minLength': "Minimal panjang judul 2 karakter"
+    }
 }
