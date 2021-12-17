@@ -1,12 +1,14 @@
 <article class="flex relative hover:child-underline {{ addClass || '' }}
-{{ direction == 'vertical' ? 'flex-col' : 'flex-row' }} 
+{{ direction == 'vertical' ? 'flex-col' : 'flex-row' }}
 border-2 border-grey-primary">
-    @!component('partials/img-lazy', {
-        src: cover,
-        alt: title,
-        addClass: 'h-200px object-cover article__img'
-    })
-    <figcaption class="{{ direction != 'vertical' ? 'p-4' : '' }} 
+    @if(cover)
+      @!component('partials/img-lazy', {
+          src: cover,
+          alt: title,
+          addClass: 'h-200px object-cover article__img'
+      })
+    @endif
+    <figcaption class="{{ direction != 'vertical' ? 'p-4' : '' }}
     items-start flex flex-col justify-center">
         @if(direction == 'vertical')
             <div class="p-4 border-b-2 border-grey-primary w-full">

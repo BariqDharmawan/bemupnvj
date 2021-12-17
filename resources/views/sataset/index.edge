@@ -1,4 +1,38 @@
 @layout('layouts/app')
 
 @section('body')
+
+@!component('partials/header-title', {
+  title: contentPage.page_name,
+  logo: contentPage.logo
+})
+
+<section class="py-10">
+  <div class="container">
+      @!component('partials/heading-section', {text: 'Sataset', align: 'left'})
+      <div id="parent-sataset" class="flex flex-col gap-y-5">
+          @each((sataset, index) in satasets)
+              @!component('partials/article', {
+                  title: sataset.title,
+                  addClass: 'article-to-load-more',
+                  link: route('sataset.show', {id: sataset.id}),
+                  excerpt: excerpt(sataset.short_desc, 200, {
+                      completeWords: false,
+                      suffix: ' [...]'
+                  })
+              })
+          @end
+      </div>
+      <div class="text-center mt-10">
+          @!component('partials/btn', {
+              text: 'Load more ...',
+              addClass: 'bg-black mx-auto hover:bg-gray-900 btn-load-more',
+              'data-page': 1,
+              'data-last-page': satasets.lastPage,
+              'data-parent-record': '#parent-sataset'
+          })
+      </div>
+  </div>
+</section>
+
 @endsection

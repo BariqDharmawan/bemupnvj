@@ -26,6 +26,7 @@ export default class ContentPage extends BaseModel {
         'upcoming-events',
         'contact-us',
         'about-us',
-        'portal-news'
+        'portal-news',
+        'Satasets'
     ]
 }
