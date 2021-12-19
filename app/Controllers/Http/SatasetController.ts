@@ -23,7 +23,11 @@ export default class SatasetController {
     const titlePage = 'Sataset'
     const aboutUs = await AboutUs.first()
 
-    return view.render('sataset/index', {satasets, titlePage, aboutUs})
+    const contentPage = await ContentPage.findByOrFail(
+      'page_name', ContentPage.pageName[6]
+    )
+
+    return view.render('sataset/index', {satasets, titlePage, aboutUs, contentPage})
   }
 
   public async create({}: HttpContextContract) {}

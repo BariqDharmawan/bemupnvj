@@ -30,7 +30,8 @@ export default class StoreSatasetValidator {
       rules.maxLength(100)
     ]),
     short_desc: schema.string({trim: true}, [
-      rules.required()
+      rules.required(),
+      rules.minLength(100)
     ]),
     file: schema.file({
       size: '12mb',

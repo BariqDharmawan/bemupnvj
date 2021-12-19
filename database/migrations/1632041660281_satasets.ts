@@ -8,7 +8,7 @@ export default class Satasets extends BaseSchema {
             table.increments('id').primary()
             table.string('file').nullable()
             table.string('title', 40).notNullable()
-            table.string('short_desc').notNullable()
+            table.text('short_desc').notNullable()
             table.boolean('is_display').defaultTo(false)
             /**
              * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
