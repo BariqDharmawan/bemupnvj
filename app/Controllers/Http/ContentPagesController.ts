@@ -11,8 +11,6 @@ export default class ContentPagesController {
         const aboutUs = await AboutUs.first()
         const contentPages = await ContentPage.all()
 
-        // return contentPages
-
         return view.render('content-page/manage', {
             titlePage, contentPages, aboutUs
         })

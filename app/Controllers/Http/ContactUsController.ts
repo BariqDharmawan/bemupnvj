@@ -8,12 +8,12 @@ import OurSocial from 'App/Models/OurSocial'
 import OurContact from 'App/Models/OurContact'
 
 export default class ContactUsController {
-    public async content({ view }: HttpContextContract) {        
+    public async content({ view }: HttpContextContract) {
         const titlePage = 'Deskripsi page'
-        const pageName = 'contact'
+        const pageName = ContentPage.pageName[3]
         const routeToPage = 'contact_us.index'
-        const contentPage = await ContentPage.findByOrFail('page_name', pageName)
-        
+        const contentPage = await ContentPage.findBy('page_name', pageName)
+
         return view.render('content-page/index', {
             titlePage, routeToPage, pageName, contentPage
         })

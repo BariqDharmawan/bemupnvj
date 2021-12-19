@@ -14,7 +14,7 @@ export default class SatasetController {
       'page_name', ContentPage.pageName[6]
     )
 
-    satasets.baseUrl('/sataset/manage')
+    satasets.baseUrl('/satasets/manage')
 
     return view.render('sataset/manage', {satasets, titlePage})
   }

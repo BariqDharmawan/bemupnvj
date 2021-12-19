@@ -30,8 +30,8 @@ Route.group(() => {
     }).prefix('blog').as('blog')
 
     Route.group(() => {
-        Route.get('content', 'ContactusesController.content').as('content')
-        Route.get('manage', 'ContactusesController.manage').as('manage')
+        Route.get('content', 'ContactUsController.content').as('content')
+        Route.get('manage', 'ContactUsController.manage').as('manage')
     }).prefix('contact-us').as('contact_us')
 
     Route.group(() => {
@@ -64,8 +64,8 @@ Route.resource('blog', 'BlogsController').only([
     'destroy': ['auth'],
 })
 
-Route.get('sataset/manage', 'SatasetController.manage').as('sataset.manage')
-Route.resource('sataset', 'SatasetController')
+Route.get('satasets/manage', 'SatasetController.manage').as('satasets.manage')
+Route.resource('satasets', 'SatasetController')
 
 Route.resource('about-us', 'AboutUsController').except(['create', 'edit', 'update', 'show'])
 Route.resource('contact-us', 'ContactUsController')

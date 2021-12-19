@@ -56,7 +56,7 @@
 
 @section('component')
   @component('partials/bootstrap-modal', {id: 'add-sataset'})
-  <form action="{{ route('sataset.store') }}"
+  <form action="{{ route('satasets.store') }}"
   method="post" enctype="multipart/form-data" id="add-new-sataset">
       {{ csrfField() }}
       @!component('partials/bootstrap-input', {
@@ -89,7 +89,7 @@
 
   @each((sataset, index) in satasets)
     @component('partials/bootstrap-modal', {id: 'hapus-sataset' + index})
-      <form action="{{ route('sataset.destroy', {qs: {_method: 'DELETE'}, id: sataset.id}) }}"
+      <form action="{{ route('satasets.destroy', {qs: {_method: 'DELETE'}, id: sataset.id}) }}"
       method="post" enctype="multipart/form-data" id="edit-sataset">
           {{ csrfField() }}
           <p>Hapus sataset {{ sataset.title }}?</p>

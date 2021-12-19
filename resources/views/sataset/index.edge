@@ -15,7 +15,7 @@
               @component('partials/article', {
                   title: sataset.title,
                   addClass: 'article-to-load-more',
-                  link: route('sataset.show', {id: sataset.id}),
+                  link: route('satasets.show', {id: sataset.id}),
                   excerpt: excerpt(sataset.short_desc, 200, {
                       completeWords: false,
                       suffix: '...'
