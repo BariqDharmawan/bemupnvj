@@ -13,7 +13,7 @@ export default class AuthController {
 
         try {
             await auth.use('web').attempt(email, password, true)
-            return response.redirect().toRoute('admin.dashboard')
+            return response.redirect().toRoute('about_us.vision_mission')
         } catch (error) {
             session.flash('notification', error)
             console.log(error)

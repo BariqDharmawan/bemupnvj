@@ -7,19 +7,8 @@ export default class AdminSeederSeeder extends BaseSeeder {
         await User.createMany([
             {
                 email: 'superadminbem@upnvj.ac.id',
-                role: 'superadmin',
                 password: 'superadminbemupnvj'
-            },
-            {
-                email: 'adminbem1@upnvj.ac.id',
-                role: 'admin',
-                password: 'adminbemupnvj'
-            },
-            {
-                email: 'adminbem2@upnvj.ac.id',
-                role: 'admin',
-                password: 'adminbemupnvj'
-            },
+            }
         ])
     }
 }

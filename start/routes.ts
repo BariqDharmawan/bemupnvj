@@ -35,7 +35,6 @@ Route.group(() => {
     }).prefix('contact-us').as('contact_us')
 
     Route.group(() => {
-        Route.get('dashboard', 'DashboardController.index').as('dashboard')
 
         Route.resource('primary-cover', 'HomeCoversController').only([
             'index', 'store', 'destroy'
