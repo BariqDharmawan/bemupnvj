@@ -90,10 +90,10 @@ $(".modal").on('shown.bs.modal', function (event) {
 if (localStorage.getItem('modal-open')) {
   console.log(localStorage.getItem('modal-open'))
 
-  if ($(`#${localStorage.getItem('modal-open')}`).find('.text-danger').length > 0) {
+  if ($(`#${localStorage.getItem('modal-open')}`).find('.validation-error-backend').length > 0) {
       $(`#${localStorage.getItem('modal-open')}`).modal('show')
 
-      $(".modal").not(`#${localStorage.getItem('modal-open')}`).find('.validation-error').remove()
+      $(".modal").not(`#${localStorage.getItem('modal-open')}`).find('.validation-error-backend').remove()
       // $(".modal.modal--single").find("input:not([name='_token']), textarea, select").val(null)
   }
   else {

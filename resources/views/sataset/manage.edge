@@ -9,7 +9,7 @@
   text: 'Tambah sataset'
 })
 
-<div class="accordion mt-5" id="accordionSataset">
+<div class="accordion my-5" id="accordionSataset">
   @each((sataset, index) in satasets)
   <div class="card">
     <div class="card-header d-flex justify-content-between" id="headingSataset{{ index }}">
@@ -41,6 +41,15 @@
     </div>
   </div>
   @endeach
+
+  <ul class="pagination mb-4">
+    @each(anchor in satasets.getUrlsForRange(1, satasets.lastPage))
+    <li class="page-item {{ anchor.isActive ? 'active' : '' }}">
+      <a class="page-link" href="{{ anchor.url }}">{{ anchor.page }}</a>
+    </li>
+    @endeach
+  </ul>
+
 </div>
 
 @endsection

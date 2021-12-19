@@ -12,7 +12,9 @@ export default class SatasetController {
     const titlePage = 'Sataset'
     const contentPage = await ContentPage.findByOrFail(
       'page_name', ContentPage.pageName[6]
-  )
+    )
+
+    satasets.baseUrl('/sataset/manage')
 
     return view.render('sataset/manage', {satasets, titlePage})
   }

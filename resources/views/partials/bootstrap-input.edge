@@ -88,7 +88,7 @@
     @end
 
     @if(flashMessages.has('errors.' + name))
-    <small class="form-text text-danger">
+    <small class="form-text text-danger validation-error-backend">
         {{ flashMessages.get('errors.' + name) }}
     </small>
     @else
@@ -97,7 +97,7 @@
           {{ helperText }}
       </small>
       @end
-      <small class="form-text text-danger {{ name + '-error-message' }}"></small>
+      <small class="form-text text-danger validation-error-ajax {{ name + '-error-message' }}"></small>
     @end
 
     {{{ await $slots.main() }}}
