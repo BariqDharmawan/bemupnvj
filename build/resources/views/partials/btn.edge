@@ -1,0 +1,23 @@
+@if(link != 'submit')
+    <a href="{{ link ?? 'javascript:void(0);' }}" 
+    class="{{ wider == 'lg' ? 'px-10 py-4' : 'py-3 px-9' }} 
+    transition text-{{ color ?? 'white' }} 
+    {{ addClass ?? '' }}" {{ $props.serializeExcept(['color', 'link', 'bg', 'addClass']) }}>
+        @if(text)
+            {{ text }}
+        @elseif(icon)
+            <img src="{{ icon }}" alt="">
+        @endif
+    </a>
+@else
+    <button type="{{ link }}" class="{{ wider == 'lg' ? 'px-10 py-4' : 'py-3 px-9' }} 
+    transition text-{{ color ?? 'white' }} 
+    {{ addClass ?? '' }}" {{ $props.serializeExcept(['color', 'link', 'bg', 'addClass']) }}>
+        @if(text)
+            {{ text }}
+        @elseif(icon)
+            <img src="{{ icon }}" alt="">
+        @end
+    </button>
+@end
+

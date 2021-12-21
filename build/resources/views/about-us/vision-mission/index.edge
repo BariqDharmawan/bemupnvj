@@ -1,0 +1,33 @@
+@layout('layouts/app')
+
+@section('header')
+    @include('about-us/header-bg')
+@end
+@section('body')
+    <section class="py-14">
+        <div class="container">
+            @!component('partials/heading-section', {
+                text: 'Visi', addClass: 'tracking-widest'
+            })
+            <p class="leading-loose">{{ aboutUs.our_vision }}</p>
+        </div>
+    </section>
+    <section class="py-14">
+        <div class="container">
+            @!component('partials/heading-section', {
+                text: 'Misi', addClass: 'tracking-widest'
+            })
+            <div class="grid grid-cols-3 gap-8">
+                @each(mission in missions)
+                    <div class="bg-gradient-purple-red flex text-white
+                    px-6 py-10 rounded items-center">
+                        <span class="mr-6 font-bold text-3xl">
+                            {{ mission.order_number }}
+                        </span>
+                        <p>{{ mission.content }}</p>
+                    </div>
+                @endeach
+            </div>
+        </div>
+    </section>
+@endsection

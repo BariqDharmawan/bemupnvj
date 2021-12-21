@@ -1,0 +1,26 @@
+@layout('layouts/admin')
+
+@section('body')
+<div class="card card-secondary mb-5">
+    <div class="card-body">
+        <p>Cover saat ini</p>
+        <img src="{{ primaryCover.filename }}" alt="{{ process.env.APP_NAME + ' Cover' }}" id="primary-cover" height="250px">
+        <small class="text-secondary d-block">
+            Ukuran ini merupakan preview, ukuran aslinya adalah
+            <var class="text-info">100% layar x 400px</var>
+        </small>
+    </div>
+</div>
+<div class="card card-secondary">
+    <div class="card-body">
+        <p>
+            Cover yang diupload akan digunakan di page
+            <a href="{{ route('landing_page') }}">Home</a> dan
+            <a href="{{ route('about_us.index') }}">About us</a>
+        </p>
+        <form action="{{ route('admin.primary_cover.store') }}" 
+        class='dropzone dropzone-single'
+        data-old-banner-id="{{ primaryCover.id }}" id="change-primary-cover"></form>
+    </div>
+</div>
+@end

@@ -1,0 +1,16 @@
+<div class="card mb-5">
+    <div class="card-header d-flex align-items-center justify-content-between">
+        <h2 class="card-title m-0">Vision</h2>
+        <button class="btn btn-default border-0 bg-transparent 
+        btn--change-readonly-to-editable" data-input="#our-vision">
+            <span>edit vision</span>
+            <i class="fas fa-edit"></i>
+        </button>
+    </div>
+    <form class="card-body" action="{{ route('about_us.store') }}" method="POST">
+        {{ csrfField() }}
+        <textarea name="our_vision" id="our-vision" 
+        class="form-control change-readonly-input submit-on-focusout"
+        rows="10" readonly>{{ aboutUs.our_vision }}</textarea>
+    </form>
+</div>

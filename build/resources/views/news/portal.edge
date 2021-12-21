@@ -1,0 +1,37 @@
+@layout('layouts/app')
+
+@section('body')
+@!component('partials/header-title', {
+    title: contentPage.page_name,
+})
+
+<section class="py-10">
+    <div class="container">
+        @!component('partials/heading-section', {text: 'Portal Berita', align: 'left'})
+        <div id="parent-portal" class="flex flex-col gap-y-5">
+            @each((news, index) in portalNews)
+                @!component('partials/article', {
+                    title: news.title,
+                    cover: news.cover,
+                    addClass: 'article-to-load-more',
+                    link: route('blog.show', {id: news.id}),
+                    excerpt: excerpt(news.content, 200, {
+                        completeWords: false,
+                        suffix: ' [...]'
+                    })
+                })
+            @end
+        </div>
+        <div class="text-center mt-10">
+            @!component('partials/btn', {
+                text: 'Load more ...',
+                addClass: 'bg-black mx-auto hover:bg-gray-900 btn-load-more',
+                'data-page': 1,
+                'data-last-page': portalNews.lastPage,
+                'data-parent-record': '#parent-portal'
+            })
+        </div>
+    </div>
+</section>
+
+@endsection

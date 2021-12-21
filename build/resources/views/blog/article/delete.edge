@@ -1,0 +1,11 @@
+@component('partials/bootstrap-modal', {id: 'delete-article-' + article.id})
+    <form action="{{ route('blog.destroy', {
+                id: article.id}, {qs: {_method: 'DELETE'}
+            }) }}" method="post">
+        {{ csrfField() }}
+        <p>
+            Are you sure wanna delete <strong>{{ article.title }}</strong> article?
+        </p>
+        <button type="submit" class="btn btn-danger">Delete it</button>
+    </form>
+@end

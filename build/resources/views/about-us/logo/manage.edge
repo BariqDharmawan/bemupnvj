@@ -1,0 +1,106 @@
+@layout('layouts/admin')
+
+@section('body')
+<section>
+    <div class="container">
+        <div class="card">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h2 class="card-title m-0">
+                    Apa makna logo kita?
+                </h2>
+                @!component('partials/trigger-modal', {
+                    targetModal: 'add-meaning',
+                    classnya: 'btn btn-primary',
+                    icon: 'fa-edit',
+                    text: 'Tambah makna'
+                })
+            </div>
+            <div class="card-body">
+                <div class="accordion" id="accordionLogoMeaning">
+                    @each((meaning, index) in logoMeanings)
+                        <div class="card shadow-none">
+                            <div class="card-header d-flex align-items-center"
+                            id="meaning{{ meaning.id }}">
+                                <span class="mr-3">{{ index + 1 }}</span>
+                                <h2 class="mb-0 d-block card-title">
+                                    {{ meaning.title }}
+                                </h2>
+                                <button class="btn btn-link text-left px-0 ml-auto"
+                                    type="button" data-toggle="collapse"
+                                    data-target="#contentMeaning{{ meaning.id }}"
+                                    aria-expanded="{{ index == 0 ? true : false }}"
+                                    aria-controls="contentMeaning{{ meaning.id }}">
+                                    <i class="fas fa-angle-down ml-auto"></i>
+                                </button>
+                            </div>
+
+                            <div id="contentMeaning{{ meaning.id }}"
+                            class="collapse {{ index == 0 ? 'show' : '' }}"
+                            aria-labelledby="meaning{{ meaning.id }}"
+                            data-parent="#accordionLogoMeaning">
+                                <div class="card-body">
+                                    <img src="{{ meaning.img }}"
+                                    class="d-block mb-3" height="120px"
+                                    alt="{{ `Makna logo ${aboutUs.cabinet_name}` }}">
+
+                                    <p>
+                                      {{ meaning.desc }}
+                                    </p>
+
+                                    @!component('partials/trigger-modal', {
+                                      targetModal: 'remove-meaning-' + index,
+                                      classnya: 'btn btn-danger',
+                                      icon: 'fa-trash',
+                                      text: 'Hapus makna'
+                                  })
+                                </div>
+                            </div>
+                        </div>
+                    @endeach
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@end
+
+@section('component')
+    @each((meaning, index) in logoMeanings)
+      @component('partials/bootstrap-modal', {id: 'remove-meaning-' + index})
+        <form action="{{ route('logo_meaning.destroy', {qs: {_method: 'DELETE'}, id: meaning.id}) }}"
+        method="post" enctype="multipart/form-data">
+            {{ csrfField() }}
+            <p>Hapus makna {{ meaning.title }}?</p>
+            <button type="submit" class="btn btn-primary">Hapus</button>
+        </form>
+      @end
+    @endeach
+    @component('partials/bootstrap-modal', {id: 'add-meaning'})
+    <form action="{{ route('logo_meaning.store') }}"
+    method="post" enctype="multipart/form-data" id="add-meaning">
+        {{ csrfField() }}
+        @!component('partials/bootstrap-input', {
+            name: 'title',
+            label: 'Judul',
+            placeholder: 'Masukan judul makna',
+            value: logoMeaning ? logoMeaning.title : '',
+            required: 'required'
+        })
+        @!component('partials/bootstrap-input', {
+            type: 'textarea',
+            name: 'desc',
+            label: 'Deskripsi',
+            placeholder: 'Masukan deskripsi disini',
+            value: logoMeaning ? logoMeaning.desc : '',
+            required: 'required'
+        })
+        @!component('partials/bootstrap-input', {
+            type: 'file',
+            name: 'title',
+            label: 'Upload logo',
+            helperText: 'Sudut pandang logo yang ingin dijelaskan maknanya'
+        })
+        <button type="submit" class="btn btn-primary">Save update</button>
+    </form>
+    @end
+@end

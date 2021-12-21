@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    @include('partials/meta')
+    @include('partials/admin-css')
+</head>
+
+<body class="hold-transition login-page">
+    <div class="login-box">
+        @component('partials/alert', {type: 'danger'})
+            @each(notif in flashMessages.get('notification'))
+                {{ notif  }}
+            @endeach
+        @endcomponent
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a href="{{ route('admin.login.index') }}" class="h1">
+                    Admin {{ process.env.APP_NAME }}
+                </a>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('admin.login.store') }}" method="post">
+                    {{ csrfField() }}
+                    @!component('partials/bootstrap-input', {
+                        type: 'email',
+                        name: 'email',
+                        prepandIcon: 'fas fa-envelope',
+                        placeholder: 'Email',
+                        autocomplete: 'username'
+                    })
+                    @!component('partials/bootstrap-input', {
+                        type: 'password',
+                        name: 'password',
+                        prepandIcon: 'fas fa-lock',
+                        placeholder: 'Password',
+                        autocomplete: 'current-password'
+                    })
+                    <div class="row">
+                        <div class="col-8">
+                            @!component('partials/bootstrap-input', {
+                                type: 'checkbox',
+                                name: 'remember',
+                                label: 'Remember Me',
+                            })
+                        </div>
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        </div>
+                    </div>
+                </form>
+                <p class="mb-1">
+                    <a href="forgot-password.html">I forgot my password</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script src="/assets/vendors/AdminLTE/plugins/jquery/jquery.min.js"></script>
+    <script src="/assets/vendors/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/vendors/AdminLTE/dist/js/adminlte.min.js"></script>
+</body>
+
+</html>

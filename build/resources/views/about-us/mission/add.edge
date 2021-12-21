@@ -1,0 +1,18 @@
+<div class="modal fade" id="modal-add-mission">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form action="{{ route('mission.store') }}" method="post" id="store-mission">
+                    {{ csrfField() }}
+                    @!component('partials/bootstrap-input', {
+                        label: 'Apa misi kita?',
+                        type: 'textarea',
+                        name: 'content',
+                        placeholder: 'Usahakan jangan terlalu bertele tele, agar menarik dibaca'
+                    })
+                    <button type="submit" class="btn btn-primary">Tambah Misi</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

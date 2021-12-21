@@ -1,0 +1,26 @@
+@component('partials/bootstrap-pane', {
+    tabName: 'Kategori',
+    isActive: true
+})
+    @each((category, index) in categories)
+        @component('partials/plain-list', {
+            text: category.category,
+            link: 'javascript:void(0);'
+        })
+            @!component('partials/trigger-modal', {
+                targetModal: 'edit-category-' + category.id,
+                classnya: 'btn btn-default text-primary',
+                icon: 'fa-edit',
+                text: 'Ubah'
+            })
+        @end
+    @end
+
+    @!component('partials/trigger-modal', {
+      targetModal: 'add-new-category',
+      classnya: 'btn btn-default text-primary m-3',
+      icon: 'fa-trash',
+      text: 'Tambah Kategori'
+    })
+
+@end

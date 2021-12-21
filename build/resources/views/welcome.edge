@@ -1,0 +1,140 @@
+@layout('layouts/app')
+
+@section('header')
+    <header
+    data-bg="{{ primaryCover }}"
+    class="h-7/10-screen bg-no-repeat bg-cover flex items-end justify-center lazyload">
+        @!component('partials/btn', {
+            text: 'Tentang kami',
+            size: 'wider',
+            addClass: 'bg-red-primary transform translate-y-1/2'
+        })
+    </header>
+@end
+
+@section('body')
+    @if(satasets.length)
+      <section class="bg-red-primary mt-20">
+          <div class="container">
+              <div class="grid grid-cols-2">
+                  {{-- todo: bikin crud ini di dashboard admin --}}
+                  @each((sataset, index) in satasets)
+                      <figure class="flex items-center py-10">
+                          <figcaption class="text-white px-10">
+                              <a class="font-bold text-lg mb-5 block underline" href="{{ sataset.file }}" target="__blank">
+                                {{ sataset.title }}
+                              </a>
+                              <p>{{ sataset.short_desc }}</p>
+                          </figcaption>
+                      </figure>
+                  @end
+              </div>
+          </div>
+      </section>
+    @endif
+    <section class="pt-20 pb-14">
+        <div class="container">
+            @!component('partials/heading-section', {text: 'Berita Terkini'})
+            <div class="grid grid-cols-3 gap-x-6">
+                @each((news, index) in latestNews)
+                    <figure class="relative hover:child-underline">
+                        @!component('partials/img-lazy', {
+                            src: news.cover,
+                            alt: news.title
+                        })
+                        <figcaption class="font-bold py-4">
+                            <p class="text-to-underline inline-block pb-2">
+                                <span>{{ news.title }}</span>
+                            </p>
+                        </figcaption>
+                        @!component('partials/stretched-link', {
+                            link: news.title
+                        })
+                    </figure>
+                @end
+            </div>
+        </div>
+    </section>
+    <section class="bg-orange-primary pt-20 pb-24">
+        <div class="container">
+            @!component('partials/heading-section', {
+                text: 'Informasi Terbaru', color: 'white'
+            })
+            <div class="grid grid-cols-3 gap-8">
+                @each((news, index) in latestNews)
+                    @!component('partials/img-lazy', {src: news.cover, alt: news.title})
+                @end
+            </div>
+        </div>
+    </section>
+    <section class="py-16">
+        <div class="container">
+            @!component('partials/heading-section', {
+                text: 'Salurkan Aspirasi'
+            })
+            <form action="{{ route('aspirations.store') }}" method="POST"
+            class="form-ajax">
+                <div class="grid grid-cols-11">
+                    @!component('partials/input', {
+                        name: 'name',
+                        label: 'Nama',
+                        required: 'required',
+                        addClass: 'col-span-5',
+                        maxlength: 200
+                    })
+
+                    <div class="mb-8 col-span-5 col-start-7">
+                        <div class="flex flex-col-reverse">
+                            <select class="bg-gray-normal focus:bg-transparent border
+                            border-gray-300 cursor-pointer
+                            {{ flashMessages.has('errors.major') ? 'is-invalid' : '' }}"
+                            name="major" required>
+                                @each(faculty in faculties)
+                                <optgroup label="{{ faculty.name }}">
+                                    @each(major in await faculty.majors)
+                                    <option value="{{ major.name }}">
+                                        {{ major.name }}
+                                    </option>
+                                    @endeach
+                                </optgroup>
+                                @end
+                            </select>
+                            <label for="major" class="mb-2 block relative">
+                                Jurusan / Fakultas
+                            </label>
+                        </div>
+                        <small class="text-red-500 major-error-message"></small>
+                    </div>
+
+                    @!component('partials/input', {
+                        type: 'email',
+                        name: 'email',
+                        label: 'Email',
+                        required: 'required',
+                        addClass: 'col-span-5'
+                    })
+                    @!component('partials/input', {
+                        type: 'select',
+                        name: 'aspiration_category_id',
+                        label: 'Tujuan aspirasi',
+                        required: 'required',
+                        addClass: 'col-span-5 col-start-7',
+                        datum: aspirationCategory
+                    })
+                    @!component('partials/input', {
+                        type: 'textarea',
+                        name: 'message',
+                        label: 'Pesan Aspirasi',
+                        required: 'required',
+                        addClass: 'col-span-full'
+                    })
+                </div>
+                @!component('partials/btn', {
+                    link: 'submit',
+                    text: 'Salurkan',
+                    addClass: 'bg-red-primary hover:bg-red-700'
+                })
+            </form>
+        </div>
+    </section>
+@end

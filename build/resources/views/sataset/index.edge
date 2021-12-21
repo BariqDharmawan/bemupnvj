@@ -1,0 +1,35 @@
+@layout('layouts/app')
+
+@section('body')
+
+@!component('partials/header-title', {
+  title: contentPage.page_name,
+})
+
+<section class="py-10">
+  <div class="container">
+      @!component('partials/heading-section', {text: 'Sataset', align: 'left'})
+      <div id="parent-sataset" class="flex flex-col gap-y-5">
+          @each((sataset, index) in satasets)
+              @component('partials/article', {
+                  title: sataset.title,
+                  addClass: 'article-to-load-more',
+                  link: 'javascript:void(0);',
+                  excerpt: excerpt(sataset.short_desc, 200, {
+                      completeWords: false,
+                      suffix: '...'
+                  })
+              })
+                @!component('partials/btn', {
+                  text: 'Open PDF',
+                  link: sataset.file,
+                  addClass: 'bg-blue-500 rounded-full mt-3',
+                  target: '_blank'
+                })
+              @end
+          @end
+      </div>
+  </div>
+</section>
+
+@endsection

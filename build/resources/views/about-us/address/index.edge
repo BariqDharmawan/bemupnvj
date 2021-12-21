@@ -1,0 +1,19 @@
+<div class="card mb-5">
+    <div class="card-header d-flex align-items-center justify-content-between">
+        <h2 class="card-title m-0">
+            Lokasi Kami
+        </h2>
+        @!component('partials/trigger-modal', {
+            targetModal: 'edit-address',
+            classnya: 'btn btn-primary',
+            icon: 'fa-edit',
+            text: 'Ubah Alamat'
+        })
+    </div>
+    <div class="card-body" id="list-address">
+        <address class="font-weight-bold">{{ ourContact.address }}</address>
+        <div class="embed-map">
+            {{{ ourContact.embed_map }}}
+        </div>
+    </div>
+</div>

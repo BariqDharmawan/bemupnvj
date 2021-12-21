@@ -1,0 +1,21 @@
+@if(type == 'anchor')
+<a class="{{ classnya || 'btn btn-primary' }}" href="javascript:void(0);" 
+data-toggle="modal" data-target="#modal-{{ targetModal }}">
+    @if(text)
+        <span>{{ text }}</span>
+    @end
+    @if(icon)
+        <i class="fas ml-2 {{ icon }}"></i>
+    @end
+</a>
+@else
+<button class="{{ classnya || 'btn btn-primary ' + addClass  }}" 
+data-toggle="modal" data-target="#modal-{{ targetModal }}">
+    @if(text)
+        <span>{{ text }}</span>
+    @end
+    @if(icon)
+        <i class="fas ml-2 {{ icon }}"></i>
+    @end
+</button>
+@endif
