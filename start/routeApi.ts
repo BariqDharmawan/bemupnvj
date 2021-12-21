@@ -6,10 +6,10 @@ Route.group(() => {
     Route.get('article/:id', 'BlogsController.getSingleArticle').as('mission.getArticle')
     Route.get('news-portal', 'NewsController.getNews').as('news_portal')
     Route.get('info-mahasiswa', 'StudentInfoController.getInfoBeasiswa').as('student_info')
-    
+
     Route.group(() => {
         Route.get('past', 'EventController.getPast').as('past')
-        // Route.get('upcoming', 'EventController.getUpcoming').as('upcoming')
+        Route.get('upcoming', 'EventController.getUpcoming').as('upcoming')
     }).as('event').prefix('event')
 
 }).as('api').prefix('api')

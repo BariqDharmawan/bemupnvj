@@ -44,6 +44,21 @@ export default class EventController {
     }
 
     /**
+     * async past
+     */
+     public async getUpcoming({request}: HttpContextContract) {
+      const upcomingEvents = await Blog.query().where('show_at_page', 'events')
+                                        .preload('blogCategory')
+                                        .where(
+                                            'show_until', '>=', Helper.getCurrentDatetime()
+                                        )
+                                        .orderBy('created_at', 'desc')
+                                        .paginate(request.input('page', 1), 6)
+
+      return upcomingEvents
+  }
+
+    /**
      * async upcoming
      */
     public async upcoming({view, request}: HttpContextContract) {
@@ -52,12 +67,13 @@ export default class EventController {
         const contentPage = await ContentPage.findByOrFail(
             'page_name', ContentPage.pageName[2]
         )
-        
+
         const upcomingEvents = await Blog.query().where('show_at_page', 'events')
                                         .preload('blogCategory')
                                         .where(
                                             'show_until', '>=', Helper.getCurrentDatetime()
                                         )
+                                        .orderBy('created_at', 'desc')
                                         .paginate(request.input('page', 1), 6)
 
         return view.render('event/upcoming', {

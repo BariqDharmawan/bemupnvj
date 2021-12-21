@@ -19,6 +19,7 @@
                         category: event.blogCategory.category,
                         title: event.title,
                         cover: event.cover,
+                        addClass: 'article-to-load-more',
                         link: route('blog.show', {id: event.id}),
                         excerpt: excerpt(event.content, 200, {
                             completeWords: false,

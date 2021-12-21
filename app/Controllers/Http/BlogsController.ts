@@ -81,7 +81,9 @@ export default class BlogsController {
         }
         article.show_at_page = requestValidated.show_at_page
         article.blog_category_id = requestValidated.blog_category_id
-        article.show_until = request.input('show_until')
+
+        const dateInArray = request.input('show_until').split('/')
+        article.show_until = DateTime.local(dateInArray[2], dateInArray[1], dateInArray[0])
         await article.save()
 
         const category = await BlogCategory.findOrFail(article.blog_category_id)
