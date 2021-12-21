@@ -1,0 +1,8 @@
+@layout('layouts/app')
+
+@section('body')
+  <div class="container py-10">
+    <img src="{{ article.cover }}" alt="" height="200px" class="mx-auto d-block mb-3">
+    {{{ article.content }}}
+  </div>
+@end

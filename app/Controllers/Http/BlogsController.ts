@@ -7,6 +7,7 @@ import Application from '@ioc:Adonis/Core/Application'
 import { string } from '@ioc:Adonis/Core/Helpers'
 import UpdateArticleValidator from 'App/Validators/UpdateArticleValidator'
 import { DateTime } from 'luxon'
+import AboutUs from 'App/Models/AboutUs'
 
 export default class BlogsController {
     public async index({ }: HttpContextContract) {
@@ -55,7 +56,11 @@ export default class BlogsController {
         return response.redirect().back()
     }
 
-    public async show({ }: HttpContextContract) {
+    public async show({ view, params }: HttpContextContract) {
+      const article = await Blog.findOrFail(params.id)
+      const aboutUs = await AboutUs.first()
+
+      return view.render('news/show', {article, aboutUs});
     }
 
     public async update({ response, request, session, params }: HttpContextContract) {
