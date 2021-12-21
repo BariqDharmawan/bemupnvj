@@ -13,23 +13,25 @@
 @end
 
 @section('body')
-    <section class="bg-red-primary mt-20">
-        <div class="container">
-            <div class="grid grid-cols-2">
-                {{-- todo: bikin crud ini di dashboard admin --}}
-                @each((sataset, index) in satasets)
-                    <figure class="flex items-center py-6">
-                        <img src="{{ sataset.img }}" class="rounded-full h-11 w-11"
-                        alt="Sataset {{ aboutUs.cabinet_name }}">
-                        <figcaption class="text-white px-10">
-                            <p class="font-bold text-lg">{{ sataset.title }}</p>
-                            <p>{{ sataset.short_desc }}</p>
-                        </figcaption>
-                    </figure>
-                @end
-            </div>
-        </div>
-    </section>
+    @if(satasets.length)
+      <section class="bg-red-primary mt-20">
+          <div class="container">
+              <div class="grid grid-cols-2">
+                  {{-- todo: bikin crud ini di dashboard admin --}}
+                  @each((sataset, index) in satasets)
+                      <figure class="flex items-center py-10">
+                          <figcaption class="text-white px-10">
+                              <a class="font-bold text-lg mb-5 block" href="{{ sataset.file }}" target="__blank">
+                                {{ sataset.title }}
+                              </a>
+                              <p>{{ sataset.short_desc }}</p>
+                          </figcaption>
+                      </figure>
+                  @end
+              </div>
+          </div>
+      </section>
+    @endif
     <section class="pt-20 pb-14">
         <div class="container">
             @!component('partials/heading-section', {text: 'Berita Terkini'})
