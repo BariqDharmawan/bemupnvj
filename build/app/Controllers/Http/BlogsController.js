@@ -10,7 +10,6 @@ const Helpers_1 = global[Symbol.for('ioc.use')]("Adonis/Core/Helpers");
 const Application_1 = __importDefault(global[Symbol.for('ioc.use')]("Adonis/Core/Application"));
 const Helpers_2 = global[Symbol.for('ioc.use')]("Adonis/Core/Helpers");
 const UpdateArticleValidator_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Validators/UpdateArticleValidator"));
-const luxon_1 = require("luxon");
 const AboutUs_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/AboutUs"));
 class BlogsController {
     async index({}) {
@@ -67,8 +66,7 @@ class BlogsController {
         }
         article.show_at_page = requestValidated.show_at_page;
         article.blog_category_id = requestValidated.blog_category_id;
-        const dateInArray = request.input('show_until').split('/');
-        article.show_until = luxon_1.DateTime.local(dateInArray[2], dateInArray[1], dateInArray[0]);
+        article.show_until = request.input('show_untill', null);
         await article.save();
         const category = await BlogCategory_1.default.findOrFail(article.blog_category_id);
         session.flash('tabActive', category.category);
