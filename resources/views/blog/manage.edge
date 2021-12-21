@@ -28,6 +28,23 @@
     @include('blog/category/edit')
 
     @component('partials/bootstrap-modal', {
+      id: 'add-new-category',
+      addClassDialog: 'modal-xl'
+    })
+      <form action="{{ route('admin.blog_category.store') }}" method="post" enctype="multipart/form-data">
+          {{ csrfField() }}
+
+          @!component('partials/bootstrap-input', {
+            label: 'Nama kategori',
+            name: 'category',
+            required: 'required'
+          })
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    @end
+
+    @component('partials/bootstrap-modal', {
         id: 'add-article',
         addClassDialog: 'modal-xl'
     })
