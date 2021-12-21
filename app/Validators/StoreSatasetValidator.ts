@@ -34,7 +34,7 @@ export default class StoreSatasetValidator {
       rules.minLength(10)
     ]),
     file: schema.file({
-      size: '12mb',
+      size: '50mb',
       extnames: ['pdf']
     }),
     is_display: schema.boolean.optional()
