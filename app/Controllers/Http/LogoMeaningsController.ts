@@ -14,7 +14,7 @@ export default class LogoMeaningsController {
 
         const titlePage = `Makna Logo`
         const bgHeader = '/assets/img/content/visi-misi-cover.png'
-        
+
         return view.render('about-us/logo/index', {
             aboutUs, ourContact, titlePage, bgHeader, logoMeanings
         })
@@ -53,15 +53,11 @@ export default class LogoMeaningsController {
         })
     }
 
-    public async show({ }: HttpContextContract) {
-    }
+    public async destroy({ params, response, session }: HttpContextContract) {
+      const logoMeaning = await LogoMeanings.findOrFail(params.id)
+      await logoMeaning.delete()
 
-    public async edit({ }: HttpContextContract) {
-    }
-
-    public async update({ }: HttpContextContract) {
-    }
-
-    public async destroy({ }: HttpContextContract) {
+      session.flash('notification', 'Berhasil menghapus')
+      return response.redirect().back()
     }
 }

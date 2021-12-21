@@ -19,7 +19,7 @@
                 <div class="accordion" id="accordionLogoMeaning">
                     @each((meaning, index) in logoMeanings)
                         <div class="card shadow-none">
-                            <div class="card-header d-flex align-items-center" 
+                            <div class="card-header d-flex align-items-center"
                             id="meaning{{ meaning.id }}">
                                 <span class="mr-3">{{ index + 1 }}</span>
                                 <h2 class="mb-0 d-block card-title">
@@ -27,22 +27,32 @@
                                 </h2>
                                 <button class="btn btn-link text-left px-0 ml-auto"
                                     type="button" data-toggle="collapse"
-                                    data-target="#contentMeaning{{ meaning.id }}" 
-                                    aria-expanded="{{ index == 0 ? true : false }}" 
+                                    data-target="#contentMeaning{{ meaning.id }}"
+                                    aria-expanded="{{ index == 0 ? true : false }}"
                                     aria-controls="contentMeaning{{ meaning.id }}">
                                     <i class="fas fa-angle-down ml-auto"></i>
                                 </button>
                             </div>
 
-                            <div id="contentMeaning{{ meaning.id }}" 
-                            class="collapse {{ index == 0 ? 'show' : '' }}" 
+                            <div id="contentMeaning{{ meaning.id }}"
+                            class="collapse {{ index == 0 ? 'show' : '' }}"
                             aria-labelledby="meaning{{ meaning.id }}"
                             data-parent="#accordionLogoMeaning">
                                 <div class="card-body">
-                                    <img src="{{ meaning.img }}" 
+                                    <img src="{{ meaning.img }}"
                                     class="d-block mb-3" height="120px"
                                     alt="{{ `Makna logo ${aboutUs.cabinet_name}` }}">
-                                    {{ meaning.desc }}
+
+                                    <p>
+                                      {{ meaning.desc }}
+                                    </p>
+
+                                    @!component('partials/trigger-modal', {
+                                      targetModal: 'remove-meaning-' + index,
+                                      classnya: 'btn btn-danger',
+                                      icon: 'fa-trash',
+                                      text: 'Hapus makna'
+                                  })
                                 </div>
                             </div>
                         </div>
@@ -55,13 +65,18 @@
 @end
 
 @section('component')
-    @each((meaning, index) in meanings)
-        @component('partials/bootstrap-modal', {id: 'edit-meaning'})
-          
-        @endcomponent
+    @each((meaning, index) in logoMeanings)
+      @component('partials/bootstrap-modal', {id: 'remove-meaning-' + index})
+        <form action="{{ route('logo_meaning.destroy', {qs: {_method: 'DELETE'}, id: meaning.id}) }}"
+        method="post" enctype="multipart/form-data">
+            {{ csrfField() }}
+            <p>Hapus makna {{ meaning.title }}?</p>
+            <button type="submit" class="btn btn-primary">Hapus</button>
+        </form>
+      @end
     @endeach
     @component('partials/bootstrap-modal', {id: 'add-meaning'})
-    <form action="{{ route('logo_meaning.store') }}" 
+    <form action="{{ route('logo_meaning.store') }}"
     method="post" enctype="multipart/form-data" id="add-meaning">
         {{ csrfField() }}
         @!component('partials/bootstrap-input', {
