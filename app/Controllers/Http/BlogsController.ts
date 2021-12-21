@@ -66,6 +66,7 @@ export default class BlogsController {
     public async update({ response, request, session, params }: HttpContextContract) {
         const requestValidated = await request.validate(UpdateArticleValidator)
 
+        // return request.all()
         const article = await Blog.findOrFail(params.id)
         article.title = requestValidated.title
         article.content = requestValidated.content
@@ -82,8 +83,8 @@ export default class BlogsController {
         article.show_at_page = requestValidated.show_at_page
         article.blog_category_id = requestValidated.blog_category_id
 
-        const dateInArray = request.input('show_until').split('/')
-        article.show_until = DateTime.local(dateInArray[2], dateInArray[1], dateInArray[0])
+        article.show_until = request.input('show_untill', null)
+
         await article.save()
 
         const category = await BlogCategory.findOrFail(article.blog_category_id)
