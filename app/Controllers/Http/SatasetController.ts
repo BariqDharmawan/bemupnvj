@@ -5,6 +5,7 @@ import Sataset from 'App/Models/Sataset'
 import StoreSatasetValidator from 'App/Validators/StoreSatasetValidator'
 import AboutUs from 'App/Models/AboutUs'
 import ContentPage from 'App/Models/ContentPage'
+import OurContact from 'App/Models/OurContact'
 
 export default class SatasetController {
   public async manage({view, request}: HttpContextContract) {
@@ -23,11 +24,13 @@ export default class SatasetController {
     const titlePage = 'Sataset'
     const aboutUs = await AboutUs.first()
 
+    const ourContact = await OurContact.all()
+
     const contentPage = await ContentPage.findByOrFail(
       'page_name', ContentPage.pageName[6]
     )
 
-    return view.render('sataset/index', {satasets, titlePage, aboutUs, contentPage})
+    return view.render('sataset/index', {satasets, titlePage, aboutUs, contentPage, ourContact})
   }
 
   public async create({}: HttpContextContract) {}
