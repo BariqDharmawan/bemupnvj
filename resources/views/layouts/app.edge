@@ -36,19 +36,10 @@
                         link: route('logo_meaning.index')
                     })
                 @end
-                @component('partials/menu', {
+                @!component('partials/menu', {
                     text: 'Info Mahasiswa',
-                    hasDropdown: true
+                    link: route('info_mahasiswa.index')
                 })
-                    @!component('partials/menu', {
-                        text: 'Info Untuk Mahasiswa',
-                        link: route('info_mahasiswa.index')
-                    })
-                    @!component('partials/menu', {
-                        text: 'Scholarship and career',
-                        link: route('info_mahasiswa.scholareer')
-                    })
-                @end
                 @component('partials/menu', {
                     text: 'Events',
                     hasDropdown: true
