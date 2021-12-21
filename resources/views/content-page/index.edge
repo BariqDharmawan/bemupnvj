@@ -9,7 +9,7 @@
                     {{ route(routeToPage) }}
                 </a>
             </h2>
-            <button class="btn btn-default border-0 bg-transparent 
+            <button class="btn btn-default border-0 bg-transparent
             btn--change-readonly-to-editable" data-input="#content-page">
                 <span>Ubah</span>
                 <i class="fas fa-edit"></i>
@@ -22,9 +22,9 @@
             }) }}">
                 {{ csrfField() }}
                 <div class="form-group">
-                    <textarea name="desc_page" id="content-page" 
+                    <textarea name="desc_page" id="content-page"
                     class="form-control change-readonly-input submit-on-focusout"
-                    rows="10" readonly>{{ contentPage.desc_page }}</textarea>
+                    rows="10" readonly>{{{ contentPage.desc_page }}}</textarea>
                     <small id="content-pageHelp" class="form-text text-muted">
                         Klik diluar input untuk menyimpan perubahan
                     </small>
