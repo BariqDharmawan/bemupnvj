@@ -3,7 +3,6 @@
 @section('body')
     @!component('partials/header-title', {
         title: contentPage.page_name,
-        logo: contentPage.logo
     })
     <section class="py-10">
         <div class="container">
@@ -28,14 +27,14 @@
             <div class="text-center mt-10">
                 @!component('partials/btn', {
                     text: 'Load more ...',
-                    addClass: `bg-black bg-opacity-80 mx-auto hover:bg-gray-900 
+                    addClass: `bg-black bg-opacity-80 mx-auto hover:bg-gray-900
                     btn-load-more`,
                     'data-page': 1,
                     'data-last-page': infoBeasiswa.lastPage,
                     'data-parent-record': '#parent-student-beasiswa'
                 })
             </div>
-            
+
         </div>
     </section>
 @end

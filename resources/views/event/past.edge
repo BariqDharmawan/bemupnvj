@@ -4,7 +4,6 @@
     <div class="lg:ml-14">
         @!component('partials/header-title', {
             title: 'Program Kerja Mardhika',
-            logo: contentPage.logo
         })
     </div>
     <section class="py-10">
@@ -32,7 +31,7 @@
             @set('lastPageNumber', pastEvents.lastPage)
             @set('parentRecord', '#parent-past-events')
             @include('event/load-more-btn')
-            
+
         </div>
     </section>
 @end
