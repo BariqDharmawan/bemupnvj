@@ -1,0 +1,102 @@
+<form action="{{ formAction }}" method="post" enctype="multipart/form-data"
+data-id="{{ article ? article.id : '' }}">
+    {{ csrfField() }}
+
+    <div class="form-group">
+        <label for="cover" class="d-block">Cover artikel</label>
+
+        <img src="{{ article ? article.cover : '/assets/img/icon/preview-upload.png' }}" alt=""
+        srcset="" id="preview-article-cover"
+        class="img-fluid mb-2" style="max-height: 200px"
+        data-default-preview="{{ article ? article.cover :
+        '/assets/img/icon/preview-upload.png' }}">
+
+        <div class="custom-file">
+            <input type="file" class="custom-file-input img-upload-preview
+            {{ flashMessages.has('errors.cover') ? 'is-invalid' : '' }}"
+            name="cover" id="cover"
+            data-img-preview="preview-article-cover" {{ action != 'edit' ? 'required' : '' }}>
+            <label class="custom-file-label" for="cover">
+                Pilih cover
+            </label>
+        </div>
+    </div>
+
+    @set('defaultCategoryActive',  article ? article.blog_category_id : '1')
+    <input type="hidden" name="blog_category_id"
+    value="{{ defaultCategoryActive }}" required readonly>
+
+    @!component('partials/bootstrap-input', {
+        label: 'Judul artikel yang akan dibuat',
+        name: 'title',
+        required: 'required',
+        helperText: `Mohon jangan menggunakan judul yang sama dengan
+        artikel sebelumnya`,
+        value: article ? article.title : '',
+        placeholder: 'Masukan judulmu disini'
+    })
+
+    @!component('partials/bootstrap-input', {
+        type: 'textarea',
+        label: 'Konten artikel',
+        name: 'content',
+        required: 'required',
+        addClass: 'summernote',
+        value: article ? article.content : "2020-09-20",
+        placeholder: 'Masukan judulmu disini'
+    })
+
+    <div class="form-group">
+        <label class="d-block mb-1">Tampilkan di halaman</label>
+        @each((page, index) in listPage)
+        <div class="d-inline-flex align-items-center mr-2">
+            <input type="radio" id="{{ dashCase(page) }}" name="show_at_page"
+            {{ article ? (article.show_at_page == page ? 'checked' : '') :
+            (index == 0 ? 'checked' : '') }} value="{{ dashCase(page) }}" required>
+            <label class="mb-0 ml-1" for="{{ dashCase(page) }}">
+                {{ noCase(page) }}
+            </label>
+        </div>
+        @endeach
+        <small class="form-text text-danger show_at_page-error-message"></small>
+    </div>
+
+    @if(article && article.show_until)
+        @!component('partials/bootstrap-input', {
+            prepandIcon: 'fas fa-calendar-alt',
+            name: 'show_until',
+            placeholder: 'Ex: 2021-09-21 12:00',
+            autocomplete: 'off',
+            addClass: 'air-datepicker',
+            helperText: `Klik untuk pilih tanggal, jika tidak ingin ada expire,
+                        kosongkan field ini`,
+            label: 'Tampilkan artikel ini sampai tanggal',
+            value: new Intl.DateTimeFormat('id-ID').format(article.show_until)
+        })
+    @else
+        @!component('partials/bootstrap-input', {
+            prepandIcon: 'fas fa-calendar-alt',
+            name: 'show_until',
+            placeholder: 'Ex: 2021-09-21 12:00',
+            autocomplete: 'off',
+            addClass: 'air-datepicker',
+            helperText: `Klik untuk pilih tanggal, jika tidak ingin ada expire,
+                        kosongkan field ini`,
+            label: 'Tampilkan artikel ini sampai tanggal'
+        })
+    @endif
+
+    @if(flashMessages.has('errors.cover'))
+    <small class="form-text text-danger">
+        {{ flashMessages.get('errors.cover') }}
+    </small>
+    @end
+
+    <button type="submit" class="btn btn-primary">
+        @if(action == 'edit')
+            Simpan perubahan
+        @else
+            Tambah artikel baru
+        @end
+    </button>
+</form>

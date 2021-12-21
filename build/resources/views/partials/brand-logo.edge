@@ -1,0 +1,10 @@
+<a href="{{ route('landing_page') }}" class="flex items-center lg:mr-auto brand-logo">
+    @!component('partials/img-lazy', {
+        src: aboutUs.logo,
+        alt: aboutUs.cabinet_name,
+        height: 60,
+        width: 60,
+        addClass: 'rounded-full'
+    })
+    <span class="ml-2">{{ aboutUs.cabinet_name }}</span>
+</a>

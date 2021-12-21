@@ -1,0 +1,85 @@
+@set('action', 'edit-')
+
+<div class="card mb-5">
+    <div class="card-header d-flex align-items-center justify-content-between">
+        <h2 class="card-title m-0">Kontak Kami</h2>
+    </div>
+    <div class="card-body">
+        <ul class="list-group list-group-flush" id="list-contact">
+            @each((contact, index) in contacts)
+                @component('partials/plain-list', {
+                    text: contact.info,
+                    link: contact.link,
+                    icon: contact.logo
+                })
+                    @!component('partials/trigger-modal', {
+                        targetModal: action + '-' + contact.id,
+                        classnya: 'btn btn-default text-primary',
+                        icon: 'fa-edit',
+                        text: 'Ubah'
+                    })
+                    @if(contact.additional_info)
+                        <div class="col-12 px-0 mt-3 embed-full-width">
+                            {{{ contact.additional_info }}}
+                        </div>
+                    @end
+                @end
+            @endeach
+        </ul>
+    </div>
+</div>
+
+@section('component')
+    @each((contact, index) in contacts)
+        @component('partials/bootstrap-modal', {id: action + '-' + contact.id})
+            <form action="{{ route('our_contact.update', {id: contact.id}, {qs: {_method: 'PUT'}}) }}" method="POST" class="edit-contact">
+                {{ csrfField() }}
+                @!component('partials/bootstrap-input', {
+                    label: 'Kontak',
+                    name: 'info',
+                    type: 'text',
+                    placeholder: 'Contoh: bariq@dharmawans.com',
+                    value: contact.info,
+                    required: 'required',
+                    helperText: 'Masukan kontak yang dapat dihubungi'
+                })
+                @!component('partials/bootstrap-input', {
+                    type: 'file',
+                    name: 'logo',
+                    label: 'Pilih icon'
+                })
+                @component('partials/bootstrap-input', {
+                    type: 'textarea',
+                    name: 'additional_info',
+                    label: 'Info tambahan',
+                    value: contact.additional_info ?? '',
+                    helperText: 'Masukan info tambahan, seperti embed iframe maps, jika dibutuhkan.'
+                })
+                    <small class="mr-1 text-muted">
+                        Untuk mengetahui cara embed maps, lihat video
+                        @!component('partials/trigger-modal', {
+                            type: 'anchor',
+                            targetModal: 'cara-embed',
+                            classnya: 'bg-transparent border-0 text-primary',
+                            text: 'ini'
+                        })
+                    </small>
+                @end
+                <button type="submit" class="btn btn-primary">Save update</button>
+            </form>
+        @end
+    @end
+@endsection
+
+@section('component')
+    @component('partials/bootstrap-modal', {
+        id: 'cara-embed', 
+        addClassDialog: 'modal-lg',
+        notHasCloseBtn: true,
+        addClass: 'modal-body--full-content modal--bg-black'
+    })
+        <video src="/assets/video/cara-embed-map.mp4" width="100%" 
+        height="500px"
+        autoplay muted draggable="false" loop controls></video>
+    @end
+@endsection

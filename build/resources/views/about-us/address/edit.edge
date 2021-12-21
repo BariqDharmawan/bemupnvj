@@ -1,0 +1,26 @@
+@component('partials/bootstrap-modal', {id: 'edit-address'})
+    <form action="{{ route('our_contact.update', {qs: {_method: 'PUT'}}) }}" 
+    method="post" enctype="multipart/form-data" id="edit-address">
+        {{ csrfField() }}
+        @!component('partials/bootstrap-input', {
+            type: 'textarea',
+            name: 'address',
+            label: 'Alamat',
+            placeholder: 'Masukan alamat lengkap disini',
+            value: ourContact.address,
+            required: 'required'
+        })
+        @component('partials/bootstrap-input', {
+            label: 'Embed google maps',
+            title: 'Mohon masukan url google maps yang benar',
+            name: 'embed_map',
+            placeholder: 'Mohon masukan embed yang benar',
+            value: ourContact.embed_map,
+            required: 'required'
+        })
+            
+        @end
+        <button type="submit" class="btn btn-primary">Save update</button>
+    </form>
+@end
+

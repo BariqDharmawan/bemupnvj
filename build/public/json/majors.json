@@ -1,0 +1,65 @@
+{
+    "faculty": [
+        {
+            "ilmu komputer": {
+                "major": [
+                    {
+                        "text": "informatika"
+                    },
+                    {
+                        "text": "sistem informasi"
+                    }
+                ]
+            },
+            "ekonomi dan bisnis" : {
+                "major": [
+                    {
+                        "text": "manajemen"
+                    },
+                    {
+                        "text": "akuntansi"
+                    },
+                    {
+                        "text": "ekonomi pembangunan"
+                    },
+                    {
+                        "text": "ekonomi syariah"
+                    }
+                ]
+            },
+            "kedokteran": {
+                "major": [
+                    {
+                        "text": "kedokteran"
+                    },
+                    {
+                        "text": "farmasi"
+                    }
+                ]
+            },
+            "teknik": {
+                "major": [
+                    {
+                        "text": "teknik mesin"
+                    },
+                    {
+                        "text": "teknik industri"
+                    },
+                    {
+                        "text": "teknik perkapalan"
+                    },
+                    {
+                        "text": "teknik elektro"
+                    }
+                ]
+            },
+            "ilmu sosial dan ilmu politik" : {
+                "major": [
+                    {
+                        "text": "ilmu komunikasi"
+                    }
+                ]
+            }
+        }
+    ]
+}

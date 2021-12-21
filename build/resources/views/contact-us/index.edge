@@ -1,0 +1,67 @@
+@layout('layouts/app')
+
+@section('body')
+    @!component('partials/header-title', {
+        title: 'Kontak BEM UPNVJ',
+    })
+    <section class="bg-orange-primary text-white py-10">
+        <div class="container content-from-wysiwyg">
+            {{{ nl2br(contentPage.desc_page) }}}
+        </div>
+    </section>
+    <section id="our-social-media" class="py-14">
+        <div class="container">
+            @!component('partials/heading-section', {text: 'Media Sosial'})
+            <div class="flex flex-wrap gap-5 justify-center">
+                @each((social, index) in ourSocial)
+                    <figure class="inline-flex items-center flex-col">
+                        @!component('partials/img-lazy', {
+                            src: social.logo,
+                            alt: `${social.name} ${process.env.APP_NAME}`,
+                            addClass: 'rounded-sm w-20 h-20 p-3',
+                            style: `background-color: ${social.color}`
+                        })
+                        <figcaption class="py-2">
+                            <a href="{{ social.url }}"
+                            class="text-blue-500 hover:text-blue-900">
+                                {{ social.username }}
+                            </a>
+                        </figcaption>
+                    </figure>
+                @endeach
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            @!component('partials/heading-section', {text: 'Hubungi Kami'})
+            <form action="{{ route('contact_us.store') }}" method="POST"
+            class="form-ajax">
+                @!component('partials/input', {
+                    type: 'email',
+                    name: 'email',
+                    label: 'Email',
+                    required: 'required',
+                    addClass: 'col-span-5'
+                })
+                @!component('partials/input', {
+                    type: 'text',
+                    name: 'subject',
+                    label: 'Subject',
+                    required: 'required'
+                })
+                @!component('partials/input', {
+                    type: 'textarea',
+                    name: 'desc',
+                    label: 'Deskripsi',
+                    required: 'required'
+                })
+                @!component('partials/btn', {
+                    link: 'submit',
+                    text: 'Kirim',
+                    addClass: 'bg-red-primary hover:bg-red-700'
+                })
+            </form>
+        </div>
+    </section>
+@end

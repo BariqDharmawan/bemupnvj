@@ -1,0 +1,21 @@
+<div class="modal fade {{ addClass || ''}}" id="{{ 'modal-' + id }}"
+{{ $props.serializeExcept(['addClass', 'id', 'addClassDialog']) }}>
+    @if(!title && !notHasCloseBtn)
+        <div class="p-4">
+            @include('partials/close-btn')
+        </div>
+    @endif
+    <div class="modal-dialog {{ addClassDialog ? addClassDialog : '' }}">
+        <div class="modal-content">
+            @if(title)
+            <div class="modal-header">
+                <h4 class="modal-title">{{ title }}</h4>
+                @include('partials/close-btn')
+            </div>
+            @end
+            <div class="modal-body">
+                {{{ await $slots.main() }}}
+            </div>
+        </div>
+    </div>
+</div>

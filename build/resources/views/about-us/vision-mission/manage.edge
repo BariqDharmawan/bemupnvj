@@ -1,0 +1,15 @@
+@layout('layouts/admin')
+
+@section('body')
+    @include('about-us/vision/index')
+    @include('about-us/mission/index')
+@end
+
+@section('component')
+    @include('about-us/mission/add')
+    
+    @each((mission, key) in missions)
+        @include('about-us/mission/delete')
+        @include('about-us/mission/edit')
+    @end
+@end

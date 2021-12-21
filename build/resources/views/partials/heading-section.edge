@@ -1,0 +1,11 @@
+<h1 class="{{ color == 'white' ? 'text-white' : 'text-black' }} 
+{{ align == 'left' ? 'text-left' : 'text-center' }} 
+mb-20 text-3xl {{ addClass ?? '' }}">
+    <span class="relative after:empty-content 
+    after:h-1 after:w-8/12 after:absolute after:-bottom-4 after:transform
+    {{ align == 'left' ? 'after:left-0 after:translate-x-0' : 
+    'after:left-1/2 after:-translate-x-1/2' }}
+    {{ color == 'white' ? 'after:bg-white' : 'after:bg-red-primary' }}">
+        {{ text }}
+    </span>
+</h1>

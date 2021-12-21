@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    @include('partials/meta')
+    @include('partials/admin-css')
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        @include('partials/preloader')
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <a href="" class="brand-link">
+                <img src="/assets/img/icon/bemupnvj.svg" alt="{{ process.env.APP_NAME }} Logo"
+                class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">
+                    {{ process.env.APP_NAME }}
+                </span>
+            </a>
+            <nav class="sidebar pt-2 mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    @!component('partials/dashboard-menu', {
+                        url: route('admin.primary_cover.index'),
+                        text: 'Primary Cover',
+                        iconMenu: 'fas fa-th'
+                    })
+                    @!component('partials/dashboard-menu', {
+                        url: route('blog.manage'),
+                        text: 'Blog',
+                        iconMenu: 'fas fa-th'
+                    })
+                    @!component('partials/dashboard-menu', {
+                      url: route('satasets.manage'),
+                      text: 'Sataset',
+                      iconMenu: 'fas fa-th'
+                  })
+                    @component('partials/dashboard-menu', {
+                        url: '#',
+                        text: 'About Us',
+                        iconMenu: 'fas fa-tree',
+                        iconTextClass: 'fas fa-angle-left right'
+                    })
+                        <ul class="nav nav-treeview">
+                            @!component('partials/dashboard-menu', {
+                                url: route('about_us.vision_mission'),
+                                text: 'Visi Misi',
+                                iconMenu: 'far fa-circle nav-icon'
+                            })
+                            @!component('partials/dashboard-menu', {
+                                url: route('our_contact.manage'),
+                                text: 'Our Contact',
+                                iconMenu: 'far fa-circle nav-icon'
+                            })
+                            @!component('partials/dashboard-menu', {
+                                url: route('about_us.profile'),
+                                text: 'Mengenai Kabinet',
+                                iconMenu: 'far fa-circle nav-icon'
+                            })
+                            @!component('partials/dashboard-menu', {
+                                url: route('about_us.content'),
+                                text: 'Konten',
+                                iconMenu: 'far fa-circle nav-icon'
+                            })
+                            @!component('partials/dashboard-menu', {
+                                url: route('logo_meaning.manage'),
+                                text: 'Makna logo',
+                                iconMenu: 'far fa-circle nav-icon'
+                            })
+                        </ul>
+                    @endcomponent
+                    @!component('partials/dashboard-menu', {
+                        url: route('aspirations.manage'),
+                        text: 'Aspirasi Mahasiswa',
+                        iconMenu: 'fas fa-th'
+                    })
+                    @!component('partials/dashboard-menu', {
+                        url: route('content_page.index'),
+                        text: 'Kontent Page',
+                        iconMenu: 'fas fa-th'
+                    })
+                    @component('partials/dashboard-menu', {
+                        url: '#',
+                        text: 'Contact Us',
+                        iconMenu: 'fas fa-tree',
+                        iconTextClass: 'fas fa-angle-left right'
+                    })
+                        <ul class="nav nav-treeview">
+                            @!component('partials/dashboard-menu', {
+                                url: route('contact_us.content'),
+                                text: 'Konten',
+                                iconMenu: 'far fa-circle nav-icon'
+                            })
+                            @!component('partials/dashboard-menu', {
+                                url: route('contact_us.manage'),
+                                text: 'Leads dari publik',
+                                iconMenu: 'far fa-circle nav-icon'
+                            })
+                        </ul>
+                    @endcomponent
+                    @if(auth.isLoggedIn)
+                        @component('partials/dashboard-menu', {
+                            url: 'javascript:void(0);',
+                            text: 'Logout',
+                            iconMenu: 'fas fa-th',
+                            onclick: 'event.preventDefault(); document.getElementById("logout-form").submit()'
+                        })
+                        <form action="{{ route('admin.logout') }}" method="POST" id="logout-form">
+                            {{ csrfField() }}
+                        </form>
+                        @endcomponent
+                    @end
+                </ul>
+            </nav>
+        </aside>
+        <div class="content-wrapper">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">{{ titlePage }}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <main class="content py-2">
+                <div class="container-fluid">
+                    @!section('body')
+                </div>
+            </main>
+        </div>
+        @include('partials/footer')
+    </div>
+
+    @!section('component')
+
+    <script src="/assets/vendors/AdminLTE/plugins/jquery/jquery.min.js"></script>
+    <script src="/assets/vendors/AdminLTE/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="/assets/vendors/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/vendors/AdminLTE/plugins/chart.js/Chart.min.js"></script>
+    <script src="/assets/vendors/AdminLTE/plugins/sparklines/sparkline.js"></script>
+    <script src="/assets/vendors/AdminLTE/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="/assets/vendors/AdminLTE/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <script src="/assets/vendors/AdminLTE/plugins/jquery-knob/jquery.knob.min.js"></script>
+    <script src="/assets/vendors/AdminLTE/plugins/moment/moment.min.js"></script>
+    <script src="/assets/vendors/AdminLTE/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="/assets/vendors/AdminLTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="/assets/vendors/AdminLTE/plugins/summernote/summernote-bs4.min.js"></script>
+    <script src="/assets/vendors/AdminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="/assets/vendors/AdminLTE/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <script src="/assets/vendors/AdminLTE/dist/js/adminlte.min.js"></script>
+    <script src="/assets/vendors/dropzone/dropzone.min.js"></script>
+    <script src="/assets/vendors/AdminLTE/plugins/toastr/toastr.min.js"></script>
+    <script src="/assets/vendors/AdminLTE/plugins/select2/js/select2.full.min.js"></script>
+    <script src="/assets/vendors/fancybox/jquery.fancybox.min.js"></script>
+    <script src="/assets/vendors/summernote/summernote-bs4.min.js"></script>
+    <script src="/assets/vendors/air-datepicker/js/datepicker.min.js"></script>
+    <script src="/assets/vendors/air-datepicker/js/i18n/datepicker.en.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.7/pdfobject.min.js" integrity="sha512-g16L6hyoieygYYZrtuzScNFXrrbJo/lj9+1AYsw+0CYYYZ6lx5J3x9Yyzsm+D37/7jMIGh0fDqdvyYkNWbuYuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/assets/js/admin.js"></script>
+    @!section('scripts')
+
+</body>
+
+</html>

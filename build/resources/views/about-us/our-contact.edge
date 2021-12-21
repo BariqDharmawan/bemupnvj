@@ -1,0 +1,32 @@
+@layout('layouts/admin')
+
+@section('body')
+
+    @component('partials/alert', {type: 'success', isDismissable: true})
+        {{ flashMessages.get('notification') }}
+    @endcomponent
+    @include('about-us/contact/basic')
+    @include('about-us/contact/social-media')
+@end
+
+@section('component')
+
+    @each((social, index) in ourSocial)
+        {{-- edit social modal --}}
+        @set('idModal', 'edit-social-' + social.id)
+        @set('formAction', route('our_social.update', {
+            id: social.id},
+            {qs: {_method: 'PUT'}})
+        )
+        @include('about-us/contact/social-media/form')
+
+        {{-- delete social modal --}}
+        @include('about-us/contact/social-media/delete')
+    @endeach
+    
+    {{-- add social modal --}}
+    @set('idModal', 'add-social-media')
+    @set('formAction', route('our_social.store'))
+    @include('about-us/contact/social-media/form')
+    
+@end

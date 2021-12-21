@@ -1,0 +1,15 @@
+<li class="nav-item">
+    <a href="{{ url }}" class="nav-link"
+    {{ $props.serializeExcept(['url', 'iconMenu', 'iconTextClass', 'text']) }}>
+        @if(iconMenu)
+        <i class="nav-icon {{ iconMenu }}"></i>
+        @endif
+        <p>
+            {{ text }}
+            @if(iconTextClass)
+                <i class="{{ iconTextClass }}"></i>
+            @endif
+        </p>
+    </a>
+    {{{ await $slots.main() }}}
+</li>

@@ -1,0 +1,19 @@
+@each((category, index) in categories)
+    @component('partials/bootstrap-modal', {
+        id: 'edit-category-' + category.id
+    })
+    <form action="{{ route('admin.blog_category.update', {
+        id: category.id}, {qs: {_method: 'PUT'}
+    }) }}" method="post">
+        {{ csrfField() }}
+        @!component('partials/bootstrap-input', {
+            name: 'category',
+            label: 'Nama Kategori',
+            placeholder: 'Masukan nama kategorinya disini',
+            value: category.category,
+            required: 'required'
+        })
+        <button type="submit" class="btn btn-primary">Simpan perubahan</button>
+    </form>
+    @end
+@end

@@ -1,0 +1,6 @@
+@component('partials/bootstrap-modal', {id: `delete-mission-${key + 1}`})
+    <form action="{{ route('mission.destroy', {id: mission.id}) }}" method="post" class="delete-mission">
+        <p>Are you sure wanna delete this mission?</p>
+        <button type="submit" class="btn btn-danger">Delete it</button>
+    </form>
+@endcomponent

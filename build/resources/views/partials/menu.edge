@@ -1,0 +1,18 @@
+<li class="relative {{ link == request.url() ? 'font-bold' : '' }}">
+    <a href="{{ link ?? 'javascript:void(0);' }}" 
+    class="text-black inline-flex items-center py-2 
+    {{ hasDropdown ? 'nav__trigger-dropdown' : '' }}">
+        {{ text }}
+        @if(hasDropdown)
+            <img src="/assets/img/icon/dropdown.svg" 
+            class="ml-2 dropdown-icon transform transition"
+            height="10px">
+        @end
+    </a>
+    @if(hasDropdown)
+        <ul class="flex flex-col absolute hide-el-max transition 
+        bg-white px-4 shadow-md rounded-b-md {{ dropdownClass ?? '' }}">
+            {{{ await $slots.main() }}}
+        </ul>
+    @end
+</li>
